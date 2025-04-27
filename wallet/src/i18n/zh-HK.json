@@ -1,0 +1,157 @@
+{
+  "nav": {
+    "wallet": "錢包",
+    "activity": "活動",
+    "transfer": "收款人",
+    "me": "我的"
+  },
+  "me": {
+    "account": {
+      "title": "賬戶",
+      "profile": {
+        "title": "個人資料",
+        "subtitle": "管理您的個人信息"
+      },
+      "walletConnect": {
+        "title": "Wallet Connect會話",
+        "subtitle": "管理您通過Wallet Connect連接的應用"
+      }
+    },
+    "settings": {
+      "title": "設置",
+      "security": {
+        "title": "安全",
+        "subtitle": "管理您的安全設置"
+      },
+      "language": {
+        "title": "語言",
+        "subtitle": "更改應用語言",
+        "current": "當前語言"
+      },
+      "timeFormat": {
+        "title": "時間格式",
+        "subtitle": "設置您的首選時間格式",
+        "current": "當前格式"
+      },
+      "theme": {
+        "title": "主題",
+        "subtitle": "更改應用主題顏色",
+        "current": "當前主題",
+        "red": "紅色",
+        "blue": "藍色",
+        "green": "綠色",
+        "yellow": "黃色",
+        "purple": "紫色",
+        "pink": "粉色",
+        "orange": "橙色"
+      },
+      "serviceProvider": {
+        "title": "服務提供商",
+        "subtitle": "選擇您的服務提供商"
+      },
+      "networks": {
+        "title": "網絡",
+        "subtitle": "管理網絡連接",
+        "searchPlaceholder": "搜索網絡",
+        "addNetwork": "添加網絡",
+        "nativeToken": "原生代幣",
+        "chainId": "鏈 ID"
+      }
+    },
+    "about": {
+      "title": "關於",
+      "version": {
+        "title": "版本",
+        "subtitle": "v1.0.0"
+      },
+      "donate": {
+        "title": "捐贈",
+        "subtitle": "支持我們的開發"
+      },
+      "discord": {
+        "title": "Discord",
+        "subtitle": "加入我們的社區"
+      },
+      "github": {
+        "title": "Github",
+        "subtitle": "查看我們的源代碼"
+      },
+      "terms": {
+        "title": "使用條款",
+        "subtitle": "閱讀我們的條款和條件"
+      }
+    }
+  },
+  "activity": {
+    "title": "活動",
+    "filter": "篩選",
+    "transactionTypes": {
+      "multiChainSwap": "多鏈兌換",
+      "crossChainTransfer": "跨鏈轉賬",
+      "tokenSwap": "代幣兌換",
+      "deposit": "充值",
+      "crossChainSwap": "跨鏈兌換",
+      "withdrawal": "提現",
+      "multiDexSwap": "多DEX兌換"
+    },
+    "transaction": {
+      "from": "從",
+      "to": "到",
+      "chain": "鏈",
+      "amount": "金額"
+    }
+  },
+  "recipient": {
+    "title": "收款人"
+  },
+  "provider": {
+    "title": "服務提供商",
+    "providerRPC": {
+      "label": "提供商 RPC",
+      "placeholder": "輸入提供商 RPC"
+    },
+    "loadConfiguration": "加載配置",
+    "cexProxy": {
+      "label": "CEX 代理",
+      "placeholder": "輸入 CEX 代理 URL"
+    },
+    "cryptoPrice": {
+      "label": "加密貨幣價格提供商",
+      "placeholder": "輸入加密貨幣價格提供商 URL"
+    },
+    "currencyRate": {
+      "label": "匯率提供商",
+      "placeholder": "輸入匯率提供商 URL"
+    },
+    "chainList": {
+      "label": "鏈列表提供商",
+      "placeholder": "輸入鏈列表提供商 URL"
+    },
+    "save": "保存",
+    "validation": {
+      "urlFormat": "請輸入有效的 HTTP 或 HTTPS URL"
+    }
+  },
+  "networkInfo": {
+    "title": "網絡資訊",
+    "networkName": "網絡名稱",
+    "networkType": "網絡類型",
+    "selectNetworkType": "選擇網絡類型",
+    "chainId": "鏈ID",
+    "currencySymbol": "貨幣符號",
+    "rpcUrl": "RPC URL",
+    "selectRpcUrl": "選擇RPC URL",
+    "explorerUrl": "瀏覽器URL",
+    "selectExplorerUrl": "選擇瀏覽器URL",
+    "invalidUrl": "無效的URL格式",
+    "save": "保存"
+  },
+  "recipientInfo": {
+    "title": "收款人資訊",
+    "name": "名稱",
+    "accountType": "賬戶類型",
+    "selectAccountType": "選擇賬戶類型",
+    "address": "地址",
+    "save": "保存"
+  }
+}

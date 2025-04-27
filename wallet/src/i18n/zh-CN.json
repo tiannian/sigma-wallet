@@ -1,0 +1,179 @@
+{
+  "nav": {
+    "wallet": "钱包",
+    "activity": "活动",
+    "transfer": "转账",
+    "me": "我的"
+  },
+  "me": {
+    "account": {
+      "title": "账户",
+      "profile": {
+        "title": "个人资料",
+        "subtitle": "管理您的个人信息"
+      },
+      "notifications": {
+        "title": "通知",
+        "subtitle": "查看您的通知"
+      },
+      "walletConnect": {
+        "title": "钱包连接会话",
+        "subtitle": "管理已连接的钱包"
+      }
+    },
+    "settings": {
+      "title": "设置",
+      "notifications": {
+        "title": "通知",
+        "subtitle": "管理您的通知",
+        "noNotifications": "暂无通知",
+        "markAllAsRead": "全部标记为已读",
+        "refresh": "刷新通知"
+      },
+      "security": {
+        "title": "安全",
+        "subtitle": "管理您的安全设置"
+      },
+      "language": {
+        "title": "语言",
+        "subtitle": "更改应用语言",
+        "current": "当前语言"
+      },
+      "timeFormat": {
+        "title": "时间格式",
+        "subtitle": "设置您的首选时间格式",
+        "current": "当前格式"
+      },
+      "theme": {
+        "title": "主题",
+        "subtitle": "更改应用主题颜色",
+        "current": "当前主题",
+        "red": "红色",
+        "blue": "蓝色",
+        "green": "绿色",
+        "yellow": "黄色",
+        "purple": "紫色",
+        "pink": "粉色",
+        "orange": "橙色"
+      },
+      "serviceProvider": {
+        "title": "服务提供商",
+        "subtitle": "选择您的服务提供商"
+      },
+      "networks": {
+        "title": "网络",
+        "subtitle": "管理网络连接",
+        "searchPlaceholder": "搜索网络",
+        "addNetwork": "添加网络",
+        "nativeToken": "原生代币",
+        "chainId": "链 ID"
+      }
+    },
+    "about": {
+      "title": "关于",
+      "version": {
+        "title": "版本",
+        "subtitle": "v1.0.0"
+      },
+      "donate": {
+        "title": "捐赠",
+        "subtitle": "支持我们的开发"
+      },
+      "discord": {
+        "title": "Discord",
+        "subtitle": "加入我们的社区"
+      },
+      "github": {
+        "title": "Github",
+        "subtitle": "查看我们的源代码"
+      },
+      "terms": {
+        "title": "使用条款",
+        "subtitle": "阅读我们的条款和条件"
+      }
+    },
+    "provider": {
+      "provider_rpc": {
+        "dev": "开发环境 RPC"
+      }
+    }
+  },
+  "activity": {
+    "title": "活动",
+    "filter": "筛选",
+    "transactionTypes": {
+      "multiChainSwap": "多链兑换",
+      "crossChainTransfer": "跨链转账",
+      "tokenSwap": "代币兑换",
+      "deposit": "充值",
+      "crossChainSwap": "跨链兑换",
+      "withdrawal": "提现",
+      "multiDexSwap": "多DEX兑换"
+    },
+    "transaction": {
+      "from": "从",
+      "to": "到",
+      "chain": "链",
+      "amount": "金额"
+    }
+  },
+  "recipient": {
+    "title": "收款人"
+  },
+  "provider": {
+    "title": "服务提供商",
+    "providerRPC": {
+      "label": "提供商 RPC",
+      "placeholder": "输入提供商 RPC"
+    },
+    "addRPC": "添加 RPC",
+    "loadConfiguration": "加载配置",
+    "cexProxy": {
+      "label": "CEX 代理",
+      "placeholder": "输入 CEX 代理 URL"
+    },
+    "cryptoPrice": {
+      "label": "加密货币价格提供商",
+      "placeholder": "输入加密货币价格提供商 URL"
+    },
+    "currencyRate": {
+      "label": "汇率提供商",
+      "placeholder": "输入汇率提供商 URL"
+    },
+    "chainList": {
+      "label": "链列表提供商",
+      "placeholder": "输入链列表提供商 URL"
+    },
+    "save": "保存",
+    "validation": {
+      "urlFormat": "请输入有效的 HTTP 或 HTTPS URL"
+    },
+    "load": {
+      "loading": "正在加载配置...",
+      "success": "配置加载成功",
+      "failed": "配置加载失败"
+    }
+  },
+  "networkInfo": {
+    "title": "网络信息",
+    "networkName": "网络名称",
+    "networkType": "网络类型",
+    "selectNetworkType": "选择网络类型",
+    "chainId": "链ID",
+    "currencySymbol": "货币符号",
+    "rpcUrl": "RPC URL",
+    "selectRpcUrl": "选择RPC URL",
+    "explorerUrl": "浏览器URL",
+    "selectExplorerUrl": "选择浏览器URL",
+    "invalidUrl": "无效的URL格式",
+    "save": "保存"
+  },
+  "recipientInfo": {
+    "title": "收款人信息",
+    "name": "名称",
+    "accountType": "账户类型",
+    "selectAccountType": "选择账户类型",
+    "address": "地址",
+    "save": "保存"
+  }
+}

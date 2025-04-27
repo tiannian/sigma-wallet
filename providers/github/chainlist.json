@@ -1,0 +1,7 @@
+{
+  "eip155": {
+    "list": "https://chainid.network/chains.json",
+    "data": "https://raw.githubusercontent.com/ethereum-lists/chains/refs/heads/master/_data/"
+  },
+  "chains": []
+}

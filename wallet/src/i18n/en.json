@@ -1,0 +1,179 @@
+{
+  "nav": {
+    "wallet": "Wallet",
+    "activity": "Activity",
+    "transfer": "Recipient",
+    "me": "Me"
+  },
+  "me": {
+    "account": {
+      "title": "Account",
+      "profile": {
+        "title": "Profile",
+        "subtitle": "Manage your personal information"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "View your notifications"
+      },
+      "walletConnect": {
+        "title": "Wallet Connect Session",
+        "subtitle": "Manage your connected wallets"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Manage your notifications",
+        "noNotifications": "No notifications",
+        "markAllAsRead": "Mark all as read",
+        "refresh": "Refresh notifications"
+      },
+      "security": {
+        "title": "Security",
+        "subtitle": "Manage your security settings"
+      },
+      "language": {
+        "title": "Language",
+        "subtitle": "Change app language",
+        "current": "Current language"
+      },
+      "timeFormat": {
+        "title": "Time Format",
+        "subtitle": "Set your preferred time format",
+        "current": "Current format"
+      },
+      "theme": {
+        "title": "Theme",
+        "subtitle": "Change app theme color",
+        "current": "Current theme",
+        "red": "Red",
+        "blue": "Blue",
+        "green": "Green",
+        "yellow": "Yellow",
+        "purple": "Purple",
+        "pink": "Pink",
+        "orange": "Orange"
+      },
+      "serviceProvider": {
+        "title": "Service Provider",
+        "subtitle": "Choose your service provider"
+      },
+      "networks": {
+        "title": "Networks",
+        "subtitle": "Manage network connections",
+        "searchPlaceholder": "Search Network",
+        "addNetwork": "Add Network",
+        "nativeToken": "Native Token",
+        "chainId": "Chain ID"
+      }
+    },
+    "about": {
+      "title": "About",
+      "version": {
+        "title": "Version",
+        "subtitle": "v1.0.0"
+      },
+      "donate": {
+        "title": "Donate",
+        "subtitle": "Support our development"
+      },
+      "discord": {
+        "title": "Discord",
+        "subtitle": "Join our community"
+      },
+      "github": {
+        "title": "Github",
+        "subtitle": "View our source code"
+      },
+      "terms": {
+        "title": "Term of Use",
+        "subtitle": "Read our terms and conditions"
+      }
+    },
+    "provider": {
+      "provider_rpc": {
+        "dev": "Development RPC"
+      }
+    }
+  },
+  "activity": {
+    "title": "Activity",
+    "filter": "Filter",
+    "transactionTypes": {
+      "multiChainSwap": "Multi-Chain Swap",
+      "crossChainTransfer": "Cross Chain Transfer",
+      "tokenSwap": "Token Swap",
+      "deposit": "Deposit",
+      "crossChainSwap": "Cross Chain Swap",
+      "withdrawal": "Withdrawal",
+      "multiDexSwap": "Multi-DEX Swap"
+    },
+    "transaction": {
+      "from": "From",
+      "to": "To",
+      "chain": "Chain",
+      "amount": "Amount"
+    }
+  },
+  "recipient": {
+    "title": "Recipient"
+  },
+  "provider": {
+    "title": "Provider RPC",
+    "providerRPC": {
+      "label": "Provider RPC",
+      "placeholder": "Enter Provider RPC"
+    },
+    "addRPC": "Add RPC",
+    "loadConfiguration": "Load Configuration",
+    "cexProxy": {
+      "label": "CEX Proxy",
+      "placeholder": "Enter CEX Proxy URL"
+    },
+    "cryptoPrice": {
+      "label": "Crypto Price Provider",
+      "placeholder": "Enter Crypto Price Provider URL"
+    },
+    "currencyRate": {
+      "label": "Currency Rate Provider",
+      "placeholder": "Enter Currency Rate Provider URL"
+    },
+    "chainList": {
+      "label": "Chain List Provider",
+      "placeholder": "Enter Chain List Provider URL"
+    },
+    "save": "Save",
+    "validation": {
+      "urlFormat": "Please enter a valid HTTP or HTTPS URL"
+    },
+    "load": {
+      "loading": "Loading configuration...",
+      "success": "Configuration loaded successfully",
+      "failed": "Failed to load configuration"
+    }
+  },
+  "networkInfo": {
+    "title": "Network Information",
+    "networkName": "Network Name",
+    "networkType": "Network Type",
+    "selectNetworkType": "Select Network Type",
+    "chainId": "Chain ID",
+    "currencySymbol": "Currency Symbol",
+    "rpcUrl": "RPC URL",
+    "selectRpcUrl": "Select RPC URL",
+    "explorerUrl": "Explorer URL",
+    "selectExplorerUrl": "Select Explorer URL",
+    "invalidUrl": "Invalid URL format",
+    "save": "Save"
+  },
+  "recipientInfo": {
+    "title": "Recipient Information",
+    "name": "Name",
+    "accountType": "Account Type",
+    "selectAccountType": "Select Account Type",
+    "address": "Address",
+    "save": "Save"
+  }
+}

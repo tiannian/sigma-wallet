@@ -1,0 +1,6 @@
+# Git Commit Rules
+1. Commit messages must be on a single line (no line breaks)
+2. Commit messages should be descriptive but concise
+3. Use present tense in commit messages
+4. Include all modified files in the commit message
+5. Always use `git add .` before committing to ensure all changes are included 
