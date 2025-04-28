@@ -5,30 +5,18 @@ import * as Feather from 'react-feather';
 import dayjs from 'dayjs';
 import Icon from '../components/Icon';
 import ListItemHorizontal from '../components/list/ListItemHorizontal';
-
+import { useColorThemeStore } from '../js/store';
 const Activity = () => {
   const { t } = useTranslation();
   const topRef = useRef(null);
   const [timeFormat, setTimeFormat] = useState('HH:mm:ss, MMM DD, YYYY');
-
+  const { currentColorTheme } = useColorThemeStore();
   useEffect(() => {
     const savedFormat = localStorage.getItem('timeFormat');
     if (savedFormat) {
       setTimeFormat(savedFormat);
     }
   }, []);
-
-  const transformTransactionToListItem = tx => {
-    return {
-      icon: <Icon url={tx.logoUrl} symbol={tx.token} />,
-      title: '',
-      subtitle: `${t('activity.transaction.from')}: ${tx.from}\n${t('activity.transaction.to')}: ${tx.to}`,
-      right: {
-        top: `${tx.amount < 0 ? '- ' : '+ '}${Math.abs(tx.amount)} ${tx.token}`,
-        bottom: tx.chain,
-      },
-    };
-  };
 
   // Sample transaction data with sub-transactions
   const transactions = [
@@ -235,11 +223,17 @@ const Activity = () => {
                   <ListItemHorizontal
                     key={idx}
                     icon={<Icon url={tx.logoUrl} symbol={tx.token} />}
-                    top={{
-                      left: `${tx.chain}`,
-                      right: { text: `${tx.amount} ${tx.token}`, isTitle: true },
-                    }}
                     bottom={{
+                      right: { text: `${tx.amount} ${tx.token}`, isTitle: true },
+                      left: (
+                        <div
+                          className={`px-1 text-xs rounded-full bg-${currentColorTheme}-50 text-grey-500`}
+                        >
+                          {tx.chain}
+                        </div>
+                      ),
+                    }}
+                    top={{
                       left: `${tx.from}`,
                       middle: <Feather.ArrowRight className='w-4 h-4 text-gray-400' />,
                       right: `${tx.to}`,

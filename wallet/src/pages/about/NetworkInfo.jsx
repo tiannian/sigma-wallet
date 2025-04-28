@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import * as Feather from 'react-feather';
 import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
 import LabelSelect from '../../components/LabelSelect';
-import { NETWORK_TYPE_LIST, NETWORK_TYPE_LIST_INDEX_MAP } from '../../constants';
-import { createUrlValidator } from '../../utils/checker';
+import { NETWORK_TYPE_LIST } from '../../js/constants';
+import { createUrlValidator } from '../../js/checker';
 import PageHeader from '../../components/PageHeader';
-import { useDatabase } from '../../store';
+import { useDatabase } from '../../js/store';
 const NetworkInfo = ({ onBack }) => {
   const { t } = useTranslation();
   const validateUrl = createUrlValidator(t('networkInfo.invalidUrl'));
@@ -36,7 +35,9 @@ const NetworkInfo = ({ onBack }) => {
       }));
     };
 
-    loadNetwork();
+    if (type && chainid) {
+      loadNetwork();
+    }
   }, [db]);
 
   const [formData, setFormData] = useState({

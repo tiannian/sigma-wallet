@@ -5,11 +5,11 @@ import { useLocation } from 'wouter';
 import Icon from '../../components/Icon';
 import Button from '../../components/Button';
 import UnlabeledInput from '../../components/UnlabeledInput';
-import { useColorThemeStore, useDatabase } from '../../store';
+import { useColorThemeStore, useDatabase } from '../../js/store';
 import PageHeader from '../../components/PageHeader';
 import { toast } from 'react-hot-toast';
 import ListItemVertical from '../../components/list/ListItemViertical';
-
+import { NETWORK_TYPE_LIST } from '../../js/constants';
 const NetworkListItem = ({ chain, onClick }) => {
   const { t } = useTranslation();
   const { currentColorTheme } = useColorThemeStore();
@@ -19,7 +19,7 @@ const NetworkListItem = ({ chain, onClick }) => {
       <div
         className={`px-2 py-0.5 text-sm rounded-full bg-${currentColorTheme}-100 text-${currentColorTheme}-800`}
       >
-        {chain.type || 'EVM'}
+        {NETWORK_TYPE_LIST[chain.type].tag}
       </div>
     ),
     bottom: `${t('me.settings.networks.nativeToken')}: ${chain.currencySymbol}`,

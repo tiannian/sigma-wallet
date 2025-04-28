@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Feather from 'react-feather';
 import { useTranslation } from 'react-i18next';
-import { useColorThemeStore } from '../../store';
+import { useColorThemeStore } from '../../js/store';
 import { useLocation } from 'wouter';
 import Icon from '../../components/Icon';
 import UnlabeledInput from '../../components/UnlabeledInput';

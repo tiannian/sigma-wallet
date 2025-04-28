@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { PROVIDER_RPC } from './constants';
-import { Database } from './js/Database';
+import { Database } from './Database';
 
 export const useColorThemeStore = create(
   persist(

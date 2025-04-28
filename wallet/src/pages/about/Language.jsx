@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
-import { useColorThemeStore } from '../../store';
+import { useColorThemeStore } from '../../js/store';
 import ListItemVertical from '../../components/list/ListItemViertical';
 import PageHeader from '../../components/PageHeader';
 

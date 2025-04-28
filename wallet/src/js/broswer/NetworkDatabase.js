@@ -1,5 +1,5 @@
 // import { openDB } from 'idb';
-import { NETWORK_TYPE_LIST } from '../../constants';
+import { NETWORK_TYPE_LIST } from '../constants';
 import { ProviderStorage } from '../Provider';
 import Dexie from 'dexie';
 const NETWORK_DATABASE_NAME = 'network';

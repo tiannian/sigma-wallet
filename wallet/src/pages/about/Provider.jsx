@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
 import LabelSelect from '../../components/LabelSelect';
 import { toast } from 'react-hot-toast';
-import { createUrlValidator } from '../../utils/checker';
+import { createUrlValidator } from '../../js/checker';
 import PageHeader from '../../components/PageHeader';
 import ProviderStorage from '../../js/Provider';
 

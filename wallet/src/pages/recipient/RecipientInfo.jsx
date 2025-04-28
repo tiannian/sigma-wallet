@@ -4,7 +4,7 @@ import * as Feather from 'react-feather';
 import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
 import LabelSelect from '../../components/LabelSelect';
-import { ACCOUNT_TYPE_LIST } from '../../constants';
+import { ACCOUNT_TYPE_LIST } from '../../js/constants';
 
 const RecipientInfo = ({ onBack }) => {
   const { t } = useTranslation();

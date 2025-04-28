@@ -28,7 +28,7 @@ const ListItemHorizontal = ({ icon, top, bottom, onClick, className = '' }) => {
     );
   };
 
-  const renderBottom = section => {
+  const renderSection = section => {
     if (!section) return null;
     if (React.isValidElement(section)) {
       return section;
@@ -53,8 +53,8 @@ const ListItemHorizontal = ({ icon, top, bottom, onClick, className = '' }) => {
     >
       <div className='mr-3'>{icon}</div>
       <div className='flex flex-col flex-1 justify-center'>
-        {renderTop(top)}
-        {renderBottom(bottom)}
+        {renderSection(top)}
+        {renderSection(bottom)}
       </div>
     </div>
   );

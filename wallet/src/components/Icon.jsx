@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useColorThemeStore } from '../store';
+import { useColorThemeStore } from '../js/store';
 
 const Icon = ({ url, symbol, className = '', showBackground = true }) => {
   const { currentColorTheme } = useColorThemeStore();

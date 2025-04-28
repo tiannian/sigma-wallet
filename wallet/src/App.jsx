@@ -17,7 +17,7 @@ import NetworkInfo from './pages/about/NetworkInfo';
 import Notification from './pages/about/Notification';
 import { Toaster } from 'react-hot-toast';
 import './i18n/i18n';
-import { useDatabase } from './store';
+import { useDatabase } from './js/store';
 import { useEffect } from 'react';
 import ProviderStorage from './js/Provider';
 import { BrowserNetworkDatabase } from './js/broswer/NetworkDatabase';

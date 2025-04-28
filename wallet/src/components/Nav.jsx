@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useColorThemeStore } from '../store';
+import { useColorThemeStore } from '../js/store';
 
 const NavItem = ({ icon, label, isActive, onClick, activeColor }) => (
   <div

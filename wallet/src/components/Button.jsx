@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useColorThemeStore } from '../store';
+import { useColorThemeStore } from '../js/store';
 import * as Feather from 'react-feather';
 
 const Button = ({

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import * as Feather from 'react-feather';
 import { useTranslation } from 'react-i18next';
-import { useColorThemeStore, useTimeFormatStore } from '../../store';
+import { useColorThemeStore, useTimeFormatStore } from '../../js/store';
 import PageHeader from '../../components/PageHeader';
 import ListItemHorizontal from '../../components/list/ListItemHorizontal';
 import dayjs from 'dayjs';

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
 import dayjs from 'dayjs';
-import { useTimeFormatStore } from '../../store';
-import { useColorThemeStore } from '../../store';
+import { useTimeFormatStore, useColorThemeStore } from '../../js/store';
 import ListItemVertical from '../../components/list/ListItemViertical';
 import PageHeader from '../../components/PageHeader';
 
