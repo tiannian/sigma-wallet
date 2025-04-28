@@ -4,7 +4,6 @@ import { ProviderStorage } from '../Provider';
 import Dexie from 'dexie';
 const NETWORK_DATABASE_NAME = 'network';
 const NETWORK_DATABASE_VERSION = 1;
-const NETWORK_DATABASE_STORE_NAME = 'network';
 
 export class BrowserNetworkDatabase {
   constructor() {
@@ -12,7 +11,7 @@ export class BrowserNetworkDatabase {
 
     this.db = new Dexie(NETWORK_DATABASE_NAME);
 
-    this.db.version(1).stores({
+    this.db.version(NETWORK_DATABASE_VERSION).stores({
       networks: '++key, name, chainId, nativeCurrency, type',
     });
   }

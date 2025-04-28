@@ -8,17 +8,17 @@
   "me": {
     "account": {
       "title": "Account",
-      "profile": {
-        "title": "Profile",
-        "subtitle": "Manage your personal information"
+      "accounts": {
+        "title": "Accounts",
+        "subtitle": "Manage your accounts"
       },
       "notifications": {
         "title": "Notifications",
-        "subtitle": "View your notifications"
+        "subtitle": "View and manage notifications"
       },
       "walletConnect": {
-        "title": "Wallet Connect Session",
-        "subtitle": "Manage your connected wallets"
+        "title": "Wallet Connect",
+        "subtitle": "Manage Wallet Connect sessions"
       }
     },
     "settings": {
@@ -175,5 +175,14 @@
     "selectAccountType": "Select Account Type",
     "address": "Address",
     "save": "Save"
+  },
+  "account": {
+    "title": "Accounts",
+    "searchPlaceholder": "Search accounts...",
+    "addAccount": "Add Account",
+    "balance": "Balance",
+    "address": "Address",
+    "refreshSuccess": "Accounts refreshed successfully",
+    "refreshError": "Failed to refresh accounts"
   }
 }

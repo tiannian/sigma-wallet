@@ -8,13 +8,17 @@
   "me": {
     "account": {
       "title": "賬戶",
-      "profile": {
-        "title": "個人資料",
-        "subtitle": "管理您的個人信息"
+      "accounts": {
+        "title": "賬戶",
+        "subtitle": "管理您的賬戶"
+      },
+      "notifications": {
+        "title": "通知",
+        "subtitle": "查看和管理通知"
       },
       "walletConnect": {
-        "title": "Wallet Connect會話",
-        "subtitle": "管理您通過Wallet Connect連接的應用"
+        "title": "錢包連接",
+        "subtitle": "管理錢包連接會話"
       }
     },
     "settings": {
@@ -153,5 +157,14 @@
     "selectAccountType": "選擇賬戶類型",
     "address": "地址",
     "save": "保存"
+  },
+  "account": {
+    "title": "賬戶",
+    "searchPlaceholder": "搜尋賬戶...",
+    "addAccount": "添加賬戶",
+    "balance": "餘額",
+    "address": "地址",
+    "refreshSuccess": "賬戶刷新成功",
+    "refreshError": "賬戶刷新失敗"
   }
 }

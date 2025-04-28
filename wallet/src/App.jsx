@@ -15,6 +15,7 @@ import Provider from './pages/about/Provider';
 import Network from './pages/about/Network';
 import NetworkInfo from './pages/about/NetworkInfo';
 import Notification from './pages/about/Notification';
+import Account from './pages/account/Account';
 import { Toaster } from 'react-hot-toast';
 import './i18n/i18n';
 import { useDatabase } from './js/store';
@@ -104,6 +105,7 @@ function App() {
                 <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />
               )}
             />
+            <Route path='/account' component={() => <Account onNavigate={handleNavigate} />} />
             <Route component={Wallet} />
           </Switch>
         </div>
