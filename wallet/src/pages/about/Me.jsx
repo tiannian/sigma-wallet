@@ -19,13 +19,13 @@ const Me = ({ onNavigate }) => {
         right: <Feather.ChevronRight className='w-5 h-5 text-gray-400' />,
         onClick: () => console.log('Profile clicked'),
       },
-      // {
-      //   icon: <Icon symbol={<Feather.Bell className='w-6 h-6' />} />,
-      //   title: t('me.account.notifications.title'),
-      //   subtitle: t('me.account.notifications.subtitle'),
-      //   right: <Feather.ChevronRight className='w-5 h-5 text-gray-400' />,
-      //   onClick: () => onNavigate('me/notifications'),
-      // },
+      {
+        icon: <Icon symbol={<Feather.Bell className='w-6 h-6' />} />,
+        title: t('me.account.notifications.title'),
+        subtitle: t('me.account.notifications.subtitle'),
+        right: <Feather.ChevronRight className='w-5 h-5 text-gray-400' />,
+        onClick: () => onNavigate('me/notifications'),
+      },
       {
         icon: <Icon symbol={<Feather.Link className='w-6 h-6' />} />,
         title: t('me.account.walletConnect.title'),

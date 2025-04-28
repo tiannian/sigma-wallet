@@ -120,10 +120,10 @@ const Wallet = () => {
       <div className='flex justify-between items-center'>
         <p className='text-gray-600 mb-2'>Total Value</p>
         <div className='flex gap-4'>
-          {/* <Feather.Bell
+          <Feather.Bell
             className='w-6 h-6 cursor-pointer hover:text-blue-500'
             onClick={() => setLocation('/me/notifications')}
-          /> */}
+          />
           <Feather.Maximize className='w-6 h-6' onClick={handleMaximize} />
         </div>
       </div>

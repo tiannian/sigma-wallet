@@ -1,37 +1,39 @@
 import React, { useRef } from 'react';
 import * as Feather from 'react-feather';
 import { useTranslation } from 'react-i18next';
-import { useColorThemeStore } from '../../store';
+import { useColorThemeStore, useTimeFormatStore } from '../../store';
 import PageHeader from '../../components/PageHeader';
-import ListItemVertical from '../../components/list/ListItemViertical';
+import ListItemHorizontal from '../../components/list/ListItemHorizontal';
+import dayjs from 'dayjs';
 
 const Notification = ({ onBack }) => {
   const { t } = useTranslation();
   const topRef = useRef(null);
   const { currentColorTheme } = useColorThemeStore();
+  const { currentTimeFormat } = useTimeFormatStore();
+
+  // 格式化时间戳
+  const formatTimestamp = timestamp => dayjs.unix(timestamp).format(currentTimeFormat);
 
   // Mock notification data - in real app this would come from your backend
   const notifications = [
     {
       id: 1,
-      title: 'Transaction Completed',
-      subtitle: 'Your transfer of 0.1 ETH has been successfully processed',
-      isRead: false,
-      timestamp: '2024-04-26 10:30',
+      tittle: 'Transaction Completed',
+      timestamp: 1714098600,
+      brief: 'Your transfer of 0.1 ETH has been successfully processed',
     },
     {
       id: 2,
-      title: 'New Token Added',
-      subtitle: 'USDT has been added to your wallet',
-      isRead: true,
-      timestamp: '2024-04-25 15:45',
+      tittle: 'New Token Added',
+      timestamp: 1714046700,
+      brief: 'USDT has been added to your wallet',
     },
     {
       id: 3,
-      title: 'Security Alert',
-      subtitle: 'A new device has logged into your account',
-      isRead: false,
-      timestamp: '2024-04-24 09:15',
+      tittle: 'Security Alert',
+      timestamp: 1713940500,
+      brief: 'A new device has logged into your account',
     },
   ];
 
@@ -52,7 +54,7 @@ const Notification = ({ onBack }) => {
           </div>
         ) : (
           notifications.map(notification => (
-            <ListItemVertical
+            <ListItemHorizontal
               key={notification.id}
               icon={
                 <Feather.Circle
@@ -61,9 +63,14 @@ const Notification = ({ onBack }) => {
                   color={notification.isRead ? '#D1D5DB' : `var(--color-${currentColorTheme}-500)`}
                 />
               }
-              title={notification.title}
-              subtitle={notification.subtitle}
-              right={{ top: notification.timestamp }}
+              top={{
+                left: { text: notification.tittle, isTitle: true },
+                right: formatTimestamp(notification.timestamp),
+              }}
+              bottom={{
+                left: notification.brief,
+                right: '',
+              }}
               onClick={() => {
                 // TODO: Handle notification click
                 console.log('Notification clicked:', notification.id);

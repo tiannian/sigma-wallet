@@ -1,7 +1,6 @@
 import React from 'react';
-import ListItemVertical from './list/ListItemViertical';
 
-const GroupListItem = ({ type, timestamp, items }) => {
+const GroupListItem = ({ type, timestamp, render_items }) => {
   return (
     <div className='flex flex-col py-2'>
       {/* Header - Type and Timestamp */}
@@ -11,17 +10,7 @@ const GroupListItem = ({ type, timestamp, items }) => {
       </div>
 
       {/* Items */}
-      <div className='flex flex-col divide-y divide-gray-100'>
-        {items.map((item, index) => (
-          <ListItemVertical
-            key={index}
-            icon={item.icon}
-            title={item.title}
-            subtitle={item.subtitle}
-            right={item.right}
-          />
-        ))}
-      </div>
+      <div className='flex flex-col divide-y divide-gray-100'>{render_items?.()}</div>
     </div>
   );
 };
