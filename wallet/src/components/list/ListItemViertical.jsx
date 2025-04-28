@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ListItem = ({ icon, title, subtitle, right, onClick, className = '' }) => {
+const ListItemVertical = ({ icon, title, subtitle, right, onClick, className = '' }) => {
   const renderRight = () => {
     if (!right) return null;
 
@@ -31,4 +31,4 @@ const ListItem = ({ icon, title, subtitle, right, onClick, className = '' }) => 
   );
 };
 
-export default ListItem;
+export default ListItemVertical;

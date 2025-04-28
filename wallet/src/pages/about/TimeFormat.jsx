@@ -4,7 +4,7 @@ import * as Feather from 'react-feather';
 import dayjs from 'dayjs';
 import { useTimeFormatStore } from '../../store';
 import { useColorThemeStore } from '../../store';
-import ListItem from '../../components/ListItem';
+import ListItemVertical from '../../components/list/ListItemViertical';
 import PageHeader from '../../components/PageHeader';
 
 const TimeFormat = ({ onBack }) => {
@@ -41,7 +41,7 @@ const TimeFormat = ({ onBack }) => {
 
       <div className='bg-white rounded-lg'>
         {timeFormats.map(format => (
-          <ListItem
+          <ListItemVertical
             key={format.id}
             icon={<div className='w-6 h-6' />}
             title={format.label}

@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import * as Feather from 'react-feather';
 import { useTranslation } from 'react-i18next';
 import { useColorThemeStore } from '../../store';
-import ListItem from '../../components/ListItem';
 import PageHeader from '../../components/PageHeader';
+import ListItemVertical from '../../components/list/ListItemViertical';
 
 const Notification = ({ onBack }) => {
   const { t } = useTranslation();
@@ -52,7 +52,7 @@ const Notification = ({ onBack }) => {
           </div>
         ) : (
           notifications.map(notification => (
-            <ListItem
+            <ListItemVertical
               key={notification.id}
               icon={
                 <Feather.Circle

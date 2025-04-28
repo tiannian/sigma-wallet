@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ListItem from './ListItem';
+import ListItemVertical from './list/ListItemViertical';
 
 const SectionList = ({ title, items, className = '' }) => {
   return (
@@ -8,7 +8,7 @@ const SectionList = ({ title, items, className = '' }) => {
       {title && <h2 className='page_title'>{title}</h2>}
       <div className='flex flex-col'>
         {items.map((item, index) => (
-          <ListItem
+          <ListItemVertical
             key={index}
             icon={item.icon}
             title={item.title}

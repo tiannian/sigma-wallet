@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import * as Feather from 'react-feather';
 import { useColorThemeStore } from '../store';
 import { useLocation } from 'wouter';
-import ListItem from '../components/ListItem';
 import Icon from '../components/Icon';
+import ListItemVertical from '../components/list/ListItemViertical';
 
 const Wallet = () => {
   const [totalValue] = useState(30000);
@@ -167,7 +167,7 @@ const Wallet = () => {
         </div>
         <div>
           {cryptoAssets.map((asset, index) => (
-            <ListItem
+            <ListItemVertical
               key={index}
               icon={<Icon url={asset.icon} symbol={asset.symbol} />}
               title={asset.symbol}

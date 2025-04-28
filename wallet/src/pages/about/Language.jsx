@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
 import { useColorThemeStore } from '../../store';
-import ListItem from '../../components/ListItem';
+import ListItemVertical from '../../components/list/ListItemViertical';
 import PageHeader from '../../components/PageHeader';
 
 const Language = ({ onBack }) => {
@@ -27,7 +27,7 @@ const Language = ({ onBack }) => {
 
       <div className='bg-white rounded-lg'>
         {languages.map(language => (
-          <ListItem
+          <ListItemVertical
             key={language.code}
             icon={<div className='w-6 h-6' />}
             title={language.name}

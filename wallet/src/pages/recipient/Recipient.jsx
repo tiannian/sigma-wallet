@@ -3,9 +3,9 @@ import * as Feather from 'react-feather';
 import { useTranslation } from 'react-i18next';
 import { useColorThemeStore } from '../../store';
 import { useLocation } from 'wouter';
-import ListItem from '../../components/ListItem';
 import Icon from '../../components/Icon';
 import UnlabeledInput from '../../components/UnlabeledInput';
+import ListItemVertical from '../../components/list/ListItemViertical';
 
 const Recipient = () => {
   const { t } = useTranslation();
@@ -109,7 +109,7 @@ const Recipient = () => {
       {/* Contacts List */}
       <div className='max-w-2xl mx-auto'>
         {contacts.map((contact, index) => (
-          <ListItem
+          <ListItemVertical
             key={index}
             icon={
               <Icon

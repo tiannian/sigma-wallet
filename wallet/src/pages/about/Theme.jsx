@@ -2,8 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
 import { useColorThemeStore } from '../../store';
-import ListItem from '../../components/ListItem';
 import PageHeader from '../../components/PageHeader';
+import ListItemVertical from '../../components/list/ListItemViertical';
 
 const Theme = ({ onBack }) => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ const Theme = ({ onBack }) => {
 
       <div className='bg-white rounded-lg'>
         {themes.map(theme => (
-          <ListItem
+          <ListItemVertical
             key={theme.code}
             icon={<div className='w-6 h-6 rounded-full' style={{ backgroundColor: theme.color }} />}
             title={theme.name}

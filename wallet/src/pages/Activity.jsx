@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import Record from '../components/Record';
+import GroupListItem from '../components/GroupListItem';
 import * as Feather from 'react-feather';
 import dayjs from 'dayjs';
+import Icon from '../components/Icon';
 
 const Activity = () => {
   const { t } = useTranslation();
@@ -16,6 +17,18 @@ const Activity = () => {
     }
   }, []);
 
+  const transformTransactionToListItem = tx => {
+    return {
+      icon: <Icon url={tx.logoUrl} symbol={tx.token} />,
+      title: '',
+      subtitle: `${t('activity.transaction.from')}: ${tx.from}\n${t('activity.transaction.to')}: ${tx.to}`,
+      right: {
+        top: `${tx.amount < 0 ? '- ' : '+ '}${Math.abs(tx.amount)} ${tx.token}`,
+        bottom: tx.chain,
+      },
+    };
+  };
+
   // Sample transaction data with sub-transactions
   const transactions = [
     {
@@ -28,6 +41,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: -1000,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
         {
           from: 'Bridge',
@@ -35,6 +49,7 @@ const Activity = () => {
           chain: 'BSC',
           amount: -1000,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
         {
           from: 'DEX',
@@ -42,6 +57,7 @@ const Activity = () => {
           chain: 'BSC',
           amount: 2.5,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
       ],
     },
@@ -55,6 +71,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: -0.001,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
         {
           from: 'Bridge',
@@ -62,6 +79,7 @@ const Activity = () => {
           chain: 'BSC',
           amount: 0.001,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
       ],
     },
@@ -75,6 +93,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: -1000,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
         {
           from: 'DEX',
@@ -82,6 +101,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: 0.5,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
       ],
     },
@@ -95,6 +115,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: 1000,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
       ],
     },
@@ -108,6 +129,7 @@ const Activity = () => {
           chain: 'BSC',
           amount: -5,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
         {
           from: 'Bridge',
@@ -115,6 +137,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: 4.98,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
       ],
     },
@@ -128,6 +151,7 @@ const Activity = () => {
           chain: 'BSC',
           amount: -2000,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
         {
           from: 'DEX',
@@ -135,6 +159,7 @@ const Activity = () => {
           chain: 'BSC',
           amount: 5,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
       ],
     },
@@ -148,6 +173,7 @@ const Activity = () => {
           chain: 'BSC',
           amount: -500,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
       ],
     },
@@ -161,6 +187,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: -2000,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
         {
           from: 'DEX1',
@@ -168,6 +195,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: -1,
           token: 'ETH',
+          logoUrl: '/src/assets/icons/eth.svg',
         },
         {
           from: 'DEX2',
@@ -175,6 +203,7 @@ const Activity = () => {
           chain: 'Ethereum',
           amount: 1950,
           token: 'USDT',
+          logoUrl: '/src/assets/icons/usdt.svg',
         },
       ],
     },
@@ -195,11 +224,11 @@ const Activity = () => {
 
       <div className='max-w-2xl mx-auto mb-8'>
         {transactions.map((record, index) => (
-          <Record
+          <GroupListItem
             key={index}
             type={record.type}
             timestamp={formatTimestamp(record.timestamp)}
-            transactions={record.transactions}
+            items={record.transactions.map(transformTransactionToListItem)}
           />
         ))}
       </div>

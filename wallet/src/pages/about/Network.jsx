@@ -2,13 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import * as Feather from 'react-feather';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'wouter';
-import ListItem from '../../components/ListItem';
 import Icon from '../../components/Icon';
 import Button from '../../components/Button';
 import UnlabeledInput from '../../components/UnlabeledInput';
 import { useColorThemeStore, useDatabase } from '../../store';
 import PageHeader from '../../components/PageHeader';
 import { toast } from 'react-hot-toast';
+import ListItemVertical from '../../components/list/ListItemViertical';
 
 const NetworkListItem = ({ chain, onClick }) => {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ const NetworkListItem = ({ chain, onClick }) => {
   };
 
   return (
-    <ListItem
+    <ListItemVertical
       icon={<Icon url={chain.logo_url} symbol={chain.name[0]} />}
       title={chain.name}
       subtitle={`${t('me.settings.networks.chainId')}: ${chain.chainId}`}
