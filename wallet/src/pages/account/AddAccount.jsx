@@ -4,7 +4,7 @@ import PageHeader from '../../components/PageHeader';
 import GroupListItem from '../../components/GroupListItem';
 import ListItemHorizontal from '../../components/list/ListItemHorizontal';
 import * as Feather from 'react-feather';
-
+import Icon from '../../components/Icon';
 const AddAccount = ({ onNavigate }) => {
   const { t } = useTranslation();
   const [selectedType, setSelectedType] = useState(null);
@@ -17,6 +17,33 @@ const AddAccount = ({ onNavigate }) => {
     setSelectedType(type);
     // TODO: Handle type selection
     console.log('Selected type:', type);
+  };
+
+  const getIconForType = key => {
+    switch (key) {
+      case 'mnemonics':
+        return <Icon symbol={<Feather.FolderPlus className='w-5 h-5 text-gray-600' />} />;
+      // return null;
+      case 'privateKey':
+        return <Icon symbol={<Feather.Key className='w-5 h-5 text-gray-600' />} />;
+      case 'device':
+        return <Icon symbol={<Feather.Smartphone className='w-5 h-5 text-gray-600' />} />;
+      // return null;
+      case 'observer':
+        return <Icon symbol={<Feather.Eye className='w-5 h-5 text-gray-600' />} />;
+      // return null;
+      case 'binance':
+        return <Icon symbol={'B'} />;
+      // return null;
+      case 'okx':
+        return <Icon symbol={'O'} />;
+      case 'kraken':
+        return <Icon symbol={'K'} />;
+      case 'wise':
+        return <Icon symbol={'W'} />;
+      case 'interactiveBrokers':
+        return <Icon symbol={'I'} />;
+    }
   };
 
   const accountGroups = [
@@ -101,7 +128,7 @@ const AddAccount = ({ onNavigate }) => {
                 {group.items.map((item, itemIndex) => (
                   <ListItemHorizontal
                     key={itemIndex}
-                    icon={null}
+                    icon={getIconForType(item.key)}
                     top={{
                       left: { text: item.label, isTitle: true },
                       right: <Feather.ChevronRight className='w-5 h-5 text-gray-400' />,
