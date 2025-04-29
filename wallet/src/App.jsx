@@ -16,13 +16,14 @@ import Network from './pages/about/Network';
 import NetworkInfo from './pages/about/NetworkInfo';
 import Notification from './pages/about/Notification';
 import Account from './pages/account/Account';
-import CreateAccount from './pages/account/CreateAccount';
+import AddAccount from './pages/account/AddAccount';
 import { Toaster } from 'react-hot-toast';
 import './i18n/i18n';
 import { useDatabase } from './js/store';
 import { useEffect } from 'react';
 import ProviderStorage from './js/Provider';
 import { BrowserNetworkDatabase } from './js/broswer/NetworkDatabase';
+
 function App() {
   const { t } = useTranslation();
   const [location, setLocation] = useLocation();
@@ -107,7 +108,7 @@ function App() {
             <Route path='/account' component={() => <Account onNavigate={handleNavigate} />} />
             <Route
               path='/account/create'
-              component={() => <CreateAccount onNavigate={handleNavigate} />}
+              component={() => <AddAccount onNavigate={handleNavigate} />}
             />
             <Route component={Wallet} />
           </Switch>

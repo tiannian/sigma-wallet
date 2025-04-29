@@ -164,22 +164,46 @@
     "addAccount": "添加賬戶",
     "balance": "餘額",
     "address": "地址",
-    "create": {
-      "title": "創建賬戶",
+    "add": {
+      "title": "添加賬戶",
       "type": {
         "label": "賬戶類型",
         "placeholder": "選擇賬戶類型"
       }
     },
     "type": {
-      "eip155": "EIP-155",
-      "mnemonics": "助記詞錢包",
-      "privateKey": "私鑰錢包",
-      "observer": "觀察者錢包",
-      "device": "設備錢包",
-      "exchange": "交易所賬戶",
-      "bank": "銀行賬戶",
-      "broker": "券商賬戶"
+      "blockchain": {
+        "tittle": "區塊鏈錢包",
+        "mnemonics": "助記詞錢包",
+        "mnemonics.description": "創建或導入經典的區塊鏈錢包，並通過助記詞恢復。",
+        "privateKey": "私鑰錢包",
+        "privateKey.description": "導入一個私鑰錢包。",
+        "device": "設備錢包",
+        "device.description": "連接其他設備上的錢包。",
+        "observer": "觀察者錢包",
+        "observer.description": "創建一個觀察者錢包，可以查看區塊鏈上的交易，但不能發送交易。"
+      },
+      "exchange": {
+        "tittle": "交易所賬戶",
+        "binance": "Binance",
+        "binance.description": "連接Binance交易所賬戶。",
+        "okx": "OKX",
+        "okx.description": "連接OKX交易所賬戶。",
+        "kraken": "Kraken",
+        "kraken.description": "連接Kraken交易所賬戶。"
+      },
+      "bank": {
+        "tittle": "銀行賬戶",
+        "description": "連接銀行賬戶，如銀行賬戶、信用卡等。",
+        "wise": "Wise",
+        "wise.description": "連接Wise銀行賬戶。"
+      },
+      "broker": {
+        "tittle": "券商賬戶",
+        "description": "連接券商賬戶，如券商賬戶、股票賬戶等。",
+        "interactiveBrokers": "Interactive Brokers",
+        "interactiveBrokers.description": "連接Interactive Brokers券商賬戶。"
+      }
     }
   }
 }

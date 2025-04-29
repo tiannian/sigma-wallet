@@ -14,34 +14,3 @@ export const NETWORK_TYPE_LIST_INDEX_MAP = {
 export const ACCOUNT_TYPE_LIST = ['EVM', 'Solana', 'Binance'];
 
 export const DATABASE_NAME_CONFIG_DB = 'config_db';
-
-export const ACCOUNT_TYPES = [
-  {
-    value: 'mnemonics',
-    i18n_name: 'account.type.mnemonics',
-  },
-  {
-    value: 'privateKey',
-    i18n_name: 'account.type.privateKey',
-  },
-  {
-    value: 'observer',
-    i18n_name: 'account.type.observer',
-  },
-  {
-    value: 'device',
-    i18n_name: 'account.type.device',
-  },
-  {
-    value: 'exchange',
-    i18n_name: 'account.type.exchange',
-  },
-  {
-    value: 'bank',
-    i18n_name: 'account.type.bank',
-  },
-  {
-    value: 'broker',
-    i18n_name: 'account.type.broker',
-  },
-];

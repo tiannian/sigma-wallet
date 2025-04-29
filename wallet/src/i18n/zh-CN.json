@@ -182,22 +182,46 @@
     "addAccount": "添加账户",
     "balance": "余额",
     "address": "地址",
-    "create": {
-      "title": "创建账户",
+    "add": {
+      "title": "添加账户",
       "type": {
         "label": "账户类型",
         "placeholder": "选择账户类型"
       }
     },
     "type": {
-      "eip155": "EIP-155",
-      "mnemonics": "助记词钱包",
-      "privateKey": "私钥钱包",
-      "observer": "观察者钱包",
-      "device": "设备钱包",
-      "exchange": "交易所账户",
-      "bank": "银行账户",
-      "broker": "券商账户"
+      "blockchain": {
+        "tittle": "区块链钱包",
+        "mnemonics": "助记词钱包",
+        "mnemonics.description": "创建或导入经典的区块链钱包，并通过助记词恢复。",
+        "privateKey": "私钥钱包",
+        "privateKey.description": "导入一个私钥钱包。",
+        "device": "设备钱包",
+        "device.description": "连接其他设备上的钱包。",
+        "observer": "观察者钱包",
+        "observer.description": "创建一个观察者钱包，可以查看区块链上的交易，但不能发送交易。"
+      },
+      "exchange": {
+        "tittle": "交易所账户",
+        "binance": "Binance",
+        "binance.description": "连接Binance交易所账户。",
+        "okx": "OKX",
+        "okx.description": "连接OKX交易所账户。",
+        "kraken": "Kraken",
+        "kraken.description": "连接Kraken交易所账户。"
+      },
+      "bank": {
+        "tittle": "银行账户",
+        "description": "连接银行账户，如银行账户、信用卡等。",
+        "wise": "Wise",
+        "wise.description": "连接Wise银行账户。"
+      },
+      "broker": {
+        "tittle": "券商账户",
+        "description": "连接券商账户，如券商账户、股票账户等。",
+        "interactiveBrokers": "Interactive Brokers",
+        "interactiveBrokers.description": "连接Interactive Brokers券商账户。"
+      }
     }
   }
 }

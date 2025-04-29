@@ -182,22 +182,46 @@
     "addAccount": "Add Account",
     "balance": "Balance",
     "address": "Address",
-    "create": {
-      "title": "Create Account",
+    "add": {
+      "title": "Add Account",
       "type": {
         "label": "Account Type",
         "placeholder": "Select account type"
       }
     },
     "type": {
-      "eip155": "EIP-155",
-      "mnemonics": "Mnemonics Wallet",
-      "privateKey": "Private Key Wallet",
-      "observer": "Observer Wallet",
-      "device": "Device Wallet",
-      "exchange": "Exchange Account",
-      "bank": "Bank Account",
-      "broker": "Broker Account"
+      "blockchain": {
+        "tittle": "Blockchain Wallet",
+        "mnemonics": "Mnemonics Wallet",
+        "mnemonics.description": "Create or import a classic blockchain wallet and restore it using mnemonics.",
+        "privateKey": "Private Key Wallet",
+        "privateKey.description": "Import a private key wallet.",
+        "device": "Device Wallet",
+        "device.description": "Connect wallet on other devices.",
+        "observer": "Observer Wallet",
+        "observer.description": "Create an observer wallet that can view transactions on the blockchain but cannot send transactions."
+      },
+      "exchange": {
+        "tittle": "Exchange Account",
+        "binance": "Binance",
+        "binance.description": "Connect Binance exchange account.",
+        "okx": "OKX",
+        "okx.description": "Connect OKX exchange account.",
+        "kraken": "Kraken",
+        "kraken.description": "Connect Kraken exchange account."
+      },
+      "bank": {
+        "tittle": "Bank Account",
+        "description": "Connect bank accounts, such as bank accounts, credit cards, etc.",
+        "wise": "Wise",
+        "wise.description": "Connect Wise bank account."
+      },
+      "broker": {
+        "tittle": "Broker Account",
+        "description": "Connect broker accounts, such as brokerage accounts, stock accounts, etc.",
+        "interactiveBrokers": "Interactive Brokers",
+        "interactiveBrokers.description": "Connect Interactive Brokers account."
+      }
     }
   }
 }
