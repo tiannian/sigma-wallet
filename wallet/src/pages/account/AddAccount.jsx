@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PageHeader from '../../components/PageHeader';
 import GroupListItem from '../../components/GroupListItem';
+import ListItemHorizontal from '../../components/list/ListItemHorizontal';
 import * as Feather from 'react-feather';
 
 const AddAccount = ({ onNavigate }) => {
@@ -98,17 +99,19 @@ const AddAccount = ({ onNavigate }) => {
             render_items={() => (
               <>
                 {group.items.map((item, itemIndex) => (
-                  <div
+                  <ListItemHorizontal
                     key={itemIndex}
-                    className='flex flex-col py-3 px-4 hover:bg-gray-50 cursor-pointer'
+                    icon={null}
+                    top={{
+                      left: { text: item.label, isTitle: true },
+                      right: <Feather.ChevronRight className='w-5 h-5 text-gray-400' />,
+                    }}
+                    bottom={{
+                      left: item.description,
+                      right: null,
+                    }}
                     onClick={() => handleTypeSelect(item.key)}
-                  >
-                    <div className='flex items-center justify-between'>
-                      <span className='text-base font-medium'>{item.label}</span>
-                      <Feather.ChevronRight className='w-5 h-5 text-gray-400' />
-                    </div>
-                    <span className='text-sm text-gray-500 mt-1'>{item.description}</span>
-                  </div>
+                  />
                 ))}
               </>
             )}

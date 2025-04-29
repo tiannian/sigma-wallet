@@ -15,19 +15,6 @@ const ListItemHorizontal = ({ icon, top, bottom, onClick, className = '' }) => {
     return <div className='text-sm text-gray-500'>{item}</div>;
   };
 
-  const renderTop = section => {
-    if (!section) return null;
-    if (React.isValidElement(section)) {
-      return section;
-    }
-    return (
-      <div className='flex items-center justify-between w-full'>
-        {renderText(section.left)}
-        {renderText(section.right)}
-      </div>
-    );
-  };
-
   const renderSection = section => {
     if (!section) return null;
     if (React.isValidElement(section)) {
