@@ -203,7 +203,7 @@ const Activity = () => {
   };
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <div className='flex justify-between items-start'>
         <h2 ref={topRef} className='page_title'>
           {t('activity.title')}

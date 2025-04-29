@@ -93,8 +93,7 @@ const Account = ({ onNavigate }) => {
   };
 
   const handleAddAccount = () => {
-    // TODO: Implement add account functionality
-    console.log('Add account clicked');
+    onNavigate('account/create');
   };
 
   const filteredAccounts = accounts.filter(
@@ -104,7 +103,7 @@ const Account = ({ onNavigate }) => {
   );
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <div ref={topRef} />
       <PageHeader onBack={handleBack} title={t('account.title')} />
 

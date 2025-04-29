@@ -54,7 +54,7 @@ const Recipient = () => {
   };
 
   return (
-    <div className='p-1'>
+    <div className='overflow-hidden'>
       <div className='flex justify-between items-center mb-6'>
         <h2 className='page_title'>{t('recipient.title', 'Recipient')}</h2>
       </div>

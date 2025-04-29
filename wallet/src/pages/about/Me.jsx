@@ -126,7 +126,7 @@ const Me = ({ onNavigate }) => {
   };
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <SectionList {...accountSection} />
       <SectionList {...settingsSection} />
       <SectionList {...aboutSection} />

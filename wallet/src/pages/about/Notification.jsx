@@ -43,7 +43,7 @@ const Notification = ({ onBack }) => {
   };
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <div ref={topRef} />
       <PageHeader onBack={onBack} title={t('me.settings.notifications.title')} />
 

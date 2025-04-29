@@ -54,7 +54,7 @@ const RecipientInfo = ({ onBack }) => {
   };
 
   return (
-    <div className='p-1 overflow-hidden flex flex-col h-screen'>
+    <div className='overflow-hidden flex flex-col h-screen'>
       <div className='flex items-center mb-6'>
         <button onClick={onBack} className='mr-4 p-2 rounded-full'>
           <Feather.ArrowLeft size={24} />

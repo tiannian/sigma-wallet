@@ -119,7 +119,7 @@ const Account = ({ onNavigate }) => {
   }, {});
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <div ref={topRef} />
       <PageHeader onBack={handleBack} title={t('account.title')} />
 

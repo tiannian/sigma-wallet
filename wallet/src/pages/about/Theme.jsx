@@ -25,7 +25,7 @@ const Theme = ({ onBack }) => {
   };
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <PageHeader onBack={onBack} title={t('me.settings.theme.title')} />
 
       <div className='bg-white rounded-lg'>

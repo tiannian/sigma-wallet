@@ -16,6 +16,7 @@ import Network from './pages/about/Network';
 import NetworkInfo from './pages/about/NetworkInfo';
 import Notification from './pages/about/Notification';
 import Account from './pages/account/Account';
+import CreateAccount from './pages/account/CreateAccount';
 import { Toaster } from 'react-hot-toast';
 import './i18n/i18n';
 import { useDatabase } from './js/store';
@@ -65,7 +66,7 @@ function App() {
   return (
     <div className='flex flex-col h-screen padding-ios'>
       <div className='flex-1 overflow-auto'>
-        <div className='max-w-2xl mx-auto p-4'>
+        <div className='max-w-2xl mx-auto p-5'>
           <Switch>
             <Route path='/wallet' component={Wallet} />
             <Route path='/activity' component={Activity} />
@@ -101,11 +102,13 @@ function App() {
             />
             <Route
               path='/me/settings/networks/info'
-              component={({ params }) => (
-                <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />
-              )}
+              component={() => <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />}
             />
             <Route path='/account' component={() => <Account onNavigate={handleNavigate} />} />
+            <Route
+              path='/account/create'
+              component={() => <CreateAccount onNavigate={handleNavigate} />}
+            />
             <Route component={Wallet} />
           </Switch>
         </div>
@@ -116,7 +119,8 @@ function App() {
         !location.startsWith('/me/settings/provider') &&
         !location.startsWith('/me/settings/networks') &&
         !location.startsWith('/recipient/info') &&
-        !location.startsWith('/me/notifications') && (
+        !location.startsWith('/me/notifications') &&
+        !location.startsWith('/account/create') && (
           <Nav items={navigationItems} activeTab={currentPage} onTabChange={handleNavigate} />
         )}
       <Toaster position='bottom-center' />

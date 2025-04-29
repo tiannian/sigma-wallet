@@ -160,11 +160,26 @@
   },
   "account": {
     "title": "賬戶",
-    "searchPlaceholder": "搜尋賬戶...",
+    "searchPlaceholder": "搜索賬戶...",
     "addAccount": "添加賬戶",
     "balance": "餘額",
     "address": "地址",
-    "refreshSuccess": "賬戶刷新成功",
-    "refreshError": "賬戶刷新失敗"
+    "create": {
+      "title": "創建賬戶",
+      "type": {
+        "label": "賬戶類型",
+        "placeholder": "選擇賬戶類型"
+      }
+    },
+    "type": {
+      "eip155": "EIP-155",
+      "mnemonics": "助記詞錢包",
+      "privateKey": "私鑰錢包",
+      "observer": "觀察者錢包",
+      "device": "設備錢包",
+      "exchange": "交易所賬戶",
+      "bank": "銀行賬戶",
+      "broker": "券商賬戶"
+    }
   }
 }

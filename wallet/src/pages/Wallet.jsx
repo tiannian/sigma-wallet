@@ -115,7 +115,7 @@ const Wallet = () => {
   };
 
   return (
-    <div className='p-1'>
+    <div className='overflow-hidden'>
       {/* Header Section */}
       <div className='flex justify-between items-center'>
         <p className='text-gray-600 mb-2'>Total Value</p>

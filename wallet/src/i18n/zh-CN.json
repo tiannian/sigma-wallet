@@ -182,7 +182,22 @@
     "addAccount": "添加账户",
     "balance": "余额",
     "address": "地址",
-    "refreshSuccess": "账户刷新成功",
-    "refreshError": "账户刷新失败"
+    "create": {
+      "title": "创建账户",
+      "type": {
+        "label": "账户类型",
+        "placeholder": "选择账户类型"
+      }
+    },
+    "type": {
+      "eip155": "EIP-155",
+      "mnemonics": "助记词钱包",
+      "privateKey": "私钥钱包",
+      "observer": "观察者钱包",
+      "device": "设备钱包",
+      "exchange": "交易所账户",
+      "bank": "银行账户",
+      "broker": "券商账户"
+    }
   }
 }

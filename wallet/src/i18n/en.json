@@ -182,7 +182,22 @@
     "addAccount": "Add Account",
     "balance": "Balance",
     "address": "Address",
-    "refreshSuccess": "Accounts refreshed successfully",
-    "refreshError": "Failed to refresh accounts"
+    "create": {
+      "title": "Create Account",
+      "type": {
+        "label": "Account Type",
+        "placeholder": "Select account type"
+      }
+    },
+    "type": {
+      "eip155": "EIP-155",
+      "mnemonics": "Mnemonics Wallet",
+      "privateKey": "Private Key Wallet",
+      "observer": "Observer Wallet",
+      "device": "Device Wallet",
+      "exchange": "Exchange Account",
+      "bank": "Bank Account",
+      "broker": "Broker Account"
+    }
   }
 }

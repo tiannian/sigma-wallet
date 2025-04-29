@@ -61,7 +61,7 @@ const Provider = ({ onBack }) => {
   };
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <PageHeader onBack={onBack} title={t('provider.title')} />
 
       <div className='bg-white rounded-lg py-4'>

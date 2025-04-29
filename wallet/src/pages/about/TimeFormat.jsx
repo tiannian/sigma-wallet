@@ -35,7 +35,7 @@ const TimeFormat = ({ onBack }) => {
   };
 
   return (
-    <div className='p-1 overflow-hidden'>
+    <div className='overflow-hidden'>
       <PageHeader onBack={onBack} title={t('me.settings.timeFormat.title')} />
 
       <div className='bg-white rounded-lg'>

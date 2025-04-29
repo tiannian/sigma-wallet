@@ -96,7 +96,7 @@ const NetworkInfo = ({ onBack }) => {
   };
 
   return (
-    <div className='p-1 overflow-hidden flex flex-col h-screen'>
+    <div className='overflow-hidden flex flex-col h-screen'>
       <PageHeader onBack={onBack} title={t('networkInfo.title')} />
 
       <div className='bg-white rounded-lg flex-1 flex flex-col py-4'>
