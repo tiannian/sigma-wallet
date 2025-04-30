@@ -3,28 +3,38 @@ import { Route, Switch, useLocation } from 'wouter';
 import Nav from './components/Nav';
 import * as Icon from 'react-feather';
 import './App.css';
-import Wallet from './pages/Wallet';
-import Activity from './pages/Activity';
-import Recipient from './pages/recipient/Recipient';
-import RecipientInfo from './pages/recipient/RecipientInfo';
-import Me from './pages/about/Me';
-import Language from './pages/about/Language';
-import TimeFormat from './pages/about/TimeFormat';
-import Theme from './pages/about/Theme';
-import Provider from './pages/about/Provider';
-import Network from './pages/about/Network';
-import NetworkInfo from './pages/about/NetworkInfo';
-import Notification from './pages/about/Notification';
-import Account from './pages/account/Account';
-import AddAccount from './pages/account/AddAccount';
-import Welcome from './pages/welcome/Welcome';
-import Password from './pages/welcome/Password';
+import { lazy, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import './i18n/i18n';
 import { useDatabase } from './js/store';
 import { useEffect } from 'react';
 import ProviderStorage from './js/Provider';
 import { BrowserNetworkDatabase } from './js/broswer/NetworkDatabase';
+
+// Lazy load all page components
+const Wallet = lazy(() => import('./pages/Wallet'));
+const Activity = lazy(() => import('./pages/Activity'));
+const Recipient = lazy(() => import('./pages/recipient/Recipient'));
+const RecipientInfo = lazy(() => import('./pages/recipient/RecipientInfo'));
+const Me = lazy(() => import('./pages/about/Me'));
+const Language = lazy(() => import('./pages/about/Language'));
+const TimeFormat = lazy(() => import('./pages/about/TimeFormat'));
+const Theme = lazy(() => import('./pages/about/Theme'));
+const Provider = lazy(() => import('./pages/about/Provider'));
+const Network = lazy(() => import('./pages/about/Network'));
+const NetworkInfo = lazy(() => import('./pages/about/NetworkInfo'));
+const Notification = lazy(() => import('./pages/about/Notification'));
+const Account = lazy(() => import('./pages/account/Account'));
+const AddAccount = lazy(() => import('./pages/account/AddAccount'));
+const Welcome = lazy(() => import('./pages/welcome/Welcome'));
+const Password = lazy(() => import('./pages/welcome/Password'));
+
+// Loading component
+const Loading = () => (
+  <div className='flex items-center justify-center h-screen'>
+    <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500'></div>
+  </div>
+);
 
 function App() {
   const { t } = useTranslation();
@@ -70,60 +80,64 @@ function App() {
     <div className='flex flex-col h-screen padding-ios'>
       <div className='flex-1 overflow-auto'>
         <div className='max-w-2xl mx-auto p-5'>
-          <Switch>
-            <Route path='/welcome' component={() => <Welcome onNavigate={handleNavigate} />} />
-            <Route
-              path='/welcome/password'
-              component={() => <Password onNavigate={handleNavigate} />}
-            />
-            <Route path='/wallet' component={Wallet} />
-            <Route path='/activity' component={Activity} />
-            <Route path='/recipient' component={Recipient} />
-            <Route
-              path='/recipient/info'
-              component={() => <RecipientInfo onBack={() => setLocation('/recipient')} />}
-            />
-            <Route path='/me' component={() => <Me onNavigate={handleNavigate} />} />
-            <Route
-              path='/me/notifications'
-              component={() => <Notification onBack={() => setLocation('/me')} />}
-            />
-            <Route
-              path='/me/settings/language'
-              component={() => <Language onBack={() => setLocation('/me')} />}
-            />
-            <Route
-              path='/me/settings/timeFormat'
-              component={() => <TimeFormat onBack={() => setLocation('/me')} />}
-            />
-            <Route
-              path='/me/settings/theme'
-              component={() => <Theme onBack={() => setLocation('/me')} />}
-            />
-            <Route
-              path='/me/settings/provider'
-              component={() => <Provider onBack={() => setLocation('/me')} />}
-            />
-            <Route
-              path='/me/settings/networks'
-              component={() => <Network onBack={() => setLocation('/me')} />}
-            />
-            <Route
-              path='/me/settings/networks/info'
-              component={() => <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />}
-            />
-            <Route
-              path='/account'
-              component={() => (
-                <Account onNavigate={handleNavigate} onBack={() => setLocation('/me')} />
-              )}
-            />
-            <Route
-              path='/account/create'
-              component={() => <AddAccount onBack={() => setLocation('/account')} />}
-            />
-            <Route component={() => <Welcome onNavigate={handleNavigate} />} />
-          </Switch>
+          <Suspense fallback={<Loading />}>
+            <Switch>
+              <Route path='/welcome' component={() => <Welcome onNavigate={handleNavigate} />} />
+              <Route
+                path='/welcome/password'
+                component={() => <Password onNavigate={handleNavigate} />}
+              />
+              <Route path='/wallet' component={Wallet} />
+              <Route path='/activity' component={Activity} />
+              <Route path='/recipient' component={Recipient} />
+              <Route
+                path='/recipient/info'
+                component={() => <RecipientInfo onBack={() => setLocation('/recipient')} />}
+              />
+              <Route path='/me' component={() => <Me onNavigate={handleNavigate} />} />
+              <Route
+                path='/me/notifications'
+                component={() => <Notification onBack={() => setLocation('/me')} />}
+              />
+              <Route
+                path='/me/settings/language'
+                component={() => <Language onBack={() => setLocation('/me')} />}
+              />
+              <Route
+                path='/me/settings/timeFormat'
+                component={() => <TimeFormat onBack={() => setLocation('/me')} />}
+              />
+              <Route
+                path='/me/settings/theme'
+                component={() => <Theme onBack={() => setLocation('/me')} />}
+              />
+              <Route
+                path='/me/settings/provider'
+                component={() => <Provider onBack={() => setLocation('/me')} />}
+              />
+              <Route
+                path='/me/settings/networks'
+                component={() => <Network onBack={() => setLocation('/me')} />}
+              />
+              <Route
+                path='/me/settings/networks/info'
+                component={() => (
+                  <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />
+                )}
+              />
+              <Route
+                path='/account'
+                component={() => (
+                  <Account onNavigate={handleNavigate} onBack={() => setLocation('/me')} />
+                )}
+              />
+              <Route
+                path='/account/create'
+                component={() => <AddAccount onBack={() => setLocation('/account')} />}
+              />
+              <Route component={() => <Welcome onNavigate={handleNavigate} />} />
+            </Switch>
+          </Suspense>
         </div>
       </div>
       {!location.startsWith('/me/settings/language') &&

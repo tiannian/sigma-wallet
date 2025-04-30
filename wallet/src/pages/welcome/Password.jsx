@@ -39,8 +39,8 @@ const Password = ({ onNavigate }) => {
   };
 
   return (
-    <div className='min-h-screen w-full flex items-start justify-center bg-white p-5 pt-[15vh]'>
-      <div className='w-full max-w-[400px]'>
+    <div className='w-full flex flex-col bg-white overflow-hidden'>
+      <div className='w-full pt-[15vh]'>
         <h1 className='text-2xl font-bold text-gray-800 mb-2 text-center'>{t('password.title')}</h1>
         <p className='text-sm text-gray-600 mb-8 text-center'>{t('password.subtitle')}</p>
 
@@ -115,7 +115,9 @@ const Password = ({ onNavigate }) => {
             </label>
           </div>
         </div>
+      </div>
 
+      <div className='p-5 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80 h-20'>
         <Button
           onClick={handleSubmit}
           fullWidth
