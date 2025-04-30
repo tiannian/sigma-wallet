@@ -57,7 +57,6 @@ const mockAccounts = [
 ];
 
 const AccountListItem = ({ account, onClick }) => {
-  const { t } = useTranslation();
   const { currentColorTheme } = useColorThemeStore();
 
   const right = {
@@ -81,31 +80,19 @@ const AccountListItem = ({ account, onClick }) => {
   );
 };
 
-const Account = ({ onNavigate }) => {
+const Account = ({ onNavigate, onBack }) => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const topRef = useRef(null);
-  const { currentColorTheme } = useColorThemeStore();
-  const [accounts] = useState(mockAccounts);
-
-  const handleBack = () => {
-    onNavigate('me');
-  };
 
   const handleAddAccount = () => {
     onNavigate('account/create');
   };
 
-  const filteredAccounts = accounts.filter(
-    account =>
-      account.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      account.address.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div className='overflow-hidden'>
       <div ref={topRef} />
-      <PageHeader onBack={handleBack} title={t('account.title')} />
+      <PageHeader onBack={onBack} title={t('account.title')} />
 
       <div className='relative mb-6 py-4'>
         <UnlabeledInput

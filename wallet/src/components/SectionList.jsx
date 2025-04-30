@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItemVertical from './list/ListItemViertical';
+import * as Feather from 'react-feather';
+import { useColorThemeStore } from '../js/store';
 
 const SectionList = ({ title, items, className = '' }) => {
+  const { currentColorTheme } = useColorThemeStore();
+
   return (
     <div className={`mb-8 ${className}`}>
       {title && <h2 className='page_title'>{title}</h2>}
@@ -13,7 +17,7 @@ const SectionList = ({ title, items, className = '' }) => {
             icon={item.icon}
             title={item.title}
             subtitle={item.subtitle}
-            right={item.right}
+            right={<Feather.ChevronRight className={`w-5 h-5 text-${currentColorTheme}-400`} />}
             onClick={item.onClick}
             className='border-b border-gray-100 last:border-b-0'
           />

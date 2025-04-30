@@ -205,5 +205,33 @@
         "interactiveBrokers.description": "連接Interactive Brokers券商賬戶。"
       }
     }
+  },
+  "welcome": {
+    "slide1": {
+      "title": "歡迎使用松鼠錢包",
+      "description": "安全、便捷嘅數字資產管理工具"
+    },
+    "slide2": {
+      "title": "多鏈支持",
+      "description": "支持多種主流區塊鏈網絡"
+    },
+    "slide3": {
+      "title": "安全可靠",
+      "description": "採用先進嘅加密技術保護您嘅資產安全"
+    },
+    "start": "開始使用"
+  },
+  "password": {
+    "title": "創建密碼",
+    "subtitle": "請創建一個安全的密碼來保護你的錢包",
+    "enterPassword": "輸入密碼",
+    "confirmPassword": "確認密碼",
+    "minLength": "密碼長度至少為8個字符",
+    "minLengthError": "密碼長度必須至少為8個字符",
+    "passwordMismatch": "兩次輸入的密碼不一致",
+    "useBiometricLogin": "使用生物識別登錄",
+    "understand": "我明白如果丟失密碼，我將無法訪問我的錢包",
+    "learnMore": "了解更多",
+    "create": "創建"
   }
 }

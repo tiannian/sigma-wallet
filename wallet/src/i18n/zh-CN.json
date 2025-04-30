@@ -223,5 +223,33 @@
         "interactiveBrokers.description": "连接Interactive Brokers券商账户。"
       }
     }
+  },
+  "welcome": {
+    "slide1": {
+      "title": "欢迎使用松鼠钱包",
+      "description": "安全、便捷的数字资产管理工具"
+    },
+    "slide2": {
+      "title": "多链支持",
+      "description": "支持多种主流区块链网络"
+    },
+    "slide3": {
+      "title": "安全可靠",
+      "description": "采用先进的加密技术保护您的资产安全"
+    },
+    "start": "开始使用"
+  },
+  "password": {
+    "title": "创建密码",
+    "subtitle": "请创建一个安全的密码来保护你的钱包",
+    "enterPassword": "输入密码",
+    "confirmPassword": "确认密码",
+    "minLength": "密码长度至少为8个字符",
+    "minLengthError": "密码长度必须至少为8个字符",
+    "passwordMismatch": "两次输入的密码不一致",
+    "useBiometricLogin": "使用生物识别登录",
+    "understand": "我明白如果丢失密码，我将无法访问我的钱包",
+    "learnMore": "了解更多",
+    "create": "创建"
   }
 }

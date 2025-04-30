@@ -5,16 +5,13 @@ import GroupListItem from '../../components/GroupListItem';
 import ListItemHorizontal from '../../components/list/ListItemHorizontal';
 import * as Feather from 'react-feather';
 import Icon from '../../components/Icon';
-const AddAccount = ({ onNavigate }) => {
-  const { t } = useTranslation();
-  const [selectedType, setSelectedType] = useState(null);
+import { useColorThemeStore } from '../../js/store';
 
-  const handleBack = () => {
-    onNavigate('account');
-  };
+const AddAccount = ({ onBack }) => {
+  const { t } = useTranslation();
+  const { currentColorTheme } = useColorThemeStore();
 
   const handleTypeSelect = type => {
-    setSelectedType(type);
     // TODO: Handle type selection
     console.log('Selected type:', type);
   };
@@ -22,19 +19,15 @@ const AddAccount = ({ onNavigate }) => {
   const getIconForType = key => {
     switch (key) {
       case 'mnemonics':
-        return <Icon symbol={<Feather.FolderPlus className='w-5 h-5 text-gray-600' />} />;
-      // return null;
+        return <Icon symbol={<Feather.FolderPlus className='w-5 h-5' />} />;
       case 'privateKey':
-        return <Icon symbol={<Feather.Key className='w-5 h-5 text-gray-600' />} />;
+        return <Icon symbol={<Feather.Key className='w-5 h-5' />} />;
       case 'device':
-        return <Icon symbol={<Feather.Smartphone className='w-5 h-5 text-gray-600' />} />;
-      // return null;
+        return <Icon symbol={<Feather.Smartphone className='w-5 h-5' />} />;
       case 'observer':
-        return <Icon symbol={<Feather.Eye className='w-5 h-5 text-gray-600' />} />;
-      // return null;
+        return <Icon symbol={<Feather.Eye className='w-5 h-5' />} />;
       case 'binance':
         return <Icon symbol={'B'} />;
-      // return null;
       case 'okx':
         return <Icon symbol={'O'} />;
       case 'kraken':
@@ -116,7 +109,7 @@ const AddAccount = ({ onNavigate }) => {
 
   return (
     <div className='overflow-hidden min-h-130'>
-      <PageHeader onBack={handleBack} title={t('account.addAccount')} />
+      <PageHeader onBack={onBack} title={t('account.addAccount')} />
 
       <div className='bg-white rounded-lg py-4'>
         {accountGroups.map((group, index) => (
@@ -131,7 +124,9 @@ const AddAccount = ({ onNavigate }) => {
                     icon={getIconForType(item.key)}
                     top={{
                       left: { text: item.label, isTitle: true },
-                      right: <Feather.ChevronRight className='w-5 h-5 text-gray-400' />,
+                      right: (
+                        <Feather.ChevronRight className={`w-5 h-5 text-${currentColorTheme}-400`} />
+                      ),
                     }}
                     bottom={{
                       left: item.description,

@@ -223,5 +223,33 @@
         "interactiveBrokers.description": "Connect Interactive Brokers account."
       }
     }
+  },
+  "welcome": {
+    "slide1": {
+      "title": "Welcome to Squirrel Wallet",
+      "description": "Secure and convenient digital asset management tool"
+    },
+    "slide2": {
+      "title": "Multi-chain Support",
+      "description": "Support for multiple mainstream blockchain networks"
+    },
+    "slide3": {
+      "title": "Secure and Reliable",
+      "description": "Advanced encryption technology to protect your assets"
+    },
+    "start": "Get Started"
+  },
+  "password": {
+    "title": "Create Password",
+    "subtitle": "Please create a secure password to protect your wallet",
+    "enterPassword": "Enter Password",
+    "confirmPassword": "Confirm Password",
+    "minLength": "Password must be at least 8 characters long",
+    "minLengthError": "Password must be at least 8 characters",
+    "passwordMismatch": "Passwords do not match",
+    "useBiometricLogin": "Use Biometric Login",
+    "understand": "I understand that if I lose my password, I will lose access to my wallet",
+    "learnMore": "Learn More",
+    "create": "Create"
   }
 }
