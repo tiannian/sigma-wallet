@@ -233,5 +233,11 @@
     "understand": "我明白如果丟失密碼，我將無法訪問我的錢包",
     "learnMore": "了解更多",
     "create": "創建"
+  },
+  "addAccount": {
+    "title": "添加賬戶",
+    "subtitle": "選擇添加賬戶的方式",
+    "addWallet": "添加錢包",
+    "skip": "跳過"
   }
 }

@@ -5,7 +5,7 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Button from '../../components/Button';
-
+import EncryptedData from '../../js/EncryptedData';
 const Welcome = ({ onNavigate }) => {
   const { t } = useTranslation();
 
@@ -25,6 +25,11 @@ const Welcome = ({ onNavigate }) => {
   ];
 
   const handleStart = () => {
+    const encryptedData = new EncryptedData();
+    encryptedData.init();
+
+    encryptedData.save();
+
     onNavigate('welcome/password');
   };
 
@@ -43,7 +48,7 @@ const Welcome = ({ onNavigate }) => {
         ))}
       </Swiper>
 
-      <div className='p-5 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80 h-20'>
+      <div className='p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
         <Button onClick={handleStart} fullWidth>
           {t('welcome.start')}
         </Button>

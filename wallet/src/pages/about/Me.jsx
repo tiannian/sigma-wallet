@@ -16,7 +16,7 @@ const Me = ({ onNavigate }) => {
         icon: <Icon symbol={<Feather.User className='w-6 h-6' />} />,
         title: t('me.account.accounts.title'),
         subtitle: t('me.account.accounts.subtitle'),
-        onClick: () => onNavigate('account'),
+        onClick: () => onNavigate('me/account'),
       },
       {
         icon: <Icon symbol={<Feather.Bell className='w-6 h-6' />} />,

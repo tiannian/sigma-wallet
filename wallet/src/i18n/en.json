@@ -251,5 +251,11 @@
     "understand": "I understand that if I lose my password, I will lose access to my wallet",
     "learnMore": "Learn More",
     "create": "Create"
+  },
+  "addAccount": {
+    "title": "Add Account",
+    "subtitle": "Choose how you want to add your account",
+    "addWallet": "Add Wallet",
+    "skip": "Skip"
   }
 }

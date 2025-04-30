@@ -251,5 +251,11 @@
     "understand": "我明白如果丢失密码，我将无法访问我的钱包",
     "learnMore": "了解更多",
     "create": "创建"
+  },
+  "addAccount": {
+    "title": "添加账户",
+    "subtitle": "选择添加账户的方式",
+    "addWallet": "添加钱包",
+    "skip": "跳过"
   }
 }

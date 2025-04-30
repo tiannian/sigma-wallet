@@ -3,14 +3,14 @@ import { Route, Switch, useLocation } from 'wouter';
 import Nav from './components/Nav';
 import * as Icon from 'react-feather';
 import './App.css';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useLayoutEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import './i18n/i18n';
 import { useDatabase } from './js/store';
 import { useEffect } from 'react';
 import ProviderStorage from './js/Provider';
 import { BrowserNetworkDatabase } from './js/broswer/NetworkDatabase';
-
+import EncryptedData from './js/EncryptedData';
 // Lazy load all page components
 const Wallet = lazy(() => import('./pages/Wallet'));
 const Activity = lazy(() => import('./pages/Activity'));
@@ -28,6 +28,7 @@ const Account = lazy(() => import('./pages/account/Account'));
 const AddAccount = lazy(() => import('./pages/account/AddAccount'));
 const Welcome = lazy(() => import('./pages/welcome/Welcome'));
 const Password = lazy(() => import('./pages/welcome/Password'));
+const AddAccountWelcome = lazy(() => import('./pages/welcome/AddAccount'));
 
 // Loading component
 const Loading = () => (
@@ -36,39 +37,45 @@ const Loading = () => (
   </div>
 );
 
+const navigationItems = [
+  {
+    id: 'wallet',
+    icon: <Icon.CreditCard size={24} />,
+    label: 'nav.wallet',
+  },
+  {
+    id: 'activity',
+    icon: <Icon.Activity size={24} />,
+    label: 'nav.activity',
+  },
+  {
+    id: 'recipient',
+    icon: <Icon.Send size={20} />,
+    label: 'nav.transfer',
+  },
+  {
+    id: 'me',
+    icon: <Icon.User size={24} />,
+    label: 'nav.me',
+  },
+];
+
 function App() {
-  const { t } = useTranslation();
   const [location, setLocation] = useLocation();
   const { initDatabase } = useDatabase();
+
+  useLayoutEffect(() => {
+    const encryptedData = new EncryptedData();
+    if (encryptedData.isInitialized()) {
+      setLocation('/wallet');
+    }
+  }, [setLocation]);
 
   useEffect(() => {
     initDatabase();
     new ProviderStorage();
     new BrowserNetworkDatabase().init();
   }, [initDatabase]);
-
-  const navigationItems = [
-    {
-      id: 'wallet',
-      icon: <Icon.CreditCard size={24} />,
-      label: t('nav.wallet'),
-    },
-    {
-      id: 'activity',
-      icon: <Icon.Activity size={24} />,
-      label: t('nav.activity'),
-    },
-    {
-      id: 'recipient',
-      icon: <Icon.Send size={20} />,
-      label: t('nav.transfer'),
-    },
-    {
-      id: 'me',
-      icon: <Icon.User size={24} />,
-      label: t('nav.me'),
-    },
-  ];
 
   const handleNavigate = page => {
     setLocation(`/${page}`);
@@ -86,6 +93,10 @@ function App() {
               <Route
                 path='/welcome/password'
                 component={() => <Password onNavigate={handleNavigate} />}
+              />
+              <Route
+                path='/welcome/add-account'
+                component={() => <AddAccountWelcome onNavigate={handleNavigate} />}
               />
               <Route path='/wallet' component={Wallet} />
               <Route path='/activity' component={Activity} />
@@ -126,28 +137,24 @@ function App() {
                 )}
               />
               <Route
-                path='/account'
+                path='/me/account'
                 component={() => (
                   <Account onNavigate={handleNavigate} onBack={() => setLocation('/me')} />
                 )}
               />
               <Route
-                path='/account/create'
-                component={() => <AddAccount onBack={() => setLocation('/account')} />}
+                path='/me/account/create'
+                component={() => <AddAccount onBack={() => setLocation('/me/account')} />}
               />
               <Route component={() => <Welcome onNavigate={handleNavigate} />} />
             </Switch>
           </Suspense>
         </div>
       </div>
-      {!location.startsWith('/me/settings/language') &&
-        !location.startsWith('/me/settings/timeFormat') &&
-        !location.startsWith('/me/settings/theme') &&
-        !location.startsWith('/me/settings/provider') &&
-        !location.startsWith('/me/settings/networks') &&
+      {!location.startsWith('/me/settings') &&
         !location.startsWith('/recipient/info') &&
         !location.startsWith('/me/notifications') &&
-        !location.startsWith('/account/create') &&
+        !location.startsWith('/me/account') &&
         !location.startsWith('/welcome') && (
           <Nav items={navigationItems} activeTab={currentPage} onTabChange={handleNavigate} />
         )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useColorThemeStore } from '../js/store';
-
+import { useTranslation } from 'react-i18next';
 const NavItem = ({ icon, label, isActive, onClick, activeColor }) => (
   <div
     className={`flex flex-col items-center justify-center flex-1 py-2 cursor-pointer ${
@@ -23,6 +23,7 @@ NavItem.propTypes = {
 };
 
 const Nav = ({ items, activeTab, onTabChange }) => {
+  const { t } = useTranslation();
   const { currentColorTheme } = useColorThemeStore();
 
   return (
@@ -31,7 +32,7 @@ const Nav = ({ items, activeTab, onTabChange }) => {
         <NavItem
           key={item.id}
           icon={item.icon}
-          label={item.label}
+          label={t(item.label)}
           isActive={activeTab === item.id}
           onClick={() => onTabChange(item.id)}
           activeColor={currentColorTheme}

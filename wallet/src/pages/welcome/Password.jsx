@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
 import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
+import EncryptedData from '../../js/EncryptedData';
 
 const Password = ({ onNavigate }) => {
   const { t } = useTranslation();
@@ -26,7 +27,7 @@ const Password = ({ onNavigate }) => {
     return { isValid: true, message: '' };
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const passwordValidation = validatePassword(password);
     const confirmPasswordValidation = validateConfirmPassword(confirmPassword);
 
@@ -34,12 +35,24 @@ const Password = ({ onNavigate }) => {
       return;
     }
 
-    // TODO: Handle password creation
-    onNavigate('wallet');
+    const encryptedData = new EncryptedData();
+
+    await encryptedData.encrypt(password);
+    encryptedData.save();
+
+    onNavigate('welcome/add-account');
   };
 
   return (
     <div className='w-full flex flex-col bg-white overflow-hidden'>
+      <div className='absolute top-4 left-4'>
+        <button
+          onClick={() => onNavigate('welcome')}
+          className='p-2 rounded-full hover:bg-gray-100'
+        >
+          <Feather.ArrowLeft size={24} />
+        </button>
+      </div>
       <div className='w-full pt-[15vh]'>
         <h1 className='text-2xl font-bold text-gray-800 mb-2 text-center'>{t('password.title')}</h1>
         <p className='text-sm text-gray-600 mb-8 text-center'>{t('password.subtitle')}</p>
@@ -117,7 +130,7 @@ const Password = ({ onNavigate }) => {
         </div>
       </div>
 
-      <div className='p-5 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80 h-20'>
+      <div className='p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
         <Button
           onClick={handleSubmit}
           fullWidth
