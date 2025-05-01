@@ -236,8 +236,8 @@
   },
   "addAccount": {
     "title": "添加賬戶",
-    "subtitle": "選擇添加賬戶的方式",
-    "addWallet": "添加錢包",
+    "subtitle": "添加賬戶或跳過",
+    "addWallet": "添加賬戶",
     "skip": "跳過"
   }
 }

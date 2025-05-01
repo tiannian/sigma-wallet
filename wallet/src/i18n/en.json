@@ -237,7 +237,12 @@
       "title": "Secure and Reliable",
       "description": "Advanced encryption technology to protect your assets"
     },
-    "start": "Get Started"
+    "start": "Get Started",
+    "complete": {
+      "title": "Setup Complete!",
+      "description": "Your wallet is now ready to use. You can start managing your digital assets.",
+      "start": "Start Using"
+    }
   },
   "password": {
     "title": "Create Password",
@@ -254,8 +259,8 @@
   },
   "addAccount": {
     "title": "Add Account",
-    "subtitle": "Choose how you want to add your account",
-    "addWallet": "Add Wallet",
+    "subtitle": "Add account or skip",
+    "addWallet": "Add Account",
     "skip": "Skip"
   }
 }

@@ -86,7 +86,7 @@ const Account = ({ onNavigate, onBack }) => {
   const topRef = useRef(null);
 
   const handleAddAccount = () => {
-    onNavigate('me/account/create');
+    onNavigate('me/account/add');
   };
 
   return (

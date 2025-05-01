@@ -7,9 +7,19 @@ import * as Feather from 'react-feather';
 import Icon from '../../components/Icon';
 import { useColorThemeStore } from '../../js/store';
 
-const AddAccount = ({ onBack }) => {
+const AddAccount = ({ onNavigate, onBack }) => {
   const { t } = useTranslation();
   const { currentColorTheme } = useColorThemeStore();
+  const searchParams = new URLSearchParams(window.location.search);
+  const backPath = searchParams.get('back');
+
+  const handleBack = () => {
+    if (backPath) {
+      onNavigate(backPath);
+    } else if (onBack) {
+      onBack();
+    }
+  };
 
   const handleTypeSelect = type => {
     // TODO: Handle type selection
@@ -109,7 +119,7 @@ const AddAccount = ({ onBack }) => {
 
   return (
     <div className='overflow-hidden min-h-130'>
-      <PageHeader onBack={onBack} title={t('account.addAccount')} />
+      <PageHeader onBack={handleBack} title={t('account.addAccount')} />
 
       <div className='bg-white rounded-lg py-4'>
         {accountGroups.map((group, index) => (

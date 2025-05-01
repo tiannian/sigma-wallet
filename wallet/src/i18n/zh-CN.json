@@ -226,8 +226,8 @@
   },
   "welcome": {
     "slide1": {
-      "title": "欢迎使用Sigma Wallet",
-      "description": "安全、便捷的数字资产管理工具"
+      "title": "欢迎使用 Sigma 钱包",
+      "description": "安全便捷的数字资产管理工具"
     },
     "slide2": {
       "title": "多链支持",
@@ -235,9 +235,14 @@
     },
     "slide3": {
       "title": "安全可靠",
-      "description": "采用先进的加密技术保护您的资产安全"
+      "description": "先进的加密技术保护您的资产"
     },
-    "start": "开始使用"
+    "start": "开始使用",
+    "complete": {
+      "title": "设置完成！",
+      "description": "您的钱包已准备就绪，可以开始管理您的数字资产了。",
+      "start": "开始使用"
+    }
   },
   "password": {
     "title": "创建密码",
@@ -254,8 +259,8 @@
   },
   "addAccount": {
     "title": "添加账户",
-    "subtitle": "选择添加账户的方式",
-    "addWallet": "添加钱包",
+    "subtitle": "添加账户或跳过",
+    "addWallet": "添加账户",
     "skip": "跳过"
   }
 }

@@ -29,6 +29,7 @@ const AddAccount = lazy(() => import('./pages/account/AddAccount'));
 const Welcome = lazy(() => import('./pages/welcome/Welcome'));
 const Password = lazy(() => import('./pages/welcome/Password'));
 const AddAccountWelcome = lazy(() => import('./pages/welcome/AddAccount'));
+const Complete = lazy(() => import('./pages/welcome/Complete'));
 
 // Loading component
 const Loading = () => (
@@ -98,6 +99,10 @@ function App() {
                 path='/welcome/add-account'
                 component={() => <AddAccountWelcome onNavigate={handleNavigate} />}
               />
+              <Route
+                path='/welcome/complete'
+                component={() => <Complete onNavigate={handleNavigate} />}
+              />
               <Route path='/wallet' component={Wallet} />
               <Route path='/activity' component={Activity} />
               <Route path='/recipient' component={Recipient} />
@@ -143,8 +148,13 @@ function App() {
                 )}
               />
               <Route
-                path='/me/account/create'
-                component={() => <AddAccount onBack={() => setLocation('/me/account')} />}
+                path='/me/account/add'
+                component={() => (
+                  <AddAccount
+                    onNavigate={handleNavigate}
+                    onBack={() => setLocation('/me/account')}
+                  />
+                )}
               />
               <Route component={() => <Welcome onNavigate={handleNavigate} />} />
             </Switch>

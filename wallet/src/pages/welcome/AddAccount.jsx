@@ -28,14 +28,13 @@ const AddAccount = ({ onNavigate }) => {
 
       <div className='p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
         <div className='flex flex-col gap-4 w-full'>
-          <Button onClick={() => onNavigate('create')} fullWidth>
+          <Button onClick={() => onNavigate('me/account/add?back=welcome/add-account')} fullWidth>
             {t('addAccount.addWallet')}
           </Button>
 
           <Button
             onClick={() => {
-              encryptedData.completeInit();
-              onNavigate('wallet');
+              onNavigate('welcome/complete');
             }}
             fullWidth
             variant='outline'
