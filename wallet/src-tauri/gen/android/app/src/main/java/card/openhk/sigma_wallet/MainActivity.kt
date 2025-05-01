@@ -1,3 +1,3 @@
-package card.openhk.sigma
+package card.openhk.sigma_wallet
 
 class MainActivity : TauriActivity()
