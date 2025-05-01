@@ -1,6 +1,6 @@
-name: squirrel-wallet
+name: sigma-wallet
 options:
-  bundleIdPrefix: card.openhk.squirrel
+  bundleIdPrefix: card.openhk.sigma-wallet
   deploymentTarget:
     iOS: 13.0
 fileGroups: [../../src]
@@ -10,8 +10,8 @@ configs:
 settingGroups:
   app:
     base:
-      PRODUCT_NAME: squirrel-wallet
-      PRODUCT_BUNDLE_IDENTIFIER: card.openhk.squirrel
+      PRODUCT_NAME: sigma-wallet
+      PRODUCT_BUNDLE_IDENTIFIER: card.openhk.sigma-wallet
 targetTemplates:
   app:
     type: application
@@ -24,20 +24,20 @@ targetTemplates:
     settings:
       groups: [app]
 targets:
-  squirrel-wallet_iOS:
+  sigma-wallet_iOS:
     type: application
     platform: iOS
     sources:
       - path: Sources
       - path: Assets.xcassets
       - path: Externals
-      - path: squirrel-wallet_iOS
+      - path: sigma-wallet_iOS
       - path: assets
         buildPhase: resources
         type: folder
       - path: LaunchScreen.storyboard
     info:
-      path: squirrel-wallet_iOS/Info.plist
+      path: sigma-wallet_iOS/Info.plist
       properties:
         LSRequiresIPhoneOS: true
         UILaunchStoryboardName: LaunchScreen
@@ -54,7 +54,7 @@ targets:
         CFBundleShortVersionString: 0.1.0
         CFBundleVersion: 0.1.0
     entitlements:
-      path: squirrel-wallet_iOS/squirrel-wallet_iOS.entitlements
+      path: sigma-wallet_iOS/sigma-wallet_iOS.entitlements
     scheme:
       environmentVariables:
         RUST_BACKTRACE: full

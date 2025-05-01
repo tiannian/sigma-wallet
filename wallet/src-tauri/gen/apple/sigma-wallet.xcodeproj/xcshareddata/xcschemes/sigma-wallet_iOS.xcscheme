@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "43C0E997EA760E136DA799A0"
-               BuildableName = "squirrel-wallet.app"
-               BlueprintName = "squirrel-wallet_iOS"
-               ReferencedContainer = "container:squirrel-wallet.xcodeproj">
+               BlueprintIdentifier = "3C04C01919FDEAE65C8F13DB"
+               BuildableName = "sigma-wallet.app"
+               BlueprintName = "sigma-wallet_iOS"
+               ReferencedContainer = "container:sigma-wallet.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,10 +30,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "43C0E997EA760E136DA799A0"
-            BuildableName = "squirrel-wallet.app"
-            BlueprintName = "squirrel-wallet_iOS"
-            ReferencedContainer = "container:squirrel-wallet.xcodeproj">
+            BlueprintIdentifier = "3C04C01919FDEAE65C8F13DB"
+            BuildableName = "sigma-wallet.app"
+            BlueprintName = "sigma-wallet_iOS"
+            ReferencedContainer = "container:sigma-wallet.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <EnvironmentVariables>
@@ -65,10 +65,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "43C0E997EA760E136DA799A0"
-            BuildableName = "squirrel-wallet.app"
-            BlueprintName = "squirrel-wallet_iOS"
-            ReferencedContainer = "container:squirrel-wallet.xcodeproj">
+            BlueprintIdentifier = "3C04C01919FDEAE65C8F13DB"
+            BuildableName = "sigma-wallet.app"
+            BlueprintName = "sigma-wallet_iOS"
+            ReferencedContainer = "container:sigma-wallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -94,10 +94,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "43C0E997EA760E136DA799A0"
-            BuildableName = "squirrel-wallet.app"
-            BlueprintName = "squirrel-wallet_iOS"
-            ReferencedContainer = "container:squirrel-wallet.xcodeproj">
+            BlueprintIdentifier = "3C04C01919FDEAE65C8F13DB"
+            BuildableName = "sigma-wallet.app"
+            BlueprintName = "sigma-wallet_iOS"
+            ReferencedContainer = "container:sigma-wallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>

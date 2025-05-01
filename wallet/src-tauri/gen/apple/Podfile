@@ -1,13 +1,13 @@
 # Uncomment the next line to define a global platform for your project
 
-target 'squirrel-wallet_iOS' do
+target 'sigma-wallet_iOS' do
 platform :ios, '13.0'
-  # Pods for squirrel-wallet_iOS
+  # Pods for sigma-wallet_iOS
 end
 
-target 'squirrel-wallet_macOS' do
+target 'sigma-wallet_macOS' do
 platform :osx, '11.0'
-  # Pods for squirrel-wallet_macOS
+  # Pods for sigma-wallet_macOS
 end
 
 # Delete the deployment target for iOS and macOS, causing it to be inherited from the Podfile
