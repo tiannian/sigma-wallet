@@ -58,8 +58,10 @@ export default class EncryptedData {
 
   completeInit() {
     this.encryptedData = this.encryptingData;
+    this.encryptedData.eKey = null;
     this.encryptingData = null;
     localStorage.setItem(ENCRYPTED_DATA_KEY, JSON.stringify(this.encryptedData));
+    localStorage.removeItem(ENCRYPTING_DATA_KEY);
   }
 }
 

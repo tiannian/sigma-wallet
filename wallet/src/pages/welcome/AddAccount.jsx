@@ -2,9 +2,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
 import Button from '../../components/Button';
+import EncryptedData from '../../js/EncryptedData';
 
 const AddAccount = ({ onNavigate }) => {
   const { t } = useTranslation();
+
+  const encryptedData = new EncryptedData();
 
   return (
     <div className='w-full flex flex-col bg-white overflow-hidden h-screen'>
@@ -29,7 +32,14 @@ const AddAccount = ({ onNavigate }) => {
             {t('addAccount.addWallet')}
           </Button>
 
-          <Button onClick={() => onNavigate('wallet')} fullWidth variant='outline'>
+          <Button
+            onClick={() => {
+              encryptedData.completeInit();
+              onNavigate('wallet');
+            }}
+            fullWidth
+            variant='outline'
+          >
             {t('addAccount.skip')}
           </Button>
         </div>

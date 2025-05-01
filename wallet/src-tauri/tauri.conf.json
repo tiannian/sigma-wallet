@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "squirrel-wallet",
+  "productName": "sigma-wallet",
   "version": "0.1.0",
-  "identifier": "card.openhk.squirrel",
+  "identifier": "card.openhk.sigma",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "squirrel-wallet",
+        "title": "sigma-wallet",
         "width": 800,
         "height": 600
       }
