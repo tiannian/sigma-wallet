@@ -4,6 +4,7 @@ import * as Feather from 'react-feather';
 import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
 import EncryptedData from '../../js/EncryptedData';
+import PageHeader from '../../components/PageHeader';
 
 const Password = ({ onNavigate }) => {
   const { t } = useTranslation();
@@ -45,14 +46,7 @@ const Password = ({ onNavigate }) => {
 
   return (
     <div className='w-full flex flex-col bg-white overflow-hidden'>
-      <div className='absolute top-4 left-4'>
-        <button
-          onClick={() => onNavigate('welcome')}
-          className='p-2 rounded-full hover:bg-gray-100'
-        >
-          <Feather.ArrowLeft size={24} />
-        </button>
-      </div>
+      <PageHeader onBack={() => onNavigate('welcome')} title={'\u00A0'} />
       <div className='w-full pt-[15vh]'>
         <h1 className='text-2xl font-bold text-gray-800 mb-2 text-center'>{t('password.title')}</h1>
         <p className='text-sm text-gray-600 mb-8 text-center'>{t('password.subtitle')}</p>
