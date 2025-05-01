@@ -11,7 +11,7 @@ const Complete = ({ onNavigate }) => {
   };
 
   return (
-    <div className='w-full flex flex-col bg-white overflow-hidden h-screen'>
+    <div className='w-full flex flex-col bg-white overflow-hidden'>
       <div className='w-full pt-[15vh] flex-1'>
         <div className='flex flex-col items-center justify-center mb-8'>
           <Feather.CheckCircle className='h-24 w-24 text-green-500' />

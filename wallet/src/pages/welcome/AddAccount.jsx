@@ -10,7 +10,7 @@ const AddAccount = ({ onNavigate }) => {
   const encryptedData = new EncryptedData();
 
   return (
-    <div className='w-full flex flex-col bg-white overflow-hidden h-screen'>
+    <div className='w-full flex flex-col bg-white overflow-hidden'>
       <div className='absolute top-4 left-4'>
         <button
           onClick={() => onNavigate('welcome/password')}
@@ -19,7 +19,7 @@ const AddAccount = ({ onNavigate }) => {
           <Feather.ArrowLeft size={24} />
         </button>
       </div>
-      <div className='w-full pt-[15vh] flex-1'>
+      <div className='w-full pt-[15vh]'>
         <h1 className='text-2xl font-bold text-gray-800 mb-2 text-center'>
           {t('addAccount.title')}
         </h1>
