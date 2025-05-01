@@ -4,3 +4,5 @@ export const NETWORK_TYPE_LIST = [
   { name: 'EIP155 (Ethereum Compatible)', tag: 'EIP155', value: 'eip155' },
   { name: 'Solana', tag: 'Solana', value: 'solana' },
 ];
+
+export const ACCOUNT_TYPE_LIST = ['EVM', 'Solana', 'Binance'];
