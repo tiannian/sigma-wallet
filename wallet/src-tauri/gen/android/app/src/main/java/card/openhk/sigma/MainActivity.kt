@@ -1,3 +1,3 @@
-package card.openhk.squirrel
+package card.openhk.sigma
 
 class MainActivity : TauriActivity()

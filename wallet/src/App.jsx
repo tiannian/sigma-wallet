@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import ProviderStorage from './js/Provider';
 import { BrowserNetworkDatabase } from './js/broswer/NetworkDatabase';
 import EncryptedData from './js/EncryptedData';
+import { useBlockBack } from './js/utils/BlockBack';
 // Lazy load all page components
 const Wallet = lazy(() => import('./pages/Wallet'));
 const Activity = lazy(() => import('./pages/Activity'));
@@ -83,6 +84,8 @@ function App() {
   };
 
   const currentPage = location.split('/')[1] || 'wallet';
+
+  useBlockBack(['/welcome', '/wallet', '/activity', '/recipient', '/me']);
 
   return (
     <div className='flex flex-col h-screen padding-ios'>
