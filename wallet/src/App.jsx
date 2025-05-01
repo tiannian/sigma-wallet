@@ -12,6 +12,7 @@ import ProviderStorage from './js/Provider';
 import { BrowserNetworkDatabase } from './js/broswer/NetworkDatabase';
 import EncryptedData from './js/EncryptedData';
 import { useBlockBack } from './js/utils/BlockBack';
+import SwipeableContainer from './components/SwipeableContainer';
 // Lazy load all page components
 const Wallet = lazy(() => import('./pages/Wallet'));
 const Activity = lazy(() => import('./pages/Activity'));
@@ -88,91 +89,93 @@ function App() {
   useBlockBack(['/welcome', '/wallet', '/activity', '/recipient', '/me']);
 
   return (
-    <div className='flex flex-col h-screen padding-ios'>
-      <div className='flex-1 overflow-auto'>
-        <div className='max-w-2xl mx-auto p-5'>
-          <Suspense fallback={<Loading />}>
-            <Switch>
-              <Route path='/welcome' component={() => <Welcome onNavigate={handleNavigate} />} />
-              <Route
-                path='/welcome/password'
-                component={() => <Password onNavigate={handleNavigate} />}
-              />
-              <Route
-                path='/welcome/add-account'
-                component={() => <AddAccountWelcome onNavigate={handleNavigate} />}
-              />
-              <Route
-                path='/welcome/complete'
-                component={() => <Complete onNavigate={handleNavigate} />}
-              />
-              <Route path='/wallet' component={Wallet} />
-              <Route path='/activity' component={Activity} />
-              <Route path='/recipient' component={Recipient} />
-              <Route
-                path='/recipient/info'
-                component={() => <RecipientInfo onBack={() => setLocation('/recipient')} />}
-              />
-              <Route path='/me' component={() => <Me onNavigate={handleNavigate} />} />
-              <Route
-                path='/me/notifications'
-                component={() => <Notification onBack={() => setLocation('/me')} />}
-              />
-              <Route
-                path='/me/settings/language'
-                component={() => <Language onBack={() => setLocation('/me')} />}
-              />
-              <Route
-                path='/me/settings/timeFormat'
-                component={() => <TimeFormat onBack={() => setLocation('/me')} />}
-              />
-              <Route
-                path='/me/settings/theme'
-                component={() => <Theme onBack={() => setLocation('/me')} />}
-              />
-              <Route
-                path='/me/settings/provider'
-                component={() => <Provider onBack={() => setLocation('/me')} />}
-              />
-              <Route
-                path='/me/settings/networks'
-                component={() => <Network onBack={() => setLocation('/me')} />}
-              />
-              <Route
-                path='/me/settings/networks/info'
-                component={() => (
-                  <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />
-                )}
-              />
-              <Route
-                path='/me/account'
-                component={() => (
-                  <Account onNavigate={handleNavigate} onBack={() => setLocation('/me')} />
-                )}
-              />
-              <Route
-                path='/me/account/add'
-                component={() => (
-                  <AddAccount
-                    onNavigate={handleNavigate}
-                    onBack={() => setLocation('/me/account')}
-                  />
-                )}
-              />
-              <Route component={() => <Welcome onNavigate={handleNavigate} />} />
-            </Switch>
-          </Suspense>
+    <SwipeableContainer>
+      <div className='flex flex-col h-screen padding-ios'>
+        <div className='flex-1 overflow-auto'>
+          <div className='max-w-2xl mx-auto p-5'>
+            <Suspense fallback={<Loading />}>
+              <Switch>
+                <Route path='/welcome' component={() => <Welcome onNavigate={handleNavigate} />} />
+                <Route
+                  path='/welcome/password'
+                  component={() => <Password onNavigate={handleNavigate} />}
+                />
+                <Route
+                  path='/welcome/add-account'
+                  component={() => <AddAccountWelcome onNavigate={handleNavigate} />}
+                />
+                <Route
+                  path='/welcome/complete'
+                  component={() => <Complete onNavigate={handleNavigate} />}
+                />
+                <Route path='/wallet' component={Wallet} />
+                <Route path='/activity' component={Activity} />
+                <Route path='/recipient' component={Recipient} />
+                <Route
+                  path='/recipient/info'
+                  component={() => <RecipientInfo onBack={() => setLocation('/recipient')} />}
+                />
+                <Route path='/me' component={() => <Me onNavigate={handleNavigate} />} />
+                <Route
+                  path='/me/notifications'
+                  component={() => <Notification onBack={() => setLocation('/me')} />}
+                />
+                <Route
+                  path='/me/settings/language'
+                  component={() => <Language onBack={() => setLocation('/me')} />}
+                />
+                <Route
+                  path='/me/settings/timeFormat'
+                  component={() => <TimeFormat onBack={() => setLocation('/me')} />}
+                />
+                <Route
+                  path='/me/settings/theme'
+                  component={() => <Theme onBack={() => setLocation('/me')} />}
+                />
+                <Route
+                  path='/me/settings/provider'
+                  component={() => <Provider onBack={() => setLocation('/me')} />}
+                />
+                <Route
+                  path='/me/settings/networks'
+                  component={() => <Network onBack={() => setLocation('/me')} />}
+                />
+                <Route
+                  path='/me/settings/networks/info'
+                  component={() => (
+                    <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />
+                  )}
+                />
+                <Route
+                  path='/me/account'
+                  component={() => (
+                    <Account onNavigate={handleNavigate} onBack={() => setLocation('/me')} />
+                  )}
+                />
+                <Route
+                  path='/me/account/add'
+                  component={() => (
+                    <AddAccount
+                      onNavigate={handleNavigate}
+                      onBack={() => setLocation('/me/account')}
+                    />
+                  )}
+                />
+                <Route component={() => <Welcome onNavigate={handleNavigate} />} />
+              </Switch>
+            </Suspense>
+          </div>
         </div>
+        {!location.startsWith('/me/settings') &&
+          !location.startsWith('/recipient/info') &&
+          !location.startsWith('/me/notifications') &&
+          !location.startsWith('/me/account') &&
+          !location.startsWith('/welcome') && (
+            <Nav items={navigationItems} activeTab={currentPage} onTabChange={handleNavigate} />
+          )}
+        <Toaster position='bottom-center' />
       </div>
-      {!location.startsWith('/me/settings') &&
-        !location.startsWith('/recipient/info') &&
-        !location.startsWith('/me/notifications') &&
-        !location.startsWith('/me/account') &&
-        !location.startsWith('/welcome') && (
-          <Nav items={navigationItems} activeTab={currentPage} onTabChange={handleNavigate} />
-        )}
-      <Toaster position='bottom-center' />
-    </div>
+    </SwipeableContainer>
   );
 }
 

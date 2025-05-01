@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    squirrel_wallet_lib::run()
+    sigma_wallet_lib::run()
 }
