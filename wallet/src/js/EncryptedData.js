@@ -13,6 +13,8 @@ export default class EncryptedData {
   isInitialized() {
     const result = this.encryptedData !== null;
 
+    // TODO: Add check for encryptedData.eKey and encryptedData.aKey
+
     console.log('encryptedData Initialized?', result);
     return result;
   }
@@ -33,14 +35,14 @@ export default class EncryptedData {
       aKey,
       encryptedEKey: null,
       eKey,
-      publicInfo: {},
-      privateInfo: {},
     };
   }
 
   save() {
     localStorage.setItem(ENCRYPTED_DATA_KEY, JSON.stringify(this.encryptedData));
-    localStorage.setItem(ENCRYPTING_DATA_KEY, JSON.stringify(this.encryptingData));
+    if (this.encryptingData) {
+      localStorage.setItem(ENCRYPTING_DATA_KEY, JSON.stringify(this.encryptingData));
+    }
   }
 
   async encrypt(key) {
