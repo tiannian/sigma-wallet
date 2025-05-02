@@ -27,6 +27,7 @@ const AddAccount = ({ onNavigate }) => {
               onNavigate('welcome/complete');
             }}
             fullWidth
+            light
             variant='outline'
           >
             {t('addAccount.skip')}

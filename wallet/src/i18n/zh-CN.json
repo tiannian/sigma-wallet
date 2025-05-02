@@ -96,6 +96,14 @@
       "provider_rpc": {
         "dev": "开发环境 RPC"
       }
+    },
+    "password": {
+      "title": "输入密码",
+      "subtitle": "输入密码来验证身份",
+      "enterPassword": "输入密码",
+      "minLengthError": "密码长度至少为8个字符",
+      "confirm": "确认",
+      "cancel": "取消"
     }
   },
   "activity": {
@@ -243,19 +251,6 @@
       "description": "您的钱包已准备就绪，可以开始管理您的数字资产了。",
       "start": "开始使用"
     }
-  },
-  "password": {
-    "title": "创建密码",
-    "subtitle": "请创建一个安全的密码来保护你的钱包",
-    "enterPassword": "输入密码",
-    "confirmPassword": "确认密码",
-    "minLength": "密码长度至少为8个字符",
-    "minLengthError": "密码长度必须至少为8个字符",
-    "passwordMismatch": "两次输入的密码不一致",
-    "useBiometricLogin": "使用生物识别登录",
-    "understand": "我明白如果丢失密码，我将无法访问我的钱包",
-    "learnMore": "了解更多",
-    "create": "创建"
   },
   "addAccount": {
     "title": "添加账户",

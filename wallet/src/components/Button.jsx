@@ -11,6 +11,7 @@ const Button = ({
   className = '',
   type = 'button',
   isLoading = false,
+  light = false,
 }) => {
   const { currentColorTheme } = useColorThemeStore();
 
@@ -28,7 +29,9 @@ const Button = ({
         ${
           disabled
             ? `bg-${currentColorTheme}-200 opacity-75 text-gray-500 cursor-not-allowed`
-            : `bg-${currentColorTheme}-500 hover:bg-${currentColorTheme}-600 text-white`
+            : light
+              ? `bg-white border border-${currentColorTheme}-500 text-gray-800 hover:bg-gray-50`
+              : `bg-${currentColorTheme}-500 hover:bg-${currentColorTheme}-600 text-white`
         }
         ${className}
       `}
@@ -49,6 +52,7 @@ Button.propTypes = {
   className: PropTypes.string,
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   isLoading: PropTypes.bool,
+  light: PropTypes.bool,
 };
 
 export default Button;

@@ -28,6 +28,7 @@ const NetworkInfo = lazy(() => import('./pages/about/NetworkInfo'));
 const Notification = lazy(() => import('./pages/about/Notification'));
 const Account = lazy(() => import('./pages/account/Account'));
 const AddAccount = lazy(() => import('./pages/account/AddAccount'));
+const AccountPassword = lazy(() => import('./pages/account/Password'));
 const Welcome = lazy(() => import('./pages/welcome/Welcome'));
 const Password = lazy(() => import('./pages/welcome/Password'));
 const AddAccountWelcome = lazy(() => import('./pages/welcome/AddAccount'));
@@ -156,6 +157,15 @@ function App() {
                   path='/me/account/add'
                   component={() => (
                     <AddAccount
+                      onNavigate={handleNavigate}
+                      onBack={() => setLocation('/me/account')}
+                    />
+                  )}
+                />
+                <Route
+                  path='/me/account/password'
+                  component={() => (
+                    <AccountPassword
                       onNavigate={handleNavigate}
                       onBack={() => setLocation('/me/account')}
                     />

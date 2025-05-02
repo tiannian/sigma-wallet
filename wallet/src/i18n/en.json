@@ -96,6 +96,14 @@
       "provider_rpc": {
         "dev": "Development RPC"
       }
+    },
+    "password": {
+      "title": "Enter Password",
+      "subtitle": "Enter password to verify your identity",
+      "enterPassword": "Enter Password",
+      "minLengthError": "Password must be at least 8 characters long",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
     }
   },
   "activity": {

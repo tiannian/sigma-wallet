@@ -84,6 +84,14 @@
         "title": "使用條款",
         "subtitle": "閱讀我們的條款和條件"
       }
+    },
+    "password": {
+      "title": "輸入密碼",
+      "subtitle": "輸入密碼來驗證身份",
+      "enterPassword": "輸入密碼",
+      "minLengthError": "密碼長度至少為8個字符",
+      "confirm": "確認",
+      "cancel": "取消"
     }
   },
   "activity": {
