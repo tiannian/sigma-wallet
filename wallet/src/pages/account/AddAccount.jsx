@@ -55,13 +55,13 @@ const AddAccount = ({ onNavigate, onBack }) => {
       items: [
         {
           key: 'mnemonics',
-          label: t('account.type.blockchain.mnemonics'),
-          description: t('account.type.blockchain.mnemonics.description'),
+          label: t('account.type.blockchain.create'),
+          description: t('account.type.blockchain.create.description'),
         },
         {
           key: 'privateKey',
-          label: t('account.type.blockchain.privateKey'),
-          description: t('account.type.blockchain.privateKey.description'),
+          label: t('account.type.blockchain.import'),
+          description: t('account.type.blockchain.import.description'),
         },
         {
           key: 'device',

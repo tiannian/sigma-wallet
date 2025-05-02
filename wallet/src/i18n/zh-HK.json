@@ -182,10 +182,10 @@
     "type": {
       "blockchain": {
         "tittle": "區塊鏈錢包",
-        "mnemonics": "助記詞錢包",
-        "mnemonics.description": "創建或導入經典的區塊鏈錢包，並通過助記詞恢復。",
-        "privateKey": "私鑰錢包",
-        "privateKey.description": "導入一個私鑰錢包。",
+        "create": "創建錢包",
+        "create.description": "創建一個新的區塊鏈錢包。",
+        "import": "導入錢包",
+        "import.description": "導入一個現有的區塊鏈錢包。",
         "device": "設備錢包",
         "device.description": "連接其他設備上的錢包。",
         "observer": "觀察者錢包",

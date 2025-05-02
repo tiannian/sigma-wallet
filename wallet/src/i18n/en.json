@@ -200,10 +200,10 @@
     "type": {
       "blockchain": {
         "tittle": "Blockchain Wallet",
-        "mnemonics": "Mnemonics Wallet",
-        "mnemonics.description": "Create or import a classic blockchain wallet and restore it using mnemonics.",
-        "privateKey": "Private Key Wallet",
-        "privateKey.description": "Import a private key wallet.",
+        "create": "Create Wallet",
+        "create.description": "Create a new blockchain wallet.",
+        "import": "Import Wallet",
+        "import.description": "Import an existing blockchain wallet.",
         "device": "Device Wallet",
         "device.description": "Connect wallet on other devices.",
         "observer": "Observer Wallet",

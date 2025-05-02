@@ -213,10 +213,10 @@
     "type": {
       "blockchain": {
         "tittle": "区块链钱包",
-        "mnemonics": "助记词钱包",
-        "mnemonics.description": "创建或导入经典的区块链钱包，并通过助记词恢复。",
-        "privateKey": "私钥钱包",
-        "privateKey.description": "导入一个私钥钱包。",
+        "create": "创建钱包",
+        "create.description": "创建一个新的区块链钱包。",
+        "import": "导入钱包",
+        "import.description": "导入一个现有的区块链钱包。",
         "device": "设备钱包",
         "device.description": "连接其他设备上的钱包。",
         "observer": "观察者钱包",
