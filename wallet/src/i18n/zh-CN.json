@@ -5,6 +5,19 @@
     "transfer": "转账",
     "me": "我的"
   },
+  "password": {
+    "title": "创建密码",
+    "subtitle": "请创建一个安全的密码来保护您的钱包",
+    "enterPassword": "输入密码",
+    "confirmPassword": "确认密码",
+    "minLength": "密码长度必须至少为8个字符",
+    "minLengthError": "密码长度必须至少为8个字符",
+    "passwordMismatch": "密码不匹配",
+    "useBiometricLogin": "使用生物识别登录",
+    "understand": "我理解如果丢失密码，我将无法访问我的钱包",
+    "learnMore": "了解更多",
+    "create": "创建"
+  },
   "me": {
     "account": {
       "title": "账户",
