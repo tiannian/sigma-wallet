@@ -95,12 +95,14 @@ function App() {
     !location.startsWith('/me/account') &&
     !location.startsWith('/welcome');
 
+  const isNavDesktopDisplay = !location.startsWith('/welcome');
+
   useBlockBack(['/welcome', '/wallet', '/activity', '/recipient', '/me']);
 
   return (
     <SwipeableContainer>
       <div className='flex flex-col md:flex-row md:w-0.7 h-screen padding-ios'>
-        {isNavDisplay && (
+        {isNavDesktopDisplay && (
           <div className='flex-1 hidden md:block'>
             <NavDesktop
               items={navigationItems}
@@ -110,7 +112,7 @@ function App() {
           </div>
         )}
         <div className='flex-2 overflow-auto'>
-          <div className={`max-w-2xl ${isNavDisplay ? 'md:mr-auto' : 'mx-auto'} p-5`}>
+          <div className={`max-w-2xl ${isNavDesktopDisplay ? 'md:mr-auto' : 'mx-auto'} p-5`}>
             <Suspense fallback={<Loading />}>
               <Switch>
                 <Route path='/wallet' component={Wallet} />
