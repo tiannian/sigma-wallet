@@ -88,26 +88,29 @@ function App() {
 
   const currentPage = location.split('/')[1] || 'wallet';
 
+  const isNavDisplay =
+    !location.startsWith('/me/settings') &&
+    !location.startsWith('/recipient/info') &&
+    !location.startsWith('/me/notifications') &&
+    !location.startsWith('/me/account') &&
+    !location.startsWith('/welcome');
+
   useBlockBack(['/welcome', '/wallet', '/activity', '/recipient', '/me']);
 
   return (
     <SwipeableContainer>
       <div className='flex flex-col md:flex-row md:w-0.7 h-screen padding-ios'>
-        <div className='flex-1/3 hidden md:block'>
-          {!location.startsWith('/me/settings') &&
-            !location.startsWith('/recipient/info') &&
-            !location.startsWith('/me/notifications') &&
-            !location.startsWith('/me/account') &&
-            !location.startsWith('/welcome') && (
-              <NavDesktop
-                items={navigationItems}
-                activeTab={currentPage}
-                onTabChange={handleNavigate}
-              />
-            )}
-        </div>
-        <div className='flex-2/3 overflow-auto'>
-          <div className='max-w-2xl md:mr-auto p-5'>
+        {isNavDisplay && (
+          <div className='flex-1 hidden md:block'>
+            <NavDesktop
+              items={navigationItems}
+              activeTab={currentPage}
+              onTabChange={handleNavigate}
+            />
+          </div>
+        )}
+        <div className='flex-2 overflow-auto'>
+          <div className={`max-w-2xl ${isNavDisplay ? 'md:mr-auto' : 'mx-auto'} p-5`}>
             <Suspense fallback={<Loading />}>
               <Switch>
                 <Route path='/wallet' component={Wallet} />
@@ -134,13 +137,9 @@ function App() {
             </Suspense>
           </div>
         </div>
-        {!location.startsWith('/me/settings') &&
-          !location.startsWith('/recipient/info') &&
-          !location.startsWith('/me/notifications') &&
-          !location.startsWith('/me/account') &&
-          !location.startsWith('/welcome') && (
-            <Nav items={navigationItems} activeTab={currentPage} onTabChange={handleNavigate} />
-          )}
+        {isNavDisplay && (
+          <Nav items={navigationItems} activeTab={currentPage} onTabChange={handleNavigate} />
+        )}
         <Toaster position='bottom-center' />
       </div>
     </SwipeableContainer>

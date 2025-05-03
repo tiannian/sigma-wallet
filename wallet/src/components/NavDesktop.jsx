@@ -28,7 +28,7 @@ const NavDesktop = ({ items, activeTab, onTabChange }) => {
   const { currentColorTheme } = useColorThemeStore();
 
   return (
-    <div className='ml-auto w-64 h-64 border-r border-gray-200 bg-white'>
+    <div className='ml-auto w-64 h-full border-r border-gray-200 bg-white'>
       <div className='flex flex-col space-y-2 p-4'>
         {items.map(item => (
           <NavDesktopItem
