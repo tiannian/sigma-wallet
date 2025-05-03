@@ -18,7 +18,7 @@ const AddAccount = ({}) => {
         <p className='text-sm text-gray-600 mb-8 text-center'>{t('addAccount.subtitle')}</p>
       </div>
 
-      <div className='p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
+      <div className='max-w-2xl mx-auto p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
         <div className='flex flex-col gap-4 w-full'>
           <Button onClick={() => setLocation('/me/account/add?back=welcome/add-account')} fullWidth>
             {t('addAccount.addWallet')}

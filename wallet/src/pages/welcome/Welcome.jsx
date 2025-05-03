@@ -33,7 +33,7 @@ const Welcome = ({}) => {
 
     encryptedData.save();
 
-    onNavigate('welcome/password');
+    setLocation('/welcome/password');
   };
 
   return (
@@ -51,8 +51,8 @@ const Welcome = ({}) => {
         ))}
       </Swiper>
 
-      <div className='p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
-        <Button onClick={() => setLocation('/welcome/password')} fullWidth>
+      <div className='max-w-2xl mx-auto p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
+        <Button onClick={handleStart} fullWidth>
           {t('welcome.start')}
         </Button>
       </div>

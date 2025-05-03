@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Route, Switch, useLocation } from 'wouter';
 import Nav from './components/Nav';
+import NavDesktop from './components/NavDesktop';
 import * as Icon from 'react-feather';
 import './App.css';
 import { lazy, Suspense, useLayoutEffect, useState } from 'react';
@@ -91,9 +92,22 @@ function App() {
 
   return (
     <SwipeableContainer>
-      <div className='flex flex-col h-screen padding-ios'>
-        <div className='flex-1 overflow-auto'>
-          <div className='max-w-2xl mx-auto p-5'>
+      <div className='flex flex-col md:flex-row md:w-0.7 h-screen padding-ios'>
+        <div className='flex-1/3 hidden md:block'>
+          {!location.startsWith('/me/settings') &&
+            !location.startsWith('/recipient/info') &&
+            !location.startsWith('/me/notifications') &&
+            !location.startsWith('/me/account') &&
+            !location.startsWith('/welcome') && (
+              <NavDesktop
+                items={navigationItems}
+                activeTab={currentPage}
+                onTabChange={handleNavigate}
+              />
+            )}
+        </div>
+        <div className='flex-2/3 overflow-auto'>
+          <div className='max-w-2xl md:mr-auto p-5'>
             <Suspense fallback={<Loading />}>
               <Switch>
                 <Route path='/wallet' component={Wallet} />

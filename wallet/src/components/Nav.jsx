@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useColorThemeStore } from '../js/store';
 import { useTranslation } from 'react-i18next';
+
 const NavItem = ({ icon, label, isActive, onClick, activeColor }) => (
   <div
     className={`flex flex-col items-center justify-center flex-1 py-2 cursor-pointer ${
@@ -27,7 +28,7 @@ const Nav = ({ items, activeTab, onTabChange }) => {
   const { currentColorTheme } = useColorThemeStore();
 
   return (
-    <div className='flex items-center justify-around border-t border-gray-200 bg-white'>
+    <div className='md:hidden flex items-center justify-around border-t border-gray-200 bg-white'>
       {items.map(item => (
         <NavItem
           key={item.id}
