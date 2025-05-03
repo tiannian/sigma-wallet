@@ -1,12 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
-import { useColorThemeStore } from '../../js/store';
-import PageHeader from '../../components/PageHeader';
-import ListItemVertical from '../../components/list/ListItemViertical';
+import { useColorThemeStore } from '../../../js/store';
+import PageHeader from '../../../components/PageHeader';
+import ListItemVertical from '../../../components/list/ListItemViertical';
+import { useLocation } from 'wouter';
 
-const Theme = ({ onBack }) => {
+const Theme = ({}) => {
   const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
   const { currentColorTheme, setColorTheme } = useColorThemeStore();
 
   const themes = [
@@ -26,7 +28,7 @@ const Theme = ({ onBack }) => {
 
   return (
     <div className='overflow-hidden'>
-      <PageHeader onBack={onBack} title={t('me.settings.theme.title')} />
+      <PageHeader onBack={() => setLocation('/me')} title={t('me.settings.theme.title')} />
 
       <div className='bg-white rounded-lg'>
         {themes.map(theme => (

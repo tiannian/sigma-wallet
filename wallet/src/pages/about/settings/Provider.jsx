@@ -1,16 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Button from '../../components/Button';
-import LabeledInput from '../../components/LabeledInput';
-import LabelSelect from '../../components/LabelSelect';
+import Button from '../../../components/Button';
+import LabeledInput from '../../../components/LabeledInput';
+import LabelSelect from '../../../components/LabelSelect';
 import { toast } from 'react-hot-toast';
-import { createUrlValidator } from '../../js/checker';
-import PageHeader from '../../components/PageHeader';
-import ProviderStorage from '../../js/Provider';
+import { createUrlValidator } from '../../../js/checker';
+import PageHeader from '../../../components/PageHeader';
+import ProviderStorage from '../../../js/Provider';
+import { useLocation } from 'wouter';
 
-const Provider = ({ onBack }) => {
+const Provider = ({}) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
+  const [_, setLocation] = useLocation();
 
   const providerStorage = new ProviderStorage();
 
@@ -62,7 +64,7 @@ const Provider = ({ onBack }) => {
 
   return (
     <div className='overflow-hidden'>
-      <PageHeader onBack={onBack} title={t('provider.title')} />
+      <PageHeader onBack={() => setLocation('/me')} title={t('provider.title')} />
 
       <div className='bg-white rounded-lg py-4'>
         <LabelSelect

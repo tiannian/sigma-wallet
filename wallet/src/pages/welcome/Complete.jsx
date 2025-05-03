@@ -3,14 +3,16 @@ import { useTranslation } from 'react-i18next';
 import Button from '../../components/Button';
 import * as Feather from 'react-feather';
 import EncryptedData from '../../js/EncryptedData';
-const Complete = ({ onNavigate }) => {
-  const { t } = useTranslation();
+import { useLocation } from 'wouter';
 
+const Complete = ({}) => {
+  const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
   const encryptedData = new EncryptedData();
 
   const handleStart = () => {
     encryptedData.completeInit();
-    onNavigate('wallet');
+    setLocation('/wallet');
   };
 
   return (

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
-import { useColorThemeStore } from '../../js/store';
-import ListItemVertical from '../../components/list/ListItemViertical';
-import PageHeader from '../../components/PageHeader';
+import { useColorThemeStore } from '../../../js/store';
+import ListItemVertical from '../../../components/list/ListItemViertical';
+import PageHeader from '../../../components/PageHeader';
+import { useLocation } from 'wouter';
 
-const Language = ({ onBack }) => {
+const Language = () => {
   const { t, i18n } = useTranslation();
+  const [, setLocation] = useLocation();
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const { currentColorTheme } = useColorThemeStore();
 
@@ -23,7 +25,7 @@ const Language = ({ onBack }) => {
 
   return (
     <div className='overflow-hidden'>
-      <PageHeader onBack={onBack} title={t('me.settings.language.title')} />
+      <PageHeader onBack={() => setLocation('/me')} title={t('me.settings.language.title')} />
 
       <div className='bg-white rounded-lg'>
         {languages.map(language => (

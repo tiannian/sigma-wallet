@@ -5,9 +5,11 @@ import Icon from '../../components/Icon';
 import * as Feather from 'react-feather';
 
 import { toast } from 'react-hot-toast';
+import { useLocation } from 'wouter';
 
-const Me = ({ onNavigate }) => {
+const Me = ({}) => {
   const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
 
   const accountSection = {
     title: t('me.account.title'),
@@ -16,13 +18,13 @@ const Me = ({ onNavigate }) => {
         icon: <Icon symbol={<Feather.User className='w-6 h-6' />} />,
         title: t('me.account.accounts.title'),
         subtitle: t('me.account.accounts.subtitle'),
-        onClick: () => onNavigate('me/account'),
+        onClick: () => setLocation('/me/account'),
       },
       {
         icon: <Icon symbol={<Feather.Bell className='w-6 h-6' />} />,
         title: t('me.account.notifications.title'),
         subtitle: t('me.account.notifications.subtitle'),
-        onClick: () => onNavigate('me/notifications'),
+        onClick: () => setLocation('/me/notifications'),
       },
       {
         icon: <Icon symbol={<Feather.Link className='w-6 h-6' />} />,
@@ -46,31 +48,31 @@ const Me = ({ onNavigate }) => {
         icon: <Icon symbol={<Feather.Server className='w-6 h-6' />} />,
         title: t('me.settings.serviceProvider.title'),
         subtitle: t('me.settings.serviceProvider.subtitle'),
-        onClick: () => onNavigate('me/settings/provider'),
+        onClick: () => setLocation('/me/settings/provider'),
       },
       {
         icon: <Icon symbol={<Feather.GitBranch className='w-6 h-6' />} />,
         title: t('me.settings.networks.title'),
         subtitle: t('me.settings.networks.subtitle'),
-        onClick: () => onNavigate('me/settings/networks'),
+        onClick: () => setLocation('/me/settings/networks'),
       },
       {
         icon: <Icon symbol={<Feather.Globe className='w-6 h-6' />} />,
         title: t('me.settings.language.title'),
         subtitle: t('me.settings.language.subtitle'),
-        onClick: () => onNavigate('me/settings/language'),
+        onClick: () => setLocation('/me/settings/language'),
       },
       {
         icon: <Icon symbol={<Feather.Clock className='w-6 h-6' />} />,
         title: t('me.settings.timeFormat.title'),
         subtitle: t('me.settings.timeFormat.subtitle'),
-        onClick: () => onNavigate('me/settings/timeFormat'),
+        onClick: () => setLocation('/me/settings/timeFormat'),
       },
       {
         icon: <Icon symbol={<Feather.Moon className='w-6 h-6' />} />,
         title: t('me.settings.theme.title'),
         subtitle: t('me.settings.theme.subtitle'),
-        onClick: () => onNavigate('me/settings/theme'),
+        onClick: () => setLocation('/me/settings/theme'),
       },
     ],
   };

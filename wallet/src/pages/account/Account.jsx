@@ -8,7 +8,7 @@ import { useColorThemeStore } from '../../js/store';
 import PageHeader from '../../components/PageHeader';
 import ListItemVertical from '../../components/list/ListItemViertical';
 import GroupListItem from '../../components/GroupListItem';
-
+import { useLocation } from 'wouter';
 // Mock data for accounts
 const mockBlockchainAccounts = [
   {
@@ -80,19 +80,20 @@ const AccountListItem = ({ account, onClick }) => {
   );
 };
 
-const Account = ({ onNavigate, onBack }) => {
+const Account = ({}) => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
+  const [_, setLocation] = useLocation();
   const topRef = useRef(null);
 
   const handleAddAccount = () => {
-    onNavigate('me/account/add');
+    setLocation('/me/account/add');
   };
 
   return (
     <div className='overflow-hidden'>
       <div ref={topRef} />
-      <PageHeader onBack={onBack} title={t('account.title')} />
+      <PageHeader onBack={() => setLocation('/me')} title={t('account.title')} />
 
       <div className='relative mb-6 py-4'>
         <UnlabeledInput

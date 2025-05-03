@@ -6,8 +6,11 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Button from '../../components/Button';
 import EncryptedData from '../../js/EncryptedData';
-const Welcome = ({ onNavigate }) => {
+import { useLocation } from 'wouter';
+
+const Welcome = ({}) => {
   const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
 
   const slides = [
     {
@@ -49,7 +52,7 @@ const Welcome = ({ onNavigate }) => {
       </Swiper>
 
       <div className='p-5 py-10 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-white/80'>
-        <Button onClick={handleStart} fullWidth>
+        <Button onClick={() => setLocation('/welcome/password')} fullWidth>
           {t('welcome.start')}
         </Button>
       </div>

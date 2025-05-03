@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import Button from '../../components/Button';
-import LabeledInput from '../../components/LabeledInput';
-import LabelSelect from '../../components/LabelSelect';
-import { NETWORK_TYPE_LIST } from '../../js/constants';
-import { createUrlValidator } from '../../js/checker';
-import PageHeader from '../../components/PageHeader';
-import { useDatabase } from '../../js/store';
-const NetworkInfo = ({ onBack }) => {
+import Button from '../../../components/Button';
+import LabeledInput from '../../../components/LabeledInput';
+import LabelSelect from '../../../components/LabelSelect';
+import { NETWORK_TYPE_LIST } from '../../../js/constants';
+import { createUrlValidator } from '../../../js/checker';
+import PageHeader from '../../../components/PageHeader';
+import { useDatabase } from '../../../js/store';
+import { useLocation } from 'wouter';
+
+const NetworkInfo = ({}) => {
   const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
   const validateUrl = createUrlValidator(t('networkInfo.invalidUrl'));
   const { db } = useDatabase();
 
@@ -97,7 +100,10 @@ const NetworkInfo = ({ onBack }) => {
 
   return (
     <div className='overflow-hidden flex flex-col h-screen'>
-      <PageHeader onBack={onBack} title={t('networkInfo.title')} />
+      <PageHeader
+        onBack={() => setLocation('/me/settings/networks')}
+        title={t('networkInfo.title')}
+      />
 
       <div className='bg-white rounded-lg flex-1 flex flex-col py-4'>
         <form onSubmit={handleSubmit} className='flex flex-col h-full'>

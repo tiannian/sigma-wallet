@@ -5,9 +5,11 @@ import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
 import EncryptedData from '../../js/EncryptedData';
 import PageHeader from '../../components/PageHeader';
+import { useLocation } from 'wouter';
 
-const Password = ({ onNavigate }) => {
+const Password = ({}) => {
   const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [useBiometric, setUseBiometric] = useState(false);
@@ -41,7 +43,7 @@ const Password = ({ onNavigate }) => {
     await encryptedData.encrypt(password);
     encryptedData.save();
 
-    onNavigate('welcome/add-account');
+    setLocation('/welcome/add-account');
   };
 
   return (

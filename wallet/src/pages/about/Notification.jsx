@@ -5,13 +5,14 @@ import { useColorThemeStore, useTimeFormatStore } from '../../js/store';
 import PageHeader from '../../components/PageHeader';
 import ListItemHorizontal from '../../components/list/ListItemHorizontal';
 import dayjs from 'dayjs';
+import { useLocation } from 'wouter';
 
-const Notification = ({ onBack }) => {
+const Notification = ({}) => {
   const { t } = useTranslation();
   const topRef = useRef(null);
   const { currentColorTheme } = useColorThemeStore();
   const { currentTimeFormat } = useTimeFormatStore();
-
+  const [_, setLocation] = useLocation();
   // 格式化时间戳
   const formatTimestamp = timestamp => dayjs.unix(timestamp).format(currentTimeFormat);
 
@@ -45,7 +46,7 @@ const Notification = ({ onBack }) => {
   return (
     <div className='overflow-hidden'>
       <div ref={topRef} />
-      <PageHeader onBack={onBack} title={t('me.settings.notifications.title')} />
+      <PageHeader onBack={() => setLocation('/me')} title={t('me.settings.notifications.title')} />
 
       <div className='bg-white rounded-lg'>
         {notifications.length === 0 ? (

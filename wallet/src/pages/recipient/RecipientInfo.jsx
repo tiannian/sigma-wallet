@@ -5,9 +5,11 @@ import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
 import LabelSelect from '../../components/LabelSelect';
 import { ACCOUNT_TYPE_LIST } from '../../js/constants';
+import { useLocation } from 'wouter';
 
-const RecipientInfo = ({ onBack }) => {
+const RecipientInfo = ({}) => {
   const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     accountType: '',
@@ -56,7 +58,7 @@ const RecipientInfo = ({ onBack }) => {
   return (
     <div className='overflow-hidden flex flex-col h-screen'>
       <div className='flex items-center mb-6'>
-        <button onClick={onBack} className='mr-4 p-2 rounded-full'>
+        <button onClick={() => setLocation('/recipient')} className='mr-4 p-2 rounded-full'>
           <Feather.ArrowLeft size={24} />
         </button>
         <h1 className='text-2xl font-bold'>{t('recipientInfo.title')}</h1>

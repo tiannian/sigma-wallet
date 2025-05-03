@@ -4,9 +4,11 @@ import * as Feather from 'react-feather';
 import Button from '../../components/Button';
 import LabeledInput from '../../components/LabeledInput';
 import PageHeader from '../../components/PageHeader';
+import { useLocation } from 'wouter';
 
-const Password = ({ onNavigate }) => {
+const Password = () => {
   const { t } = useTranslation();
+  const [, setLocation] = useLocation();
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -18,21 +20,16 @@ const Password = ({ onNavigate }) => {
   };
 
   const handleSubmit = async () => {
-    const passwordValidation = validatePassword(password);
-    if (!passwordValidation.isValid) {
-      return;
-    }
-    // TODO: Implement password verification logic
-    onNavigate('account');
+    console.log('submit');
   };
 
   const handleCancel = () => {
-    onNavigate('account');
+    setLocation('/me/account');
   };
 
   return (
     <div className='w-full flex flex-col bg-white overflow-hidden'>
-      <PageHeader title={'\u00A0'} />
+      <PageHeader onBack={handleCancel} title={t('me.password.title')} />
       <div className='w-full pt-[15vh]'>
         <h1 className='text-2xl font-bold text-gray-800 mb-2 text-center'>
           {t('me.password.title')}

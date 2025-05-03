@@ -6,18 +6,20 @@ import ListItemHorizontal from '../../components/list/ListItemHorizontal';
 import * as Feather from 'react-feather';
 import Icon from '../../components/Icon';
 import { useColorThemeStore } from '../../js/store';
+import { useLocation } from 'wouter';
 
-const AddAccount = ({ onNavigate, onBack }) => {
+const AddAccount = () => {
   const { t } = useTranslation();
   const { currentColorTheme } = useColorThemeStore();
+  const [, setLocation] = useLocation();
   const searchParams = new URLSearchParams(window.location.search);
   const backPath = searchParams.get('back');
 
   const handleBack = () => {
     if (backPath) {
-      onNavigate(backPath);
-    } else if (onBack) {
-      onBack();
+      setLocation(`/${backPath}`);
+    } else {
+      setLocation('/me/account');
     }
   };
 

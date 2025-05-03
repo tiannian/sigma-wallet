@@ -19,12 +19,12 @@ const Activity = lazy(() => import('./pages/Activity'));
 const Recipient = lazy(() => import('./pages/recipient/Recipient'));
 const RecipientInfo = lazy(() => import('./pages/recipient/RecipientInfo'));
 const Me = lazy(() => import('./pages/about/Me'));
-const Language = lazy(() => import('./pages/about/Language'));
-const TimeFormat = lazy(() => import('./pages/about/TimeFormat'));
-const Theme = lazy(() => import('./pages/about/Theme'));
-const Provider = lazy(() => import('./pages/about/Provider'));
-const Network = lazy(() => import('./pages/about/Network'));
-const NetworkInfo = lazy(() => import('./pages/about/NetworkInfo'));
+const Language = lazy(() => import('./pages/about/settings/Language'));
+const TimeFormat = lazy(() => import('./pages/about/settings/TimeFormat'));
+const Theme = lazy(() => import('./pages/about/settings/Theme'));
+const Provider = lazy(() => import('./pages/about/settings/Provider'));
+const Network = lazy(() => import('./pages/about/settings/Network'));
+const NetworkInfo = lazy(() => import('./pages/about/settings/NetworkInfo'));
 const Notification = lazy(() => import('./pages/about/Notification'));
 const Account = lazy(() => import('./pages/account/Account'));
 const AddAccount = lazy(() => import('./pages/account/AddAccount'));
@@ -96,82 +96,26 @@ function App() {
           <div className='max-w-2xl mx-auto p-5'>
             <Suspense fallback={<Loading />}>
               <Switch>
-                <Route path='/welcome' component={() => <Welcome onNavigate={handleNavigate} />} />
-                <Route
-                  path='/welcome/password'
-                  component={() => <Password onNavigate={handleNavigate} />}
-                />
-                <Route
-                  path='/welcome/add-account'
-                  component={() => <AddAccountWelcome onNavigate={handleNavigate} />}
-                />
-                <Route
-                  path='/welcome/complete'
-                  component={() => <Complete onNavigate={handleNavigate} />}
-                />
                 <Route path='/wallet' component={Wallet} />
+                <Route path='/welcome' component={Welcome} />
+                <Route path='/welcome/password' component={Password} />
+                <Route path='/welcome/add-account' component={AddAccountWelcome} />
+                <Route path='/welcome/complete' component={Complete} />
                 <Route path='/activity' component={Activity} />
                 <Route path='/recipient' component={Recipient} />
-                <Route
-                  path='/recipient/info'
-                  component={() => <RecipientInfo onBack={() => setLocation('/recipient')} />}
-                />
-                <Route path='/me' component={() => <Me onNavigate={handleNavigate} />} />
-                <Route
-                  path='/me/notifications'
-                  component={() => <Notification onBack={() => setLocation('/me')} />}
-                />
-                <Route
-                  path='/me/settings/language'
-                  component={() => <Language onBack={() => setLocation('/me')} />}
-                />
-                <Route
-                  path='/me/settings/timeFormat'
-                  component={() => <TimeFormat onBack={() => setLocation('/me')} />}
-                />
-                <Route
-                  path='/me/settings/theme'
-                  component={() => <Theme onBack={() => setLocation('/me')} />}
-                />
-                <Route
-                  path='/me/settings/provider'
-                  component={() => <Provider onBack={() => setLocation('/me')} />}
-                />
-                <Route
-                  path='/me/settings/networks'
-                  component={() => <Network onBack={() => setLocation('/me')} />}
-                />
-                <Route
-                  path='/me/settings/networks/info'
-                  component={() => (
-                    <NetworkInfo onBack={() => setLocation('/me/settings/networks')} />
-                  )}
-                />
-                <Route
-                  path='/me/account'
-                  component={() => (
-                    <Account onNavigate={handleNavigate} onBack={() => setLocation('/me')} />
-                  )}
-                />
-                <Route
-                  path='/me/account/add'
-                  component={() => (
-                    <AddAccount
-                      onNavigate={handleNavigate}
-                      onBack={() => setLocation('/me/account')}
-                    />
-                  )}
-                />
-                <Route
-                  path='/me/account/password'
-                  component={() => (
-                    <AccountPassword
-                      onNavigate={handleNavigate}
-                      onBack={() => setLocation('/me/account')}
-                    />
-                  )}
-                />
-                <Route component={() => <Welcome onNavigate={handleNavigate} />} />
+                <Route path='/recipient/info' component={RecipientInfo} />
+                <Route path='/me' component={Me} />
+                <Route path='/me/notifications' component={Notification} />
+                <Route path='/me/settings/language' component={Language} />
+                <Route path='/me/settings/timeFormat' component={TimeFormat} />
+                <Route path='/me/settings/theme' component={Theme} />
+                <Route path='/me/settings/provider' component={Provider} />
+                <Route path='/me/settings/networks' component={Network} />
+                <Route path='/me/settings/networks/info' component={NetworkInfo} />
+                <Route path='/me/account' component={Account} />
+                <Route path='/me/account/add' component={AddAccount} />
+                <Route path='/me/account/password' component={AccountPassword} />
+                <Route component={Wallet} />
               </Switch>
             </Suspense>
           </div>

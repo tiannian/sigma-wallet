@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Feather from 'react-feather';
 import dayjs from 'dayjs';
-import { useTimeFormatStore, useColorThemeStore } from '../../js/store';
-import ListItemVertical from '../../components/list/ListItemViertical';
-import PageHeader from '../../components/PageHeader';
+import { useTimeFormatStore, useColorThemeStore } from '../../../js/store';
+import ListItemVertical from '../../../components/list/ListItemViertical';
+import PageHeader from '../../../components/PageHeader';
+import { useLocation } from 'wouter';
 
-const TimeFormat = ({ onBack }) => {
+const TimeFormat = ({}) => {
   const { t } = useTranslation();
+  const [_, setLocation] = useLocation();
   const { currentTimeFormat, setTimeFormat } = useTimeFormatStore();
   const { currentColorTheme } = useColorThemeStore();
   const [currentTime] = useState(dayjs());
@@ -36,7 +38,7 @@ const TimeFormat = ({ onBack }) => {
 
   return (
     <div className='overflow-hidden'>
-      <PageHeader onBack={onBack} title={t('me.settings.timeFormat.title')} />
+      <PageHeader onBack={() => setLocation('/me')} title={t('me.settings.timeFormat.title')} />
 
       <div className='bg-white rounded-lg'>
         {timeFormats.map(format => (

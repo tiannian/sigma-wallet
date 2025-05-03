@@ -2,14 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import * as Feather from 'react-feather';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'wouter';
-import Icon from '../../components/Icon';
-import Button from '../../components/Button';
-import UnlabeledInput from '../../components/UnlabeledInput';
-import { useColorThemeStore, useDatabase } from '../../js/store';
-import PageHeader from '../../components/PageHeader';
+import Icon from '../../../components/Icon';
+import Button from '../../../components/Button';
+import UnlabeledInput from '../../../components/UnlabeledInput';
+import { useColorThemeStore, useDatabase } from '../../../js/store';
+import PageHeader from '../../../components/PageHeader';
 import { toast } from 'react-hot-toast';
-import ListItemVertical from '../../components/list/ListItemViertical';
-import { NETWORK_TYPE_LIST } from '../../js/constants';
+import ListItemVertical from '../../../components/list/ListItemViertical';
+import { NETWORK_TYPE_LIST } from '../../../js/constants';
+
 const NetworkListItem = ({ chain, onClick }) => {
   const { t } = useTranslation();
   const { currentColorTheme } = useColorThemeStore();
@@ -36,7 +37,7 @@ const NetworkListItem = ({ chain, onClick }) => {
   );
 };
 
-const Network = ({ onBack }) => {
+const Network = ({}) => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -88,7 +89,7 @@ const Network = ({ onBack }) => {
   return (
     <div className='overflow-hidden'>
       <div ref={topRef} />
-      <PageHeader onBack={onBack} title={t('me.settings.networks.title')} />
+      <PageHeader onBack={() => setLocation('/me')} title={t('me.settings.networks.title')} />
 
       <div className='relative mb-6 py-4'>
         <UnlabeledInput
