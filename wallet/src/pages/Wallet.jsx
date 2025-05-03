@@ -147,15 +147,17 @@ const Wallet = () => {
           </button>
           <button
             className={`py-2 px-3 rounded-full bg-${currentColorTheme}-100 flex items-center justify-center gap-1.5 text-black hover:bg-${currentColorTheme}-200`}
+            onClick={() => setLocation('/recipient')}
           >
             <Feather.Send className='w-4 h-4' />
             <span className='text-sm'>Send</span>
           </button>
           <button
             className={`py-2 px-3 rounded-full bg-${currentColorTheme}-100 flex items-center justify-center gap-1.5 text-black hover:bg-${currentColorTheme}-200`}
+            onClick={() => setLocation('/me/account')}
           >
-            <Feather.Repeat className='w-4 h-4' />
-            <span className='text-sm'>Transfer</span>
+            <Feather.User className='w-4 h-4' />
+            <span className='text-sm'>Account</span>
           </button>
         </div>
       </div>

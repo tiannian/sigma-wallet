@@ -70,8 +70,8 @@ function App() {
 
   useLayoutEffect(() => {
     const encryptedData = new EncryptedData();
-    if (encryptedData.isInitialized() && location.startsWith('/welcome')) {
-      setLocation('/wallet');
+    if (!encryptedData.isInitialized()) {
+      setLocation('/welcome');
     }
   }, [setLocation]);
 
