@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  sigma-wallet
+
+  Created by Steve Du on 2025/5/12.
+  
+*/
+CFBundleDisplayName="Sigma Wallet";
+CFBundleName="Sigma Wallet";
