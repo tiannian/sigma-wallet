@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Sigma Wallet",
+  "productName": "sigma-wallet",
   "version": "0.1.0",
   "identifier": "card.openhk.sigma-wallet",
   "build": {
