@@ -29,7 +29,7 @@ const NavDesktop = ({ items, activeTab, onTabChange }) => {
 
   return (
     <div className='ml-auto w-64 h-full border-r border-gray-200 bg-white'>
-      <div className='flex flex-col space-y-2 p-4'>
+      <div className='flex flex-col space-y-2 p-4 pt-50'>
         {items.map(item => (
           <NavDesktopItem
             key={item.id}
