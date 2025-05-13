@@ -1,0 +1,24 @@
+[workspace]
+resolver = "3"
+members = ["crates/core", "crates/sigwa"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+core = { path = "crates/core" }
+
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = { version = "1.0.105" }
+async-trait = "0.1.75"
+anyhow = "1.0.95"
+
+alloy-primitives = "1.1.0"
+
+aes-gcm = "0.10.0"
+rand_core = { version = "0.6", default-features = false }
+
+reqwest = { version = "0.12.11" }
+
+tokio = { version = "1.41.1" }

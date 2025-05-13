@@ -1,0 +1,16 @@
+{
+  "cex_proxy": {
+    "type": "proxy",
+    "url": "http://localhost:8080"
+  },
+  "crypto_price_provider": {
+    "url": "https://api.coingecko.com/",
+    "type": "coingecko"
+  },
+  "currency_rate_provider": {
+    "type": "exchange-rate",
+    "url": "https://open.er-api.com/v6/latest/"
+  },
+  "chain_list_provider": "https://assets.sw.openhk.cards/dev-v2/chainlist.json",
+  "assets_list_provider": "https://assets.sw.openhk.cards/dev-v2/assetslist.json"
+}

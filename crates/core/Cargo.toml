@@ -1,0 +1,22 @@
+[package]
+name = "sigwa-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde.workspace = true
+alloy-primitives = { workspace = true, features = ["serde"] }
+
+anyhow.workspace = true
+
+aes-gcm = { workspace = true }
+rand_core = { workspace = true }
+
+async-trait = { workspace = true }
+
+reqwest = { workspace = true, features = ["json"] }
+
+serde_json = { workspace = true }
+
+[dev-dependencies]
+tokio = { version = "1.41.1", features = ["full"] }

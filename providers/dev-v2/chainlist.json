@@ -1,0 +1,7 @@
+{
+  "eip155": {
+    "list": "https://assets.sw.openhk.cards/dev/eip155.json",
+    "icons": "https://assets.sw.openhk.cards/dev/icons/"
+  },
+  "chains": []
+}
