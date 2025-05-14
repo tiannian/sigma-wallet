@@ -1,14 +1,17 @@
 [workspace]
 resolver = "3"
-members = ["crates/core", "crates/sigwa"]
+members = [
+    "crates/core",
+    "crates/providers/local",
+    "crates/providers/wasm",
+    "crates/sigwa",
+]
 
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
 
 [workspace.dependencies]
-core = { path = "crates/core" }
-
 serde = { version = "1.0.215", features = ["derive"] }
 serde_json = { version = "1.0.105" }
 async-trait = "0.1.75"
@@ -22,3 +25,6 @@ rand_core = { version = "0.6", default-features = false }
 reqwest = { version = "0.12.11" }
 
 tokio = { version = "1.41.1" }
+
+sigwa-core = { path = "crates/core" }
+sigwa-provider-local = { path = "crates/providers/local" }

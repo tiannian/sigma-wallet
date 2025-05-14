@@ -2,6 +2,9 @@ use alloy_primitives::Bytes;
 use anyhow::Result;
 use async_trait::async_trait;
 
+mod sql;
+pub use sql::*;
+
 pub trait Cryptor {
     fn encrypt(&self, data: &[u8]) -> Result<Bytes>;
 
