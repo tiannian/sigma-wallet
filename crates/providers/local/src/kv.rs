@@ -1,6 +1,5 @@
 use anyhow::Result;
-use redb::{ReadOnlyTable, TableDefinition};
-use sigwa_core::{KeyValueStorage, PersistentKeyValueStorage};
+use redb::{ReadOnlyTable, Table, TableDefinition};
 
 pub struct LocalKeyValueStorage {
     db: redb::Database,
@@ -28,5 +27,33 @@ impl LocalKeyValueStorage {
         } else {
             Ok(None)
         }
+    }
+
+    pub fn set(&self, table: &str, key: &[u8], value: Vec<u8>) -> Result<()> {
+        let txn = self.db.begin_write()?;
+
+        {
+            let mut table: Table<&[u8], Vec<u8>> = txn.open_table(TableDefinition::new(table))?;
+
+            table.insert(key, value)?;
+        }
+
+        txn.commit()?;
+
+        Ok(())
+    }
+
+    pub fn remove(&self, table: &str, key: &[u8]) -> Result<()> {
+        let txn = self.db.begin_write()?;
+
+        {
+            let mut table: Table<&[u8], Vec<u8>> = txn.open_table(TableDefinition::new(table))?;
+
+            table.remove(key)?;
+        }
+
+        txn.commit()?;
+
+        Ok(())
     }
 }

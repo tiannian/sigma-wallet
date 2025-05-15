@@ -1,6 +1,8 @@
 use std::{fs::File, path::Path};
 
 use anyhow::Result;
+use async_trait::async_trait;
+use sigwa_core::{KeyValueStorage, PersistentKeyValueStorage};
 
 use crate::kv::LocalKeyValueStorage;
 
@@ -25,4 +27,29 @@ impl LocalPersistentKeyValueStorage {
     pub fn get(&self, table: &str, key: &[u8]) -> Result<Option<Vec<u8>>> {
         self.kv.get(table, key)
     }
+
+    pub fn set(&self, table: &str, key: &[u8], value: Vec<u8>) -> Result<()> {
+        self.kv.set(table, key, value)
+    }
+
+    pub fn remove(&self, table: &str, key: &[u8]) -> Result<()> {
+        self.kv.remove(table, key)
+    }
 }
+
+#[async_trait]
+impl KeyValueStorage for LocalPersistentKeyValueStorage {
+    async fn set(&self, table: &str, key: &[u8], value: Vec<u8>) -> Result<()> {
+        self.kv.set(table, key, value)
+    }
+
+    async fn get(&self, table: &str, key: &[u8]) -> Result<Option<Vec<u8>>> {
+        self.kv.get(table, key)
+    }
+
+    async fn remove(&self, table: &str, key: &[u8]) -> Result<()> {
+        self.kv.remove(table, key)
+    }
+}
+
+impl PersistentKeyValueStorage for LocalPersistentKeyValueStorage {}

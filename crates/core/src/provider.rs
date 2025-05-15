@@ -46,6 +46,12 @@ pub struct Provider {
     pub selected_rpc: usize,
 }
 
+impl Default for Provider {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Provider {
     pub fn new() -> Self {
         let rpc = ProviderRpc {
@@ -76,7 +82,7 @@ impl Provider {
         S: KeyValueStorage + PersistentKeyValueStorage,
     {
         storage
-            .set("provider", &serde_json::to_string(self)?)
+            .set("provider", b"provider", serde_json::to_vec(self)?)
             .await?;
 
         Ok(())
@@ -86,8 +92,8 @@ impl Provider {
     where
         S: KeyValueStorage + PersistentKeyValueStorage,
     {
-        if let Some(provider) = storage.get("provider").await? {
-            *self = serde_json::from_str(&provider)?;
+        if let Some(provider) = storage.get("provider", b"provider").await? {
+            *self = serde_json::from_slice(&provider)?;
         }
 
         Ok(())

@@ -13,13 +13,11 @@ pub trait Cryptor {
 
 #[async_trait]
 pub trait KeyValueStorage {
-    async fn set(&self, key: &str, value: &str) -> Result<()>;
+    async fn set(&self, table: &str, key: &[u8], value: Vec<u8>) -> Result<()>;
 
-    async fn get(&self, key: &str) -> Result<Option<String>>;
+    async fn get(&self, table: &str, key: &[u8]) -> Result<Option<Vec<u8>>>;
 
-    async fn has(&self, key: &str) -> Result<bool>;
-
-    async fn remove(&self, key: &str) -> Result<()>;
+    async fn remove(&self, table: &str, key: &[u8]) -> Result<()>;
 }
 
 pub trait SessionKeyValueStorage {}
