@@ -92,8 +92,6 @@ impl Network {
         let body: Vec<model::Eip155ChainInfo> = response.json().await?;
 
         for chain_info in body {
-            println!("{}", chain_info.name);
-
             let info = NetworkInfo {
                 name: chain_info.name,
                 network_type: NetworkType::Eip155,
@@ -144,8 +142,7 @@ impl Network {
             url,
             explorer_type,
             selected
-        ) VALUES ($1, $2, $3, $4, $5)
-        RETURNING id";
+        ) VALUES ($1, $2, $3, $4, $5)";
 
         for info in &self.infos {
             let result = storage
@@ -161,16 +158,14 @@ impl Network {
                 )
                 .await?;
 
-            let network_id = result
-                .get("id")
-                .ok_or(anyhow::anyhow!("network id not found"))?;
+            let network_id = result.1;
 
             for (i, rpc_url) in info.rpc_urls.iter().enumerate() {
                 storage
                     .execute(
                         network_rpc_sql,
                         &[
-                            network_id.clone(),
+                            network_id.into(),
                             rpc_url.as_str().into(),
                             (i == info.selected_rpc_url).into(),
                         ],
@@ -183,7 +178,7 @@ impl Network {
                     .execute(
                         network_explorer_sql,
                         &[
-                            network_id.clone(),
+                            network_id.into(),
                             explorer.name.as_str().into(),
                             explorer.url.as_str().into(),
                             (i as i64).into(),

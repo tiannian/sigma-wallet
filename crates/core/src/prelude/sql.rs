@@ -10,6 +10,7 @@ pub enum SqlValue {
     Int(i64),
     Float(f64),
     Bool(bool),
+    Blob(Vec<u8>),
 }
 
 macro_rules! define_sql_value_from {
@@ -27,7 +28,7 @@ define_sql_value_from!(i64, Int);
 define_sql_value_from!(f64, Float);
 define_sql_value_from!(bool, Bool);
 define_sql_value_from!(&str, String);
-
+define_sql_value_from!(Vec<u8>, Blob);
 impl<T: Into<SqlValue>> From<Option<T>> for SqlValue {
     fn from(value: Option<T>) -> Self {
         if let Some(value) = value {
@@ -62,11 +63,18 @@ impl SqlValue {
             _ => None,
         }
     }
+
+    pub fn as_blob(&self) -> Option<&[u8]> {
+        match self {
+            SqlValue::Blob(value) => Some(value),
+            _ => None,
+        }
+    }
 }
 
 #[async_trait]
 pub trait SqlStorgae {
-    async fn execute(&self, sql: &str, values: &[SqlValue]) -> Result<BTreeMap<String, SqlValue>>;
+    async fn execute(&self, sql: &str, values: &[SqlValue]) -> Result<(u64, i64)>;
 
     async fn select(
         &self,

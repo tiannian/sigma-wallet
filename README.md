@@ -3,10 +3,11 @@
 ## TODO
 
 - [x] Add `react-swipeable` in iOS.
-- [ ] Responsive layout for Desktop.
+- [X] Responsive layout for Desktop.
 - [ ] Add dropable toast.
-- [ ] Store network list in SQLite.
+- [X] Store network list in SQLite.
 - [ ] Add patch for chainlist.
 - [x] Add launch process:
   - [ ] Load provider by default.
 - [ ] Add icon cache.
+- [ ] Refact main logic using Rust.
