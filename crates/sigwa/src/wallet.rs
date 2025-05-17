@@ -6,6 +6,8 @@ use rand_core::{CryptoRng, RngCore};
 use serde::{Deserialize, Serialize};
 use sigwa_core::{EncryptedData, Guard, GuardType, KeyValueStorage, PersistentKeyValueStorage};
 
+use crate::utils;
+
 #[derive(Debug, Serialize, Deserialize, Default, Clone)]
 struct EncryptedWallet {
     pub(crate) auth_key: BTreeMap<GuardType, Bytes>,
@@ -159,7 +161,10 @@ impl Wallet {
             .as_ref()
             .ok_or(anyhow::anyhow!("Wallet not unlocked"))?;
 
-        utils::encrypt_aes256_gcm(rng, *unencrypted_auth_key, data)
+        let mut nonce = [0; 12];
+        rng.fill_bytes(nonce.as_mut());
+
+        utils::encrypt_aes256_gcm(*unencrypted_auth_key, nonce, data)
     }
 
     pub fn decrypt_auth_data(&self, data: EncryptedData) -> Result<Vec<u8>> {
@@ -192,7 +197,10 @@ impl Wallet {
 
         let unencrypted_transaction_key = guard.decrypt(guard_data)?;
 
-        let encrypted_data = utils::encrypt_aes256_gcm(rng, unencrypted_transaction_key, data)?;
+        let mut nonce = [0; 12];
+        rng.fill_bytes(nonce.as_mut());
+
+        let encrypted_data = utils::encrypt_aes256_gcm(unencrypted_transaction_key, nonce, data)?;
 
         Ok(encrypted_data)
     }
@@ -226,54 +234,5 @@ impl Wallet {
             .await?;
 
         Ok(())
-    }
-}
-
-mod utils {
-    use aes_gcm::{Aes256Gcm, Key, KeyInit, Nonce, aead::Aead};
-    use alloy_primitives::B256;
-    use anyhow::Result;
-    use rand_core::{CryptoRng, RngCore};
-    use sigwa_core::EncryptedData;
-
-    pub fn encrypt_aes256_gcm<R>(rng: &mut R, key: B256, data: &[u8]) -> Result<EncryptedData>
-    where
-        R: RngCore + CryptoRng,
-    {
-        let key: Key<Aes256Gcm> = key.0.into();
-
-        let cipher = Aes256Gcm::new(&key);
-
-        let mut nonce = [0u8; 12];
-        rng.fill_bytes(nonce.as_mut());
-
-        let nonce = Nonce::from(nonce);
-
-        let ciphertext = cipher
-            .encrypt(&nonce, data)
-            .map_err(|e| anyhow::anyhow!(e))?;
-
-        let nonce: [u8; 12] = nonce.into();
-
-        Ok(EncryptedData::Aes256Gcm {
-            nonce: nonce.into(),
-            data: ciphertext.into(),
-        })
-    }
-
-    pub fn decrypt(key: B256, encrypted_data: EncryptedData) -> Result<Vec<u8>> {
-        let key: Key<Aes256Gcm> = key.0.into();
-        let cipher = Aes256Gcm::new(&key);
-
-        if let EncryptedData::Aes256Gcm { nonce, data } = encrypted_data {
-            let nonce = Nonce::from(nonce.0);
-            let plaintext = cipher
-                .decrypt(&nonce, data.as_ref())
-                .map_err(|e| anyhow::anyhow!(e))?;
-
-            Ok(plaintext)
-        } else {
-            Err(anyhow::anyhow!("Invalid encrypted data"))
-        }
     }
 }

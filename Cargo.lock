@@ -2490,6 +2490,15 @@ dependencies = [
 [[package]]
 name = "sigwa-guards-password"
 version = "0.1.0"
+dependencies = [
+ "aes-gcm",
+ "alloy-primitives",
+ "anyhow",
+ "rand_core 0.6.4",
+ "sha3",
+ "sigwa-core",
+ "sigwa-wallet",
+]
 
 [[package]]
 name = "sigwa-provider-local"

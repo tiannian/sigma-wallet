@@ -4,3 +4,13 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+alloy-primitives = { workspace = true }
+anyhow = { workspace = true }
+sigwa-core = { workspace = true }
+
+sha3 = { workspace = true }
+aes-gcm = { workspace = true }
+
+rand_core = { workspace = true }
+
+sigwa-wallet = { workspace = true }
