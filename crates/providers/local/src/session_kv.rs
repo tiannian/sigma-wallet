@@ -34,3 +34,4 @@ impl KeyValueStorage for LocalSessionKeyValueStorage {
 }
 
 impl SessionKeyValueStorage for LocalSessionKeyValueStorage {}
+

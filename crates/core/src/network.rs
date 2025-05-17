@@ -1,7 +1,7 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 
-use crate::{SqlStorgae, SqlValue};
+use crate::{Migration, MigrationType, SqlStorgae, SqlValue};
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
@@ -83,6 +83,57 @@ impl Network {
         Self { infos: vec![] }
     }
 
+    pub fn migrations(&self) -> Vec<Migration> {
+        // let network_migration = Migration {
+        //     version: 1,
+        //     description: "create networks table",
+        //     migration_type: MigrationType::Up,
+        //     sql: "
+        //     CREATE TABLE networks (
+        //         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        //         name TEXT NOT NULL,
+        //         network_type INTEGER NOT NULL,
+        //         chain_id TEXT NOT NULL,
+        //         symbol TEXT NOT NULL,
+        //         decimals INTEGER NOT NULL,
+        //     );",
+        // };
+
+        // let network_rpc_migration = Migration {
+        //     version: 2,
+        //     description: "create network_rpc table",
+        //     migration_type: MigrationType::Up,
+        //     sql: "
+        //     CREATE TABLE network_rpc (
+        //         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        //         network_id INTEGER NOT NULL,
+        //         rpc_url TEXT NOT NULL,
+        //         selected BOOLEAN NOT NULL,
+        //     );",
+        // };
+
+        // let network_explorer_migration = Migration {
+        //     version: 3,
+        //     description: "create network_explorer table",
+        //     migration_type: MigrationType::Up,
+        //     sql: "
+        //     CREATE TABLE network_explorer (
+        //         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        //         network_id INTEGER NOT NULL,
+        //         name TEXT NOT NULL,
+        //         url TEXT NOT NULL,
+        //         explorer_type INTEGER NOT NULL,
+        //         selected BOOLEAN NOT NULL,
+        //     );",
+        // };
+
+        vec![
+            // network_migration,
+            // network_rpc_migration,
+            // network_explorer_migration,
+        ]
+    }
+
     pub async fn load_remote(&mut self, chain_list_provider: &str) -> Result<()> {
         let response = reqwest::get(chain_list_provider).await?;
 
@@ -118,7 +169,7 @@ impl Network {
         Ok(())
     }
 
-    pub async fn save_local<S: SqlStorgae>(&self, storage: &S) -> Result<()>
+    pub async fn save_local<S>(&self, storage: &S) -> Result<()>
     where
         S: SqlStorgae,
     {
@@ -140,7 +191,7 @@ impl Network {
             network_id,
             name,
             url,
-            explorer_type,
+            explorer_type
             selected
         ) VALUES ($1, $2, $3, $4, $5)";
 

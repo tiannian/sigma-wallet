@@ -2492,6 +2492,8 @@ dependencies = [
  "redb",
  "sigwa-core",
  "sqlx",
+ "tempfile",
+ "tokio",
 ]
 
 [[package]]
