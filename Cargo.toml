@@ -4,7 +4,8 @@ members = [
     "crates/core",
     "crates/providers/local",
     "crates/providers/wasm",
-    "crates/sigwa", "crates/wallet",
+    "crates/sigwa",
+    "crates/cli", "crates/guards/password",
 ]
 
 [workspace.package]

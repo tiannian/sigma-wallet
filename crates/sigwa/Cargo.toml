@@ -1,9 +1,16 @@
 [package]
-name = "sigwa"
+name = "sigwa-wallet"
 version.workspace = true
 edition.workspace = true
 
 [dependencies]
-clap = { version = "4.5.10", features = ["derive", "env"] }
+sigwa-core = { workspace = true }
 
 anyhow = { workspace = true }
+alloy-primitives = { workspace = true }
+rand_core = { workspace = true }
+
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+aes-gcm = { workspace = true }

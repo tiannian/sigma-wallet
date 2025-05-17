@@ -1,0 +1,6 @@
+[package]
+name = "sigwa-guards-password"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
