@@ -89,7 +89,13 @@ pub struct Migration {
 
 #[async_trait]
 pub trait SqlStorgae {
+    type Transaction<'a>: SqlTransaction
+    where
+        Self: 'a;
+
     async fn migrate(&self, migrations: Vec<Migration>) -> Result<()>;
+
+    async fn begin(&self) -> Result<Self::Transaction<'_>>;
 
     async fn execute(&self, sql: &str, values: &[SqlValue]) -> Result<(u64, i64)>;
 
@@ -98,4 +104,17 @@ pub trait SqlStorgae {
         sql: &str,
         values: &[SqlValue],
     ) -> Result<Vec<BTreeMap<String, SqlValue>>>;
+}
+
+#[async_trait]
+pub trait SqlTransaction {
+    async fn execute(&mut self, sql: &str, values: &[SqlValue]) -> Result<(u64, i64)>;
+
+    async fn select(
+        &mut self,
+        sql: &str,
+        values: &[SqlValue],
+    ) -> Result<Vec<BTreeMap<String, SqlValue>>>;
+
+    async fn commit(self) -> Result<()>;
 }

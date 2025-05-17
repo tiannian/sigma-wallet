@@ -8,7 +8,7 @@ use sqlx::migrate::{
 };
 
 #[derive(Debug)]
-pub struct MigrationList(Vec<Migration>);
+pub struct MigrationList(pub Vec<Migration>);
 
 impl From<Vec<Migration>> for MigrationList {
     fn from(migrations: Vec<Migration>) -> Self {
@@ -49,13 +49,13 @@ impl MigrationSource<'static> for MigrationList {
         >,
     > {
         Box::pin(async move {
-            let migrations = self.resolve().await?;
+            let migrations = self._resolve().await?;
             Ok(migrations)
         })
     }
 }
 
-fn migration_type_to_sqlx(migration_type: MigrationType) -> SqlxMigrationType {
+pub fn migration_type_to_sqlx(migration_type: MigrationType) -> SqlxMigrationType {
     match migration_type {
         MigrationType::Simple => SqlxMigrationType::Simple,
         MigrationType::Up => SqlxMigrationType::ReversibleUp,

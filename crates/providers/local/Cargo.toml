@@ -9,9 +9,10 @@ sigwa-core = { workspace = true }
 anyhow = { workspace = true }
 async-trait = { workspace = true }
 
-sqlx = { version = "0.8.5", features = ["sqlite", "runtime-tokio"] }
+sqlx = { version = "0.8.5", features = ["sqlite", "runtime-tokio-rustls"] }
 redb = "2.5.0"
+
+tokio = { workspace = true }
 
 [dev-dependencies]
 tokio = { version = "1.41.1", features = ["full"] }
-tempfile = "3"

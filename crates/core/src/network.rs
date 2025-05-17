@@ -1,7 +1,7 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 
-use crate::{Migration, MigrationType, SqlStorgae, SqlValue};
+use crate::{Migration, MigrationType, SqlStorgae, SqlTransaction, SqlValue};
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
@@ -48,7 +48,7 @@ pub struct NetworkInfo {
     pub selected_explorer: usize,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum ExplorerType {
     Eip3091,
@@ -57,11 +57,19 @@ pub enum ExplorerType {
 impl ExplorerType {
     pub fn from_sql_value(value: &SqlValue) -> Result<Self> {
         match value {
-            SqlValue::String(value) => match value.as_str() {
-                "eip3091" => Ok(ExplorerType::Eip3091),
+            SqlValue::Int(value) => match value {
+                0 => Ok(ExplorerType::Eip3091),
                 _ => Err(anyhow::anyhow!("invalid explorer type {}", value)),
             },
             _ => Err(anyhow::anyhow!("invalid explorer type")),
+        }
+    }
+}
+
+impl From<ExplorerType> for i64 {
+    fn from(value: ExplorerType) -> Self {
+        match value {
+            ExplorerType::Eip3091 => 0,
         }
     }
 }
@@ -84,54 +92,14 @@ impl Network {
     }
 
     pub fn migrations(&self) -> Vec<Migration> {
-        // let network_migration = Migration {
-        //     version: 1,
-        //     description: "create networks table",
-        //     migration_type: MigrationType::Up,
-        //     sql: "
-        //     CREATE TABLE networks (
-        //         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        //         name TEXT NOT NULL,
-        //         network_type INTEGER NOT NULL,
-        //         chain_id TEXT NOT NULL,
-        //         symbol TEXT NOT NULL,
-        //         decimals INTEGER NOT NULL,
-        //     );",
-        // };
+        let v1 = Migration {
+            version: 1,
+            description: "create networks table",
+            migration_type: MigrationType::Up,
+            sql: include_str!("../sql/0001-network.sql"),
+        };
 
-        // let network_rpc_migration = Migration {
-        //     version: 2,
-        //     description: "create network_rpc table",
-        //     migration_type: MigrationType::Up,
-        //     sql: "
-        //     CREATE TABLE network_rpc (
-        //         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        //         network_id INTEGER NOT NULL,
-        //         rpc_url TEXT NOT NULL,
-        //         selected BOOLEAN NOT NULL,
-        //     );",
-        // };
-
-        // let network_explorer_migration = Migration {
-        //     version: 3,
-        //     description: "create network_explorer table",
-        //     migration_type: MigrationType::Up,
-        //     sql: "
-        //     CREATE TABLE network_explorer (
-        //         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        //         network_id INTEGER NOT NULL,
-        //         name TEXT NOT NULL,
-        //         url TEXT NOT NULL,
-        //         explorer_type INTEGER NOT NULL,
-        //         selected BOOLEAN NOT NULL,
-        //     );",
-        // };
-
-        vec![
-            // network_migration,
-            // network_rpc_migration,
-            // network_explorer_migration,
-        ]
+        vec![v1]
     }
 
     pub async fn load_remote(&mut self, chain_list_provider: &str) -> Result<()> {
@@ -173,30 +141,35 @@ impl Network {
     where
         S: SqlStorgae,
     {
+        let mut txn = storage.begin().await?;
+
         let network_sql = "INSERT INTO networks (
             name,
             network_type,
             chain_id,
-            symbol
+            symbol,
             decimals
-        ) VALUES ($1, $2, $3, $4, $5)";
+        ) VALUES (?, ?, ?, ?, ?)
+        ON CONFLICT DO NOTHING";
 
         let network_rpc_sql = "INSERT INTO network_rpc (
             network_id,
             rpc_url,
             selected
-        ) VALUES ($1 $2, $3)";
+        ) VALUES (?, ?, ?)
+        ON CONFLICT DO NOTHING";
 
         let network_explorer_sql = "INSERT INTO network_explorer (
             network_id,
             name,
             url,
-            explorer_type
+            explorer_type,
             selected
-        ) VALUES ($1, $2, $3, $4, $5)";
+        ) VALUES (?, ?, ?, ?, ?)
+        ON CONFLICT DO NOTHING";
 
         for info in &self.infos {
-            let result = storage
+            let result = txn
                 .execute(
                     network_sql,
                     &[
@@ -212,33 +185,33 @@ impl Network {
             let network_id = result.1;
 
             for (i, rpc_url) in info.rpc_urls.iter().enumerate() {
-                storage
-                    .execute(
-                        network_rpc_sql,
-                        &[
-                            network_id.into(),
-                            rpc_url.as_str().into(),
-                            (i == info.selected_rpc_url).into(),
-                        ],
-                    )
-                    .await?;
+                txn.execute(
+                    network_rpc_sql,
+                    &[
+                        network_id.into(),
+                        rpc_url.as_str().into(),
+                        (i == info.selected_rpc_url).into(),
+                    ],
+                )
+                .await?;
             }
 
             for (i, explorer) in info.explorers.iter().enumerate() {
-                storage
-                    .execute(
-                        network_explorer_sql,
-                        &[
-                            network_id.into(),
-                            explorer.name.as_str().into(),
-                            explorer.url.as_str().into(),
-                            (i as i64).into(),
-                            (i == info.selected_explorer).into(),
-                        ],
-                    )
-                    .await?;
+                txn.execute(
+                    network_explorer_sql,
+                    &[
+                        network_id.into(),
+                        explorer.name.as_str().into(),
+                        explorer.url.as_str().into(),
+                        (explorer.explorer_type as i64).into(),
+                        (i == info.selected_explorer).into(),
+                    ],
+                )
+                .await?;
             }
         }
+
+        txn.commit().await?;
 
         Ok(())
     }
