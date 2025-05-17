@@ -2504,6 +2504,18 @@ name = "sigwa-provider-wasm"
 version = "0.1.0"
 
 [[package]]
+name = "sigwa-wallet"
+version = "0.1.0"
+dependencies = [
+ "alloy-primitives",
+ "anyhow",
+ "rand_core 0.6.4",
+ "serde",
+ "serde_json",
+ "sigwa-core",
+]
+
+[[package]]
 name = "slab"
 version = "0.4.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"

@@ -41,6 +41,7 @@ pub struct ProviderRpc {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Provider {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub info: Option<ProviderInfo>,
     pub rpcs: Vec<ProviderRpc>,
     pub selected_rpc: usize,

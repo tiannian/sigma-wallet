@@ -1,14 +1,18 @@
-use alloy_primitives::Bytes;
+use alloy_primitives::{B256, Bytes};
 use anyhow::Result;
 use async_trait::async_trait;
 
 mod sql;
 pub use sql::*;
 
-pub trait Cryptor {
-    fn encrypt(&self, data: &[u8]) -> Result<Bytes>;
+use crate::GuardType;
 
-    fn decrypt(&self, data: &[u8]) -> Result<Bytes>;
+pub trait Guard {
+    fn encrypt(&self, data: B256) -> Result<Vec<u8>>;
+
+    fn decrypt(&self, data: &[u8]) -> Result<B256>;
+
+    fn guard_type(&self) -> GuardType;
 }
 
 #[async_trait]
