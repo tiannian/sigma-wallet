@@ -4,7 +4,7 @@ use alloy_primitives::{B256, Bytes};
 use anyhow::Result;
 use rand_core::{CryptoRng, RngCore};
 use serde::{Deserialize, Serialize};
-use sigwa_core::{Guard, GuardType, KeyValueStorage, PersistentKeyValueStorage};
+use sigwa_core::{EncryptedData, Guard, GuardType, KeyValueStorage, PersistentKeyValueStorage};
 
 #[derive(Debug, Serialize, Deserialize, Default, Clone)]
 struct EncryptedWallet {
@@ -36,12 +36,15 @@ impl Wallet {
         })
     }
 
+    /// Create a new wallet with a new guard
+    ///
+    /// Note: If wallet is initialized, it will be replaced with a new wallet
     pub fn create_keys<R, G>(&mut self, rng: &mut R, guard: &G) -> Result<()>
     where
         R: RngCore + CryptoRng,
         G: Guard,
     {
-        let mut encrypted_wallet = self.encrypted_wallet.clone().unwrap_or_default();
+        let mut encrypted_wallet = EncryptedWallet::default();
 
         // Add auth key
         let mut auth_key = B256::default();
@@ -66,6 +69,11 @@ impl Wallet {
         Ok(())
     }
 
+    /// Add a new guard to the wallet
+    ///
+    /// If you want to add a new guard, you must first add the old guard to the wallet
+    /// If old guard and new guard are the same, it will be replaced with a new wallet.
+    /// For example, this function can use to modify the password
     pub fn add_guard(&mut self, old_guard: &impl Guard, new_guard: &impl Guard) -> Result<()> {
         let encrypted_wallet = self
             .encrypted_wallet
@@ -76,7 +84,7 @@ impl Wallet {
 
         // Add guard for auth key
         let unencrypted_auth_key = old_guard.decrypt(
-            &encrypted_wallet
+            encrypted_wallet
                 .auth_key
                 .get(&old_guard.guard_type())
                 .ok_or(anyhow::anyhow!("Old guard not found"))?,
@@ -93,7 +101,7 @@ impl Wallet {
 
         // Add guard for transaction key
         let unencrypted_transaction_key = old_guard.decrypt(
-            &encrypted_wallet
+            encrypted_wallet
                 .transaction_key
                 .get(&old_guard.guard_type())
                 .ok_or(anyhow::anyhow!("Old guard not found"))?,
@@ -123,11 +131,7 @@ impl Wallet {
             .get(&guard.guard_type())
             .ok_or(anyhow::anyhow!("Guard not found"))?;
 
-        let guard_data = guard.decrypt(guard_data)?;
-
-        let unencrypted_auth_key = B256::from_slice(guard_data.as_ref());
-
-        self.unencrypted_auth_key = Some(unencrypted_auth_key);
+        self.unencrypted_auth_key = Some(guard.decrypt(guard_data)?);
 
         Ok(())
     }
@@ -138,24 +142,81 @@ impl Wallet {
         Ok(())
     }
 
+    pub fn is_unlocked(&self) -> bool {
+        self.unencrypted_auth_key.is_some()
+    }
+
     pub fn is_initialized(&self) -> bool {
         self.encrypted_wallet.is_some()
     }
 
-    pub fn encrypt_auth_data(&self, data: &[u8]) -> Result<Vec<u8>> {
-        Ok(data.to_vec())
+    pub fn encrypt_auth_data<R>(&self, rng: &mut R, data: &[u8]) -> Result<EncryptedData>
+    where
+        R: RngCore + CryptoRng,
+    {
+        let unencrypted_auth_key = self
+            .unencrypted_auth_key
+            .as_ref()
+            .ok_or(anyhow::anyhow!("Wallet not unlocked"))?;
+
+        utils::encrypt_aes256_gcm(rng, *unencrypted_auth_key, data)
     }
 
-    pub fn decrypt_auth_data(&self, data: &[u8]) -> Result<Vec<u8>> {
-        Ok(data.to_vec())
+    pub fn decrypt_auth_data(&self, data: EncryptedData) -> Result<Vec<u8>> {
+        let unencrypted_auth_key = self
+            .unencrypted_auth_key
+            .as_ref()
+            .ok_or(anyhow::anyhow!("Wallet not unlocked"))?;
+
+        utils::decrypt(*unencrypted_auth_key, data)
     }
 
-    pub fn encrypt_transaction_data(&self, data: &[u8], guard: &impl Guard) -> Result<Vec<u8>> {
-        Ok(data.to_vec())
+    pub fn encrypt_transaction_data<R>(
+        &self,
+        rng: &mut R,
+        data: &[u8],
+        guard: &impl Guard,
+    ) -> Result<EncryptedData>
+    where
+        R: RngCore + CryptoRng,
+    {
+        let encrypted_wallet = self
+            .encrypted_wallet
+            .as_ref()
+            .ok_or(anyhow::anyhow!("Wallet not initialized"))?;
+
+        let guard_data = encrypted_wallet
+            .transaction_key
+            .get(&guard.guard_type())
+            .ok_or(anyhow::anyhow!("Guard not found"))?;
+
+        let unencrypted_transaction_key = guard.decrypt(guard_data)?;
+
+        let encrypted_data = utils::encrypt_aes256_gcm(rng, unencrypted_transaction_key, data)?;
+
+        Ok(encrypted_data)
     }
 
-    pub fn decrypt_transaction_data(&self, data: &[u8], guard: &impl Guard) -> Result<Vec<u8>> {
-        Ok(data.to_vec())
+    pub fn decrypt_transaction_data(
+        &self,
+        data: EncryptedData,
+        guard: &impl Guard,
+    ) -> Result<Vec<u8>> {
+        let encrypted_wallet = self
+            .encrypted_wallet
+            .as_ref()
+            .ok_or(anyhow::anyhow!("Wallet not initialized"))?;
+
+        let guard_data = encrypted_wallet
+            .transaction_key
+            .get(&guard.guard_type())
+            .ok_or(anyhow::anyhow!("Guard not found"))?;
+
+        let unencrypted_transaction_key = guard.decrypt(guard_data)?;
+
+        let encrypted_data = utils::decrypt(unencrypted_transaction_key, data)?;
+
+        Ok(encrypted_data)
     }
 
     pub async fn save(&self, storage: &impl KeyValueStorage) -> Result<()> {
@@ -165,5 +226,54 @@ impl Wallet {
             .await?;
 
         Ok(())
+    }
+}
+
+mod utils {
+    use aes_gcm::{Aes256Gcm, Key, KeyInit, Nonce, aead::Aead};
+    use alloy_primitives::B256;
+    use anyhow::Result;
+    use rand_core::{CryptoRng, RngCore};
+    use sigwa_core::EncryptedData;
+
+    pub fn encrypt_aes256_gcm<R>(rng: &mut R, key: B256, data: &[u8]) -> Result<EncryptedData>
+    where
+        R: RngCore + CryptoRng,
+    {
+        let key: Key<Aes256Gcm> = key.0.into();
+
+        let cipher = Aes256Gcm::new(&key);
+
+        let mut nonce = [0u8; 12];
+        rng.fill_bytes(nonce.as_mut());
+
+        let nonce = Nonce::from(nonce);
+
+        let ciphertext = cipher
+            .encrypt(&nonce, data)
+            .map_err(|e| anyhow::anyhow!(e))?;
+
+        let nonce: [u8; 12] = nonce.into();
+
+        Ok(EncryptedData::Aes256Gcm {
+            nonce: nonce.into(),
+            data: ciphertext.into(),
+        })
+    }
+
+    pub fn decrypt(key: B256, encrypted_data: EncryptedData) -> Result<Vec<u8>> {
+        let key: Key<Aes256Gcm> = key.0.into();
+        let cipher = Aes256Gcm::new(&key);
+
+        if let EncryptedData::Aes256Gcm { nonce, data } = encrypted_data {
+            let nonce = Nonce::from(nonce.0);
+            let plaintext = cipher
+                .decrypt(&nonce, data.as_ref())
+                .map_err(|e| anyhow::anyhow!(e))?;
+
+            Ok(plaintext)
+        } else {
+            Err(anyhow::anyhow!("Invalid encrypted data"))
+        }
     }
 }

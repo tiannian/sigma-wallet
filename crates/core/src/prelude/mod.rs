@@ -1,4 +1,4 @@
-use alloy_primitives::{B256, Bytes};
+use alloy_primitives::B256;
 use anyhow::Result;
 use async_trait::async_trait;
 
