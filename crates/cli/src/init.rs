@@ -10,9 +10,6 @@ pub struct Args {
 
     #[clap(short, long, env = "SIGWA_KEY")]
     pub password: String,
-
-    #[clap(short, long)]
-    pub use_keystore: bool,
 }
 
 impl Args {

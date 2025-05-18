@@ -1,0 +1,6 @@
+[package]
+name = "sigwa-storages-sqlite"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

@@ -1,0 +1,12 @@
+[package]
+name = "sigwa-storages-file"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+sigwa-core = { workspace = true }
+
+anyhow.workspace = true
+async-trait.workspace = true
+
+tokio = { workspace = true, features = ["fs"] }

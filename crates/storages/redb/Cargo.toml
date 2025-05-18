@@ -1,5 +1,5 @@
 [package]
-name = "sigwa-provider-wasm"
+name = "sigwa-storages-redb"
 version.workspace = true
 edition.workspace = true
 
