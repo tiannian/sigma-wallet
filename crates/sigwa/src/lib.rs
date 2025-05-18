@@ -4,5 +4,7 @@ pub use wallet::*;
 mod provider;
 pub use provider::*;
 
-pub mod commands;
+mod network;
+pub use network::*;
+
 pub mod utils;
