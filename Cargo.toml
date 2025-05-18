@@ -34,3 +34,4 @@ sigwa-core = { path = "crates/core" }
 sigwa-wallet = { path = "crates/sigwa" }
 sigwa-guards-password = { path = "crates/guards/password" }
 sigwa-storages-file = { path = "crates/storages/file" }
+sigwa-storages-sqlite = { path = "crates/storages/sqlite" }

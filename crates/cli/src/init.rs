@@ -5,7 +5,8 @@ use clap::Parser;
 use rand_core::OsRng;
 use sigwa_guards_password::PasswordGuard;
 use sigwa_storages_file::JsonFileKeyValueStorage;
-use sigwa_wallet::{Provider, Wallet};
+use sigwa_storages_sqlite::SqliteStorage;
+use sigwa_wallet::{Network, Provider, Wallet};
 
 #[derive(Parser)]
 pub struct Args {
@@ -15,8 +16,9 @@ pub struct Args {
 
 impl Args {
     pub async fn run(self, home_path: PathBuf) -> Result<()> {
-        let storage = JsonFileKeyValueStorage::new(home_path);
+        let storage = JsonFileKeyValueStorage::new(&home_path);
 
+        // init wallet
         let mut wallet = Wallet::new(&storage).await?;
         if !wallet.is_initialized() {
             println!("Initializing wallet...");
@@ -25,6 +27,7 @@ impl Args {
         }
         println!("Wallet initialized");
 
+        // init provider
         let mut provider = Provider::new(&storage).await?;
         if !provider.is_initialized() {
             println!("Initializing provider...");
@@ -33,6 +36,23 @@ impl Args {
             provider.save(&storage).await?;
         }
         println!("Provider initialized");
+
+        // init network
+        let path = home_path.join("network.db");
+        if !path.exists() {
+            println!("Initializing network...");
+
+            let mut network = Network::new();
+            let chain_list_provider = &provider
+                .get_info()
+                .ok_or(anyhow::anyhow!("chain list provider not found"))?
+                .chain_list_provider;
+
+            let storage = SqliteStorage::new(&path).await?;
+            network.migrations(&storage).await?;
+            network.load_remote(chain_list_provider, &storage).await?;
+        }
+        println!("Network initialized");
 
         Ok(())
     }

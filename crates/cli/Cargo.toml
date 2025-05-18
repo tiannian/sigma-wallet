@@ -12,6 +12,7 @@ rand_core = { workspace = true }
 sigwa-wallet = { workspace = true }
 sigwa-guards-password = { workspace = true }
 sigwa-storages-file = { workspace = true }
+sigwa-storages-sqlite = { workspace = true }
 
 tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
 

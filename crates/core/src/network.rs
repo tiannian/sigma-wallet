@@ -8,17 +8,6 @@ impl Network {
         Self { infos: vec![] }
     }
 
-    pub fn migrations(&self) -> Vec<Migration> {
-        let v1 = Migration {
-            version: 1,
-            description: "create networks table",
-            migration_type: MigrationType::Up,
-            sql: include_str!("../sql/0001-network.sql"),
-        };
-
-        vec![v1]
-    }
-
     pub async fn load_remote(&mut self, chain_list_provider: &str) -> Result<()> {
         let response = reqwest::get(chain_list_provider).await?;
 

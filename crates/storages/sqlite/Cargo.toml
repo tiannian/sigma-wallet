@@ -4,3 +4,10 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+anyhow = { workspace = true }
+sigwa-core = { workspace = true }
+sqlx = { version = "0.8.5", features = ["sqlite", "runtime-tokio"] }
+
+async-trait = { workspace = true }
+
+tokio = { workspace = true, features = ["fs"] }
