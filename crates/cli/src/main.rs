@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use anyhow::Result;
 use clap::Parser;
 
@@ -6,6 +8,9 @@ mod provider;
 
 #[derive(Parser)]
 pub struct Args {
+    #[clap(long, env = "SIGWA_HOME")]
+    pub home_path: Option<PathBuf>,
+
     #[clap(subcommand)]
     subcommand: Subcommand,
 }
@@ -17,13 +22,27 @@ pub enum Subcommand {
 }
 
 impl Args {
-    pub fn run(&self) -> Result<()> {
+    pub async fn run(self) -> Result<()> {
+        let home_path = if let Some(path) = &self.home_path {
+            path.clone()
+        } else {
+            let mut path = std::env::var("HOME").unwrap_or_else(|_| ".".to_string());
+            path.push_str("/.sigwa");
+            PathBuf::from(path)
+        };
+
+        match self.subcommand {
+            Subcommand::Init(args) => args.run(home_path).await,
+            Subcommand::Provider(args) => args.run(home_path).await,
+        }?;
+
         Ok(())
     }
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let args = Args::parse();
 
-    args.run().expect("Failed to run command");
+    args.run().await.expect("Failed to run command");
 }

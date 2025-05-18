@@ -20,11 +20,11 @@ pub struct Wallet {
 }
 
 impl Wallet {
-    pub async fn new<S>(storage: S) -> Result<Self>
+    pub async fn new<S>(storage: &S) -> Result<Self>
     where
         S: PersistentKeyValueStorage + KeyValueStorage,
     {
-        let encrypted_wallet = storage.get("wallet", b"encrypted").await?;
+        let encrypted_wallet = storage.get("", b"wallet").await?;
 
         let encrypted_wallet = if let Some(encrypted_wallet) = encrypted_wallet {
             Some(serde_json::from_slice(&encrypted_wallet)?)
@@ -229,9 +229,7 @@ impl Wallet {
 
     pub async fn save(&self, storage: &impl KeyValueStorage) -> Result<()> {
         let encrypted_wallet = serde_json::to_vec(&self.encrypted_wallet)?;
-        storage
-            .set("wallet", b"encrypted", encrypted_wallet)
-            .await?;
+        storage.set("", b"wallet", encrypted_wallet).await?;
 
         Ok(())
     }

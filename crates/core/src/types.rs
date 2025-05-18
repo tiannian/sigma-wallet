@@ -42,6 +42,7 @@ impl EncryptedData {
 }
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone, Copy, Ord, PartialOrd)]
+#[serde(rename_all = "kebab-case")]
 pub enum GuardType {
     Password,
     WindowsHello,

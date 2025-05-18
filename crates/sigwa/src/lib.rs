@@ -1,9 +1,8 @@
 mod wallet;
 pub use wallet::*;
 
+mod provider;
+pub use provider::*;
+
 pub mod commands;
-
-// mod account;
-// pub use account::*;
-
 pub mod utils;

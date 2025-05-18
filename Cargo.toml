@@ -33,3 +33,4 @@ tokio = { version = "1.41.1" }
 sigwa-core = { path = "crates/core" }
 sigwa-wallet = { path = "crates/sigwa" }
 sigwa-guards-password = { path = "crates/guards/password" }
+sigwa-storages-file = { path = "crates/storages/file" }

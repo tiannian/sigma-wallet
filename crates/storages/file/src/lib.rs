@@ -2,14 +2,14 @@ use std::path::{Path, PathBuf};
 
 use anyhow::Result;
 use async_trait::async_trait;
-use sigwa_core::KeyValueStorage;
+use sigwa_core::{KeyValueStorage, PersistentKeyValueStorage};
 use tokio::fs;
 
-pub struct FileKeyValueStorage {
+pub struct JsonFileKeyValueStorage {
     path: PathBuf,
 }
 
-impl FileKeyValueStorage {
+impl JsonFileKeyValueStorage {
     pub fn new(path: impl AsRef<Path>) -> Self {
         Self {
             path: path.as_ref().to_path_buf(),
@@ -17,16 +17,19 @@ impl FileKeyValueStorage {
     }
 
     async fn _set(&self, table: &str, key: &[u8], value: Vec<u8>) -> Result<()> {
-        let key = String::from_utf8(key.to_vec())?;
-        let path = self.path.join(table).join(key);
+        let path = self.path.join(table);
 
-        fs::write(path, value).await?;
+        fs::create_dir_all(&path).await?;
+
+        let key = String::from_utf8(key.to_vec())?;
+
+        fs::write(path.join(format!("{}.json", key)), value).await?;
         Ok(())
     }
 
     async fn _get(&self, table: &str, key: &[u8]) -> Result<Option<Vec<u8>>> {
         let key = String::from_utf8(key.to_vec())?;
-        let path = self.path.join(table).join(key);
+        let path = self.path.join(table).join(format!("{}.json", key));
 
         if !path.exists() {
             Ok(None)
@@ -38,7 +41,7 @@ impl FileKeyValueStorage {
 
     async fn _remove(&self, table: &str, key: &[u8]) -> Result<()> {
         let key = String::from_utf8(key.to_vec())?;
-        let path = self.path.join(table).join(key);
+        let path = self.path.join(table).join(format!("{}.json", key));
 
         fs::remove_file(path).await?;
         Ok(())
@@ -46,7 +49,7 @@ impl FileKeyValueStorage {
 }
 
 #[async_trait]
-impl KeyValueStorage for FileKeyValueStorage {
+impl KeyValueStorage for JsonFileKeyValueStorage {
     async fn set(&self, table: &str, key: &[u8], value: Vec<u8>) -> Result<()> {
         self._set(table, key, value).await
     }
@@ -59,3 +62,5 @@ impl KeyValueStorage for FileKeyValueStorage {
         self._remove(table, key).await
     }
 }
+
+impl PersistentKeyValueStorage for JsonFileKeyValueStorage {}

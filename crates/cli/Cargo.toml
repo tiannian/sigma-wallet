@@ -7,3 +7,12 @@ edition.workspace = true
 clap = { version = "4.5.10", features = ["derive", "env"] }
 
 anyhow = { workspace = true }
+rand_core = { workspace = true }
+
+sigwa-wallet = { workspace = true }
+sigwa-guards-password = { workspace = true }
+sigwa-storages-file = { workspace = true }
+
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
+
+dialoguer = "0.11.0"
