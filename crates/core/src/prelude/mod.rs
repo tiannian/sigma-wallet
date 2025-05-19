@@ -2,9 +2,6 @@ use alloy_primitives::B256;
 use anyhow::Result;
 use async_trait::async_trait;
 
-mod sql;
-pub use sql::*;
-
 use crate::GuardType;
 
 pub trait Guard {

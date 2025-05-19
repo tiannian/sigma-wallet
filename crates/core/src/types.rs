@@ -47,3 +47,18 @@ pub enum GuardType {
     Password,
     WindowsHello,
 }
+
+#[derive(Debug)]
+pub enum MigrationType {
+    Simple,
+    Up,
+    Down,
+}
+
+#[derive(Debug)]
+pub struct Migration {
+    pub version: i64,
+    pub description: &'static str,
+    pub migration_type: MigrationType,
+    pub sql: &'static str,
+}

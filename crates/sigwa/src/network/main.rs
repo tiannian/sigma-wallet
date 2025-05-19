@@ -76,4 +76,17 @@ impl Network {
     pub async fn get_network(&self, id: u32) -> Result<NetworkInfo> {
         sql::get_network(&self.pool, id).await
     }
+
+    pub async fn update_network_text_field(&self, id: u32, field: &str, value: &str) -> Result<()> {
+        sql::update_network_text_filed(&self.pool, id, field, value).await
+    }
+
+    pub async fn update_network_number_field(
+        &self,
+        id: u32,
+        field: &str,
+        value: u32,
+    ) -> Result<()> {
+        sql::update_network_number_filed(&self.pool, id, field, value).await
+    }
 }

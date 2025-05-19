@@ -193,3 +193,42 @@ pub async fn get_network(pool: &SqlitePool, id: u32) -> Result<NetworkInfo> {
         slip44: slip44 as u64,
     })
 }
+
+pub async fn update_network_text_filed(
+    pool: &SqlitePool,
+    id: u32,
+    field: &str,
+    value: &str,
+) -> Result<()> {
+    let sql = format!(
+        "UPDATE networks SET {} = ?, is_user_added = TRUE WHERE id = ?",
+        field
+    );
+
+    let result = sqlx::query(&sql).bind(value).bind(id).execute(pool).await?;
+
+    log::debug!(
+        "updated network row effect rows: {:?}",
+        result.rows_affected()
+    );
+
+    Ok(())
+}
+
+pub async fn update_network_number_filed(
+    pool: &SqlitePool,
+    id: u32,
+    field: &str,
+    value: u32,
+) -> Result<()> {
+    let sql = format!("UPDATE networks SET {} = ? WHERE id = ?", field);
+
+    let result = sqlx::query(&sql).bind(value).bind(id).execute(pool).await?;
+
+    log::debug!(
+        "updated network row effect rows: {:?}",
+        result.rows_affected()
+    );
+
+    Ok(())
+}
