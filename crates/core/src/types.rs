@@ -14,7 +14,7 @@ impl EncryptedData {
             EncryptedData::Aes256Gcm { data, nonce } => {
                 let mut res = vec![1];
                 res.extend_from_slice(nonce.as_ref());
-                res.extend_from_slice(&data);
+                res.extend_from_slice(data);
                 res
             }
         }

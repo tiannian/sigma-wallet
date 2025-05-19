@@ -31,8 +31,8 @@ impl PasswordGuard {
     fn _encrypt(&self, data: B256) -> Result<Vec<u8>> {
         let mut hasher = Sha3_256::new();
 
-        hasher.update(&self.password.0);
-        hasher.update(&self.salt.0);
+        hasher.update(self.password.0);
+        hasher.update(self.salt.0);
         let hash = hasher.finalize();
 
         let nonce = [

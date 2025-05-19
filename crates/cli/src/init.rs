@@ -2,6 +2,7 @@ use std::path::PathBuf;
 
 use anyhow::Result;
 use clap::Parser;
+use dialoguer::theme::ColorfulTheme;
 use rand_core::OsRng;
 use sigwa_guards_password::PasswordGuard;
 use sigwa_storages_file::JsonFileKeyValueStorage;
@@ -65,8 +66,10 @@ impl Args {
         let password = if let Some(password) = &self.password {
             password.clone()
         } else {
-            let mut theme = dialoguer::theme::ColorfulTheme::default();
-            theme.prompt_style = console::Style::new().blue().bright();
+            let theme = ColorfulTheme {
+                prompt_style: console::Style::new().blue().bright(),
+                ..Default::default()
+            };
 
             let password = dialoguer::Password::with_theme(&theme)
                 .with_prompt("Enter your password to initialize wallet")

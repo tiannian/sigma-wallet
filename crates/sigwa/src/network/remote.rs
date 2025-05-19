@@ -1,5 +1,4 @@
 use anyhow::Result;
-use reqwest;
 
 use crate::{Explorer, ExplorerType, NetworkInfo, NetworkType};
 

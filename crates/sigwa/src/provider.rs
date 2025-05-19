@@ -45,6 +45,12 @@ pub struct ProviderSelector {
     selected_rpc: usize,
 }
 
+impl Default for ProviderSelector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ProviderSelector {
     pub fn new() -> Self {
         let rpc = ProviderRpc {

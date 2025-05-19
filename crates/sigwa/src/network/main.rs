@@ -3,6 +3,7 @@ use sigwa_core::{Migration, MigrationType, SqlStorgae};
 
 use super::{remote, sql};
 
+#[derive(Debug, Default)]
 pub struct Network {}
 
 impl Network {
@@ -34,5 +35,17 @@ impl Network {
         sql::save_local(&infos, storage).await?;
 
         Ok(())
+    }
+
+    pub async fn select_all_network_names<S>(
+        &self,
+        storage: &S,
+        testnet: bool,
+    ) -> Result<Vec<String>>
+    where
+        S: SqlStorgae,
+    {
+        let infos = sql::select_all_network_names(storage, testnet).await?;
+        Ok(infos)
     }
 }

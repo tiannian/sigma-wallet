@@ -83,3 +83,30 @@ where
 
     Ok(())
 }
+
+pub async fn select_all_network_names<S>(storage: &S, testnet: bool) -> Result<Vec<String>>
+where
+    S: SqlStorgae,
+{
+    let input = if testnet {
+        "SELECT name FROM networks"
+    } else {
+        "SELECT name FROM networks WHERE slip44 != 1"
+    };
+
+    let result = storage.select(input, &[]).await?;
+
+    let mut names = Vec::new();
+
+    for row in result {
+        if let Some(name) = row.get("name") {
+            let name = name
+                .as_str()
+                .ok_or(anyhow::anyhow!("name is not a string"))?;
+
+            names.push(name.into());
+        }
+    }
+
+    Ok(names)
+}
