@@ -4,6 +4,7 @@ use anyhow::Result;
 use clap::Parser;
 
 mod init;
+mod network;
 mod provider;
 
 #[derive(Parser)]
@@ -17,8 +18,12 @@ pub struct Args {
 
 #[derive(Parser)]
 pub enum Subcommand {
+    /// Initialize the wallet
     Init(init::Args),
+    /// Display provider information
     Provider(provider::Args),
+    /// Display or modify network information
+    Network(network::Args),
 }
 
 impl Args {
@@ -34,6 +39,7 @@ impl Args {
         match self.subcommand {
             Subcommand::Init(args) => args.run(home_path).await,
             Subcommand::Provider(args) => args.run(home_path).await,
+            Subcommand::Network(args) => args.run(home_path).await,
         }?;
 
         Ok(())

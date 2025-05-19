@@ -33,6 +33,8 @@ pub struct Eip155ChainInfo {
     pub chain_id: u64,
     #[serde(default)]
     pub explorers: Vec<Eip155Explorer>,
+    #[serde(default)]
+    pub slip44: u64,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

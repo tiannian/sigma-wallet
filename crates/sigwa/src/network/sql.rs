@@ -14,8 +14,9 @@ where
             network_type,
             chain_id,
             symbol,
-            decimals
-        ) VALUES (?, ?, ?, ?, ?)
+            decimals,
+            slip44
+        ) VALUES (?, ?, ?, ?, ?, ?)
         ON CONFLICT DO NOTHING";
 
     let network_rpc_sql = "INSERT INTO network_rpc (
@@ -44,6 +45,7 @@ where
                     info.chain_id.as_str().into(),
                     info.symbol.as_str().into(),
                     (info.decimals as i64).into(),
+                    (info.slip44 as i64).into(),
                 ],
             )
             .await?;

@@ -65,7 +65,10 @@ impl Args {
         let password = if let Some(password) = &self.password {
             password.clone()
         } else {
-            let password = dialoguer::Password::new()
+            let mut theme = dialoguer::theme::ColorfulTheme::default();
+            theme.prompt_style = console::Style::new().blue().bright();
+
+            let password = dialoguer::Password::with_theme(&theme)
                 .with_prompt("Enter your password to initialize wallet")
                 .with_confirmation("Confirm your password", "Passwords do not match")
                 .interact()?;

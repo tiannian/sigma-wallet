@@ -17,3 +17,4 @@ sigwa-storages-sqlite = { workspace = true }
 tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
 
 dialoguer = "0.11.0"
+console = "0.15.11"

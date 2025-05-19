@@ -45,6 +45,7 @@ pub struct NetworkInfo {
     pub selected_rpc_url: usize,
     pub explorers: Vec<Explorer>,
     pub selected_explorer: usize,
+    pub slip44: u64,
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
