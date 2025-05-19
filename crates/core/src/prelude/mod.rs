@@ -4,6 +4,9 @@ use async_trait::async_trait;
 
 use crate::GuardType;
 
+mod account;
+pub use account::*;
+
 pub trait Guard {
     fn encrypt(&self, data: B256) -> Result<Vec<u8>>;
 
