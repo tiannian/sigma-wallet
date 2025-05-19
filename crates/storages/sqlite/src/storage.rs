@@ -16,9 +16,13 @@ pub struct SqliteStorage {
 
 impl SqliteStorage {
     pub async fn new(path: &impl AsRef<Path>) -> Result<Self> {
-        File::create(path).await?;
+        let path = path.as_ref();
 
-        let pool = SqlitePool::connect(&format!("sqlite://{}", path.as_ref().display())).await?;
+        if !path.exists() {
+            File::create(path).await?;
+        }
+
+        let pool = SqlitePool::connect(&format!("sqlite://{}", path.display())).await?;
 
         Ok(Self { pool })
     }

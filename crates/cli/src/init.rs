@@ -6,7 +6,6 @@ use dialoguer::theme::ColorfulTheme;
 use rand_core::OsRng;
 use sigwa_guards_password::PasswordGuard;
 use sigwa_storages_file::JsonFileKeyValueStorage;
-use sigwa_storages_sqlite::SqliteStorage;
 use sigwa_wallet::{Network, Provider, Wallet};
 
 #[derive(Parser)]
@@ -39,19 +38,17 @@ impl Args {
         println!("Provider initialized");
 
         // init network
-        let path = home_path.join("network.db");
-        if !path.exists() {
-            println!("Initializing network...");
+        println!("Initializing network...");
 
-            let mut network = Network::new();
+        let mut network = Network::new(&home_path).await?;
+        if !network.is_initialized() {
             let chain_list_provider = &provider
                 .get_info()
                 .ok_or(anyhow::anyhow!("chain list provider not found"))?
                 .chain_list_provider;
 
-            let storage = SqliteStorage::new(&path).await?;
-            network.migrations(&storage).await?;
-            network.load_remote(chain_list_provider, &storage).await?;
+            network.migrate().await?;
+            network.load_remote(chain_list_provider).await?;
         }
         println!("Network initialized");
 

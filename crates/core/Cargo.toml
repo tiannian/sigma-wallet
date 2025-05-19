@@ -18,5 +18,7 @@ reqwest = { workspace = true, features = ["json"] }
 
 serde_json = { workspace = true }
 
+hex = { workspace = true }
+
 [dev-dependencies]
 tokio = { version = "1.41.1", features = ["full"] }

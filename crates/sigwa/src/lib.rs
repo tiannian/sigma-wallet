@@ -7,4 +7,5 @@ pub use provider::*;
 mod network;
 pub use network::*;
 
+pub mod migration;
 pub mod utils;

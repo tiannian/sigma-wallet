@@ -16,3 +16,8 @@ serde_json = { workspace = true }
 aes-gcm = { workspace = true }
 
 reqwest = { workspace = true }
+
+sqlx = { version = "0.8.5", features = ["sqlite", "runtime-tokio"] }
+tokio = { workspace = true, features = ["fs"] }
+
+log = { workspace = true }

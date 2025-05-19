@@ -1,6 +1,5 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
-use sigwa_core::SqlValue;
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
@@ -11,15 +10,12 @@ pub enum NetworkType {
 }
 
 impl NetworkType {
-    pub fn from_sql_value(value: &SqlValue) -> Result<Self> {
+    pub fn from_u32(value: u32) -> Result<Self> {
         match value {
-            SqlValue::Int(value) => match value {
-                0 => Ok(NetworkType::Eip155),
-                1 => Ok(NetworkType::Solana),
-                2 => Ok(NetworkType::Bitcoin),
-                _ => Err(anyhow::anyhow!("invalid network type {}", value)),
-            },
-            _ => Err(anyhow::anyhow!("invalid network type")),
+            0 => Ok(NetworkType::Eip155),
+            1 => Ok(NetworkType::Solana),
+            2 => Ok(NetworkType::Bitcoin),
+            _ => Err(anyhow::anyhow!("invalid network type {}", value)),
         }
     }
 }
@@ -55,13 +51,10 @@ pub enum ExplorerType {
 }
 
 impl ExplorerType {
-    pub fn from_sql_value(value: &SqlValue) -> Result<Self> {
+    pub fn from_u32(value: u32) -> Result<Self> {
         match value {
-            SqlValue::Int(value) => match value {
-                0 => Ok(ExplorerType::Eip3091),
-                _ => Err(anyhow::anyhow!("invalid explorer type {}", value)),
-            },
-            _ => Err(anyhow::anyhow!("invalid explorer type")),
+            0 => Ok(ExplorerType::Eip3091),
+            _ => Err(anyhow::anyhow!("invalid explorer type {}", value)),
         }
     }
 }

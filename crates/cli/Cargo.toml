@@ -12,9 +12,8 @@ rand_core = { workspace = true }
 sigwa-wallet = { workspace = true }
 sigwa-guards-password = { workspace = true }
 sigwa-storages-file = { workspace = true }
-sigwa-storages-sqlite = { workspace = true }
 
 tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
 
-dialoguer = "0.11.0"
+dialoguer = { version = "0.11.0", features = ["fuzzy-select"] }
 console = "0.15.11"

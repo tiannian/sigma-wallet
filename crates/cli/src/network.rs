@@ -2,58 +2,74 @@ use std::path::PathBuf;
 
 use anyhow::Result;
 use clap::Parser;
-use sigwa_storages_sqlite::SqliteStorage;
-use sigwa_wallet::Network;
+use dialoguer::{Confirm, FuzzySelect, Select, theme::ColorfulTheme};
+use sigwa_wallet::{Network, NetworkInfo};
 
 #[derive(Parser)]
 pub struct Args {
-    #[clap(subcommand)]
-    subcommand: Option<Subcommand>,
+    #[clap(short, long)]
+    testnet: bool,
 }
 
 impl Args {
     pub async fn run(self, home_path: PathBuf) -> Result<()> {
-        let subcommand = self.subcommand.unwrap_or_default();
-        subcommand.run(home_path).await?;
+        let network = Network::new(&home_path).await?;
+        let names = network
+            .select_all_network_chainid_names(self.testnet)
+            .await?;
 
-        Ok(())
-    }
-}
+        let theme = ColorfulTheme {
+            prompt_style: console::Style::new().blue().bright(),
+            ..Default::default()
+        };
 
-#[derive(Parser)]
-pub enum Subcommand {
-    List {
-        #[clap(short, long)]
-        testnet: bool,
-    },
-    Edit,
-    Add,
-    Remove,
-}
+        let selection = FuzzySelect::with_theme(&theme)
+            .with_prompt("Select a network")
+            .items(&names.1)
+            .interact_opt()?;
 
-impl Default for Subcommand {
-    fn default() -> Self {
-        Self::List { testnet: false }
-    }
-}
+        if selection.is_none() {
+            return Ok(());
+        }
 
-impl Subcommand {
-    pub async fn run(&self, home_path: PathBuf) -> Result<()> {
-        match self {
-            Self::List { testnet } => {
-                let path = home_path.join("network.db");
+        // Safe to unwrap because we checked for None above
+        let selection = selection.unwrap();
 
-                let storage = SqliteStorage::new(&path).await?;
-                let network = Network::new();
-                let names = network.select_all_network_names(&storage, *testnet).await?;
+        // println!("{}", names.0[selection]);
 
-                println!("{}", names.join(", "));
+        let operation = Select::with_theme(&theme)
+            .with_prompt("Select an operation")
+            .items(&["Show Detail", "Remove"])
+            .interact_opt()?;
+
+        if operation.is_none() {
+            return Ok(());
+        }
+
+        // Safe to unwrap because we checked for None above
+        match operation.unwrap() {
+            0 => {
+                let network = network.get_network(names.0[selection]).await?;
+                show_detail(network).await?;
             }
-            Self::Edit => {}
-            Self::Add => {}
-            Self::Remove => {}
+            1 => {
+                let confirm = Confirm::with_theme(&theme)
+                    .with_prompt("Are you sure you want to remove this network?")
+                    .interact()?;
+
+                if confirm {
+                    network.remove_network(names.0[selection]).await?;
+                    println!("Network removed");
+                }
+            }
+            _ => {}
         }
 
         Ok(())
     }
+}
+
+async fn show_detail(network: NetworkInfo) -> Result<()> {
+    println!("{:?}", network);
+    Ok(())
 }

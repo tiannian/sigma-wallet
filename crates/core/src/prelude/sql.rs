@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::{collections::BTreeMap, fmt::Display};
 
 use anyhow::Result;
 use async_trait::async_trait;
@@ -11,6 +11,19 @@ pub enum SqlValue {
     Float(f64),
     Bool(bool),
     Blob(Vec<u8>),
+}
+
+impl Display for SqlValue {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            SqlValue::Null => write!(f, "NULL"),
+            SqlValue::String(value) => write!(f, "{}", value),
+            SqlValue::Int(value) => write!(f, "{}", value),
+            SqlValue::Float(value) => write!(f, "{}", value),
+            SqlValue::Bool(value) => write!(f, "{}", value),
+            SqlValue::Blob(value) => write!(f, "0x{}", hex::encode(value)),
+        }
+    }
 }
 
 macro_rules! define_sql_value_from {

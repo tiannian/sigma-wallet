@@ -128,6 +128,8 @@ where
     for row in res {
         let mut map = BTreeMap::new();
 
+        println!("{:?}", row);
+
         for (i, column) in row.columns().iter().enumerate() {
             let v = row.try_get_raw(i)?;
 
