@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use alloy_primitives::{B256, Bytes};
 use anyhow::Result;
-use rand_core::{CryptoRng, RngCore};
+use rand_core::{CryptoRng, OsRng, RngCore};
 use serde::{Deserialize, Serialize};
 use sigwa_core::{EncryptedData, Guard, GuardType, KeyValueStorage, PersistentKeyValueStorage};
 
@@ -152,17 +152,14 @@ impl Wallet {
         self.encrypted_wallet.is_some()
     }
 
-    pub fn encrypt_auth_data<R>(&self, rng: &mut R, data: &[u8]) -> Result<EncryptedData>
-    where
-        R: RngCore + CryptoRng,
-    {
+    pub fn encrypt_auth_data(&self, data: &[u8]) -> Result<EncryptedData> {
         let unencrypted_auth_key = self
             .unencrypted_auth_key
             .as_ref()
             .ok_or(anyhow::anyhow!("Wallet not unlocked"))?;
 
         let mut nonce = [0; 12];
-        rng.fill_bytes(nonce.as_mut());
+        OsRng.fill_bytes(nonce.as_mut());
 
         utils::encrypt_aes256_gcm(*unencrypted_auth_key, nonce, data)
     }
@@ -176,15 +173,11 @@ impl Wallet {
         utils::decrypt(*unencrypted_auth_key, data)
     }
 
-    pub fn encrypt_transaction_data<R>(
+    pub fn encrypt_transaction_data(
         &self,
-        rng: &mut R,
         data: &[u8],
         guard: &impl Guard,
-    ) -> Result<EncryptedData>
-    where
-        R: RngCore + CryptoRng,
-    {
+    ) -> Result<EncryptedData> {
         let encrypted_wallet = self
             .encrypted_wallet
             .as_ref()
@@ -198,7 +191,7 @@ impl Wallet {
         let unencrypted_transaction_key = guard.decrypt(guard_data)?;
 
         let mut nonce = [0; 12];
-        rng.fill_bytes(nonce.as_mut());
+        OsRng.fill_bytes(nonce.as_mut());
 
         let encrypted_data = utils::encrypt_aes256_gcm(unencrypted_transaction_key, nonce, data)?;
 

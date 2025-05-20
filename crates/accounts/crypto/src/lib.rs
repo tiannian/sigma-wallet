@@ -1,1 +1,4 @@
-pub struct Account {}
+mod account;
+pub use account::*;
+
+pub mod types;
