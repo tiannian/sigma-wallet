@@ -1,35 +1,36 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum NetworkType {
     Eip155,
-    Solana,
-    Bitcoin,
+    NonEip155(String),
 }
 
-impl NetworkType {
-    pub fn from_u32(value: u32) -> Result<Self> {
-        match value {
-            0 => Ok(NetworkType::Eip155),
-            1 => Ok(NetworkType::Solana),
-            2 => Ok(NetworkType::Bitcoin),
-            _ => Err(anyhow::anyhow!("invalid network type {}", value)),
+impl<'a> From<&'a str> for NetworkType {
+    fn from(value: &'a str) -> Self {
+        value.to_string().into()
+    }
+}
+
+impl From<String> for NetworkType {
+    fn from(value: String) -> Self {
+        match value.as_str() {
+            "eip155" => NetworkType::Eip155,
+            _ => NetworkType::NonEip155(value.to_string()),
         }
     }
 }
 
-impl From<NetworkType> for i64 {
+impl From<NetworkType> for String {
     fn from(value: NetworkType) -> Self {
         match value {
-            NetworkType::Eip155 => 0,
-            NetworkType::Solana => 1,
-            NetworkType::Bitcoin => 2,
+            NetworkType::Eip155 => "eip155".to_string(),
+            NetworkType::NonEip155(value) => value,
         }
     }
 }
-
 pub struct NetworkId {
     pub network_type: NetworkType,
     pub chain_id: u64,

@@ -2,11 +2,16 @@
 resolver = "3"
 members = [
     "crates/core",
-    "crates/sigwa",
-    "crates/cli",
-    "crates/guards/password",
-    "crates/storages/file",
-    "crates/storages/redb", "crates/accounts/crypto", "crates/accounts/cex/binance", "crates/accounts/cex/okx", "crates/accounts/cex/kraken", "crates/accounts/wise",
+    # "crates/sigwa",
+    # "crates/cli",
+    # "crates/guards/password",
+    # "crates/storages/file",
+    # "crates/storages/redb",
+    # "crates/accounts/crypto",
+    # "crates/accounts/cex/binance",
+    # "crates/accounts/cex/okx",
+    # "crates/accounts/cex/kraken",
+    # "crates/accounts/wise",
 ]
 
 [workspace.package]
