@@ -33,6 +33,7 @@ pub async fn load_remote(chain_list_provider: &str) -> Result<Vec<NetworkInfo>> 
                 .collect(),
             selected_explorer: 0,
             slip44: chain_info.slip44,
+            icon: "".into(),
         };
 
         infos.push(info);

@@ -188,6 +188,7 @@ pub async fn get_network(pool: &SqlitePool, id: u32) -> Result<NetworkInfo> {
         explorers,
         selected_explorer,
         slip44: slip44 as u64,
+        icon: "".to_string(),
     })
 }
 

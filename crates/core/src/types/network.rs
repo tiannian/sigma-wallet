@@ -47,6 +47,7 @@ pub struct NetworkInfo {
     pub explorers: Vec<Explorer>,
     pub selected_explorer: usize,
     pub slip44: u64,
+    pub icon: String,
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
