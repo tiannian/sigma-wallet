@@ -21,3 +21,5 @@ sqlx = { version = "0.8.5", features = ["sqlite", "runtime-tokio"] }
 tokio = { workspace = true, features = ["fs"] }
 
 log = { workspace = true }
+
+rust-embed = { version = "8.7.2", features = ["interpolate-folder-path"] }

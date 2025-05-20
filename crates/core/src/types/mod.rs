@@ -6,3 +6,6 @@ pub use network::*;
 
 mod storage;
 pub use storage::*;
+
+mod version;
+pub use version::*;

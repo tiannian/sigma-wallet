@@ -8,6 +8,7 @@ CREATE TABLE
         decimals INTEGER NOT NULL,
         slip44 INTEGER NOT NULL,
         is_user_added BOOLEAN NOT NULL DEFAULT FALSE,
+        icon TEXT,
         UNIQUE (network_type, chain_id)
     );
 

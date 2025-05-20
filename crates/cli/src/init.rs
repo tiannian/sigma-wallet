@@ -42,13 +42,8 @@ impl Args {
 
         let mut network = Network::new(&home_path).await?;
         if !network.is_initialized() {
-            let chain_list_provider = &provider
-                .get_info()
-                .ok_or(anyhow::anyhow!("chain list provider not found"))?
-                .chain_list_provider;
-
             network.migrate().await?;
-            network.load_remote(chain_list_provider).await?;
+            network.init_data().await?;
         }
         println!("Network initialized");
 

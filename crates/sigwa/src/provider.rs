@@ -26,8 +26,6 @@ pub enum CexProxy {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ProviderInfo {
-    pub chain_list_provider: String,
-    pub assets_list_provider: String,
     pub cex_proxy: CexProxy,
     pub crypto_price_provider: CryptoPriceProvider,
     pub currency_rate_provider: CurrencyRateProvider,

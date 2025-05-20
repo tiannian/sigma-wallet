@@ -38,8 +38,6 @@ impl Args {
 
             println!();
 
-            println!("Chain List Provider: {}", info.chain_list_provider);
-            println!("Assets List Provider: {}", info.assets_list_provider);
             println!("CEX Proxy: {:?}", info.cex_proxy);
             println!("Crypto Price Provider: {:?}", info.crypto_price_provider);
             println!("Currency Rate Provider: {:?}", info.currency_rate_provider);

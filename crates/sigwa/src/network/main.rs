@@ -7,7 +7,7 @@ use tokio::fs::File;
 
 use crate::migration;
 
-use super::{remote, sql};
+use super::{data, sql};
 
 #[derive(Debug)]
 pub struct Network {
@@ -54,9 +54,8 @@ impl Network {
         Ok(())
     }
 
-    pub async fn load_remote(&mut self, chain_list_provider: &str) -> Result<()> {
-        let infos = remote::load_remote(chain_list_provider).await?;
-        sql::save_local(&mut self.pool, &infos).await?;
+    pub async fn init_data(&mut self) -> Result<()> {
+        data::init_data(&mut self.pool).await?;
 
         Ok(())
     }
