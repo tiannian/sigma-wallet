@@ -1,9 +1,6 @@
 use anyhow::Result;
+use sigwa_core::{Explorer, ExplorerType, NetworkInfo, NetworkType};
 use sqlx::{Row, SqlitePool};
-
-use crate::NetworkInfo;
-
-use super::{Explorer, ExplorerType, NetworkType};
 
 pub async fn save_local(pool: &SqlitePool, infos: &[NetworkInfo]) -> Result<()> {
     let mut txn = pool.begin().await?;
@@ -129,7 +126,7 @@ pub async fn get_network(pool: &SqlitePool, id: u32) -> Result<NetworkInfo> {
 
     let name: String = result.try_get("name")?;
 
-    let network_type: NetworkType = NetworkType::from_u32(result.try_get("network_type")?)?;
+    let network_type = NetworkType::from_u32(result.try_get("network_type")?)?;
 
     let symbol: String = result.try_get("symbol")?;
 
@@ -167,7 +164,7 @@ pub async fn get_network(pool: &SqlitePool, id: u32) -> Result<NetworkInfo> {
     for (i, row) in explorers_result.iter().enumerate() {
         let name: String = row.try_get("name")?;
         let url: String = row.try_get("url")?;
-        let explorer_type: ExplorerType = ExplorerType::from_u32(row.try_get("explorer_type")?)?;
+        let explorer_type = ExplorerType::from_u32(row.try_get("explorer_type")?)?;
         let selected: bool = row.try_get("selected")?;
 
         explorers.push(Explorer {

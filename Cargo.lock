@@ -2518,6 +2518,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "sigwa-account-bank-wise"
+version = "0.1.0"
+
+[[package]]
+name = "sigwa-account-cex-binance"
+version = "0.1.0"
+
+[[package]]
+name = "sigwa-account-cex-kraken"
+version = "0.1.0"
+
+[[package]]
+name = "sigwa-account-cex-okx"
+version = "0.1.0"
+
+[[package]]
+name = "sigwa-account-crypto"
+version = "0.1.0"
+
+[[package]]
 name = "sigwa-core"
 version = "0.1.0"
 dependencies = [

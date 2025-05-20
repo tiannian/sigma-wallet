@@ -1,13 +1,13 @@
 use std::path::Path;
 
 use anyhow::Result;
-use sigwa_core::{Migration, MigrationType};
+use sigwa_core::{Migration, MigrationType, NetworkInfo};
 use sqlx::{SqlitePool, migrate::Migrator};
 use tokio::fs::File;
 
 use crate::migration;
 
-use super::{NetworkInfo, remote, sql};
+use super::{remote, sql};
 
 #[derive(Debug)]
 pub struct Network {

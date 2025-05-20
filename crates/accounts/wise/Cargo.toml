@@ -1,0 +1,6 @@
+[package]
+name = "sigwa-account-bank-wise"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

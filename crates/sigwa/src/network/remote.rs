@@ -1,6 +1,5 @@
 use anyhow::Result;
-
-use crate::{Explorer, ExplorerType, NetworkInfo, NetworkType};
+use sigwa_core::{Explorer, ExplorerType, NetworkInfo, NetworkType};
 
 use super::eip155_model;
 

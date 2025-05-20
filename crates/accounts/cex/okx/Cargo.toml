@@ -1,0 +1,6 @@
+[package]
+name = "sigwa-account-cex-okx"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

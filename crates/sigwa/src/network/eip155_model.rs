@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
-
-use super::NetworkInfo;
+use sigwa_core::NetworkInfo;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Eip155Rpc {

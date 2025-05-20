@@ -1,0 +1,6 @@
+[package]
+name = "sigwa-account-cex-binance"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

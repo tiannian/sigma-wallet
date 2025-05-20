@@ -1,0 +1,6 @@
+[package]
+name = "sigwa-account-crypto"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
