@@ -168,6 +168,12 @@ impl<'w> Account<'w> {
 
         Ok(())
     }
+
+    pub async fn update_state(&mut self, _network_type: NetworkType, _index: usize) -> Result<()> {
+        // TODO: update balance and nonce for different networks.
+
+        Ok(())
+    }
 }
 
 fn build_bip32_path(network_type: NetworkType, index: usize) -> String {
