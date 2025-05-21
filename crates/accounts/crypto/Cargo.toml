@@ -10,10 +10,11 @@ sigwa-wallet = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 
-alloy-primitives = { workspace = true }
+alloy-primitives = { workspace = true, features = ["k256"] }
+anyhow = { workspace = true }
+rand_core = { workspace = true }
 
 tokio = { workspace = true, features = ["fs"] }
 
-anyhow = { workspace = true }
 
 bip32 = { version = "0.5.3", features = ["mnemonic", "bip39"] }

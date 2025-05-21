@@ -2706,6 +2706,7 @@ dependencies = [
  "alloy-primitives",
  "anyhow",
  "bip32",
+ "rand_core 0.6.4",
  "serde",
  "serde_json",
  "sigwa-core",
