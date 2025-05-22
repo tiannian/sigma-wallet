@@ -6,6 +6,7 @@ use clap::Parser;
 mod init;
 mod network;
 mod provider;
+mod wallet;
 
 #[derive(Parser)]
 pub struct Args {
@@ -24,6 +25,8 @@ pub enum Subcommand {
     Provider(provider::Args),
     /// Display or modify network information
     Network(network::Args),
+    /// Create, List or edit wallet.
+    Wallet(wallet::Args),
 }
 
 impl Args {
@@ -40,6 +43,7 @@ impl Args {
             Subcommand::Init(args) => args.run(home_path).await,
             Subcommand::Provider(args) => args.run(home_path).await,
             Subcommand::Network(args) => args.run(home_path).await,
+            Subcommand::Wallet(args) => args.run(home_path).await,
         }?;
 
         Ok(())

@@ -16,5 +16,9 @@ rand_core = { workspace = true }
 
 tokio = { workspace = true, features = ["fs"] }
 
-
 bip32 = { version = "0.5.3", features = ["mnemonic", "bip39"] }
+k256 = { workspace = true }
+
+[features]
+default = ["console"]
+console = []

@@ -7,11 +7,11 @@ members = [
     "crates/guards/password",
     "crates/storages/file",
     "crates/storages/redb",
-    "crates/accounts/crypto",
-    "crates/accounts/cex/binance",
-    "crates/accounts/cex/okx",
-    "crates/accounts/cex/kraken",
-    "crates/accounts/wise",
+    "crates/subaccounts/crypto",
+    "crates/subaccounts/cex/binance",
+    "crates/subaccounts/cex/okx",
+    "crates/subaccounts/cex/kraken",
+    "crates/subaccounts/wise", "crates/account",
 ]
 
 [workspace.package]
@@ -31,6 +31,7 @@ sha3 = "0.10.0"
 rand_core = { version = "0.6", default-features = false }
 hex = "0.4.3"
 log = "0.4.21"
+k256 = "0.13.4"
 
 reqwest = { version = "0.12.11" }
 

@@ -11,7 +11,10 @@ use sigwa_core::{EncryptedData, Guard, NetworkType};
 use sigwa_wallet::Wallet;
 use tokio::fs;
 
-use crate::types::{BitcoinAccount, Eip155Account, PrivateInfo, SolanaAccount, SubAccount};
+use crate::types::{
+    BitcoinAccount, Eip155Account, PrivateInfo, PrivateKey, PrivateKeyType, SolanaAccount,
+    SubAccount,
+};
 
 pub struct Account<'w> {
     sub_accounts: SubAccount,
@@ -63,7 +66,7 @@ impl<'w> Account<'w> {
 
         let private_info = PrivateInfo {
             version: 1,
-            entropy,
+            private_key: PrivateKey::Entropy(entropy),
         };
 
         let private_info_data = serde_json::to_vec(&private_info)?;
@@ -73,6 +76,61 @@ impl<'w> Account<'w> {
         Ok(Self {
             sub_accounts,
             account_path: account_path.to_path_buf(),
+            wallet,
+        })
+    }
+
+    pub async fn import_private_key(
+        &mut self,
+        private_key: B256,
+        network_type: NetworkType,
+        account_path: impl AsRef<Path>,
+        wallet: &'w Wallet,
+        guard: &impl Guard,
+    ) -> Result<Self> {
+        let private_info = PrivateInfo {
+            version: 1,
+            private_key: PrivateKey::PrivateKey(private_key),
+        };
+
+        let private_info_data = serde_json::to_vec(&private_info)?;
+        let encrypted_private_info = wallet.encrypt_transaction_data(&private_info_data, guard)?;
+        fs::write(
+            account_path.as_ref().join("entropy.ejson"),
+            encrypted_private_info.to_vec(),
+        )
+        .await?;
+
+        let mut sub_accounts = SubAccount {
+            private_key_type: PrivateKeyType::PrivateKey,
+            ..Default::default()
+        };
+
+        let data = serde_json::to_vec(&sub_accounts)?;
+        match network_type {
+            NetworkType::Eip155 => {
+                let private_key = k256::ecdsa::SigningKey::from_bytes(&private_key.0.into())?;
+                let address = Address::from_private_key(&private_key);
+                sub_accounts.eip155_account.push(Eip155Account {
+                    address,
+                    nonce: 0,
+                    balance: BTreeMap::new(),
+                    name: "".to_string(),
+                });
+            }
+            _ => {}
+        }
+
+        let encrypted_data = wallet.encrypt_auth_data(&data)?;
+        fs::write(
+            account_path.as_ref().join("subaccounts.ejson"),
+            encrypted_data.to_vec(),
+        )
+        .await?;
+
+        Ok(Self {
+            sub_accounts,
+            account_path: account_path.as_ref().to_path_buf(),
             wallet,
         })
     }
@@ -96,7 +154,11 @@ impl<'w> Account<'w> {
             .decrypt_transaction_data(encrypted_seed, guard)?;
 
         let private_info: PrivateInfo = serde_json::from_slice(&seed_bytes)?;
-        let entropy = private_info.entropy;
+        let entropy = if let PrivateKey::Entropy(entropy) = private_info.private_key {
+            entropy
+        } else {
+            return Err(anyhow::anyhow!("Unsupported private key"));
+        };
 
         let mnemonic = Mnemonic::from_entropy(entropy.0, bip32::Language::English);
         let seed = mnemonic.to_seed("");

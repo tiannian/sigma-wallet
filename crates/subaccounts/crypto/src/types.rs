@@ -28,10 +28,24 @@ pub struct SubAccount {
     pub eip155_account: Vec<Eip155Account>,
     pub bitcoin_account: Vec<BitcoinAccount>,
     pub solana_account: Vec<SolanaAccount>,
+    pub private_key_type: PrivateKeyType,
 }
 
 #[derive(Default, Serialize, Deserialize)]
+pub enum PrivateKeyType {
+    #[default]
+    Entropy,
+    PrivateKey,
+}
+
+#[derive(Serialize, Deserialize)]
+pub enum PrivateKey {
+    Entropy(B256),
+    PrivateKey(B256),
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct PrivateInfo {
     pub version: u8,
-    pub entropy: B256,
+    pub private_key: PrivateKey,
 }
