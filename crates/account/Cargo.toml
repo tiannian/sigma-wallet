@@ -4,3 +4,10 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+serde = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+serde_json = { workspace = true }
+
+sigwa-account-crypto = { workspace = true }
+sigwa-account-cex-binance = { workspace = true }

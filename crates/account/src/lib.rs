@@ -1,14 +1,8 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+mod accounts;
+pub use accounts::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+mod types;
+pub use types::*;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+mod account;
+pub use account::*;

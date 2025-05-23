@@ -2685,12 +2685,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "sigwa-account"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "serde",
+ "serde_json",
+ "sigwa-account-cex-binance",
+ "sigwa-account-crypto",
+ "tokio",
+]
+
+[[package]]
 name = "sigwa-account-bank-wise"
 version = "0.1.0"
 
 [[package]]
 name = "sigwa-account-cex-binance"
 version = "0.1.0"
+dependencies = [
+ "sigwa-wallet",
+]
 
 [[package]]
 name = "sigwa-account-cex-kraken"

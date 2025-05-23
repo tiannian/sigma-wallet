@@ -7,11 +7,12 @@ members = [
     "crates/guards/password",
     "crates/storages/file",
     "crates/storages/redb",
-    "crates/subaccounts/crypto",
-    "crates/subaccounts/cex/binance",
-    "crates/subaccounts/cex/okx",
-    "crates/subaccounts/cex/kraken",
-    "crates/subaccounts/wise", "crates/account",
+    "crates/accounts/crypto",
+    "crates/accounts/cex/binance",
+    "crates/accounts/cex/okx",
+    "crates/accounts/cex/kraken",
+    "crates/accounts/wise",
+    "crates/account",
 ]
 
 [workspace.package]
@@ -41,3 +42,5 @@ sigwa-core = { path = "crates/core" }
 sigwa-wallet = { path = "crates/sigwa" }
 sigwa-guards-password = { path = "crates/guards/password" }
 sigwa-storages-file = { path = "crates/storages/file" }
+sigwa-account-crypto = { path = "crates/accounts/crypto" }
+sigwa-account-cex-binance = { path = "crates/accounts/cex/binance" }

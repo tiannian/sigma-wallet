@@ -27,3 +27,9 @@ pub trait KeyValueStorage {
 pub trait SessionKeyValueStorage {}
 
 pub trait PersistentKeyValueStorage {}
+
+pub trait SubAccount {
+    fn wid(&self, device_id: &str) -> Result<String>;
+
+    fn name(&self) -> String;
+}
