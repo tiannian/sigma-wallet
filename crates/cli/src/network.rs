@@ -37,35 +37,6 @@ impl Args {
 
         show_detail(&network, names.0[selection]).await?;
 
-        // let operation = Select::with_theme(&theme)
-        //     .with_prompt("Select an operation")
-        //     .items(&["Show Detail", "Remove"])
-        //     .interact_opt()?;
-
-        // if operation.is_none() {
-        //     return Ok(());
-        // }
-
-        // // Safe to unwrap because we checked for None above
-        // match operation.unwrap() {
-        //     0 => {
-        //         let id = names.0[selection];
-
-        //         show_detail(&network, id).await?;
-        //     }
-        //     1 => {
-        //         let confirm = Confirm::with_theme(&theme)
-        //             .with_prompt("Are you sure you want to remove this network?")
-        //             .interact()?;
-
-        //         if confirm {
-        //             network.remove_network(names.0[selection]).await?;
-        //             println!("Network removed");
-        //         }
-        //     }
-        //     _ => {}
-        // }
-
         Ok(())
     }
 }

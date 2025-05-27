@@ -2693,6 +2693,7 @@ dependencies = [
  "serde_json",
  "sigwa-account-cex-binance",
  "sigwa-account-crypto",
+ "sigwa-wallet",
  "tokio",
 ]
 

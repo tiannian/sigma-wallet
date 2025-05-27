@@ -25,7 +25,7 @@ pub struct Account<'w> {
 impl<'w> Account<'w> {
     pub async fn new(account_path: impl AsRef<Path>, wallet: &'w Wallet) -> Result<Self> {
         let account_path = account_path.as_ref();
-        let account_path_ = account_path.join("subaccounts.ejson");
+        let account_path_ = account_path.join("accounts.ejson");
 
         let entropy_path = account_path.join("entropy.ejson");
 
@@ -123,7 +123,7 @@ impl<'w> Account<'w> {
 
         let encrypted_data = wallet.encrypt_auth_data(&data)?;
         fs::write(
-            account_path.as_ref().join("subaccounts.ejson"),
+            account_path.as_ref().join("accounts.ejson"),
             encrypted_data.to_vec(),
         )
         .await?;
