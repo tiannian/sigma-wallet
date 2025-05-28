@@ -62,7 +62,7 @@ impl<'w> Account<'w> {
 
         let entropy_path = account_path.join("entropy.ejson");
         let mut entropy = B256::default();
-        OsRng.fill_bytes(&mut entropy.as_mut());
+        OsRng.fill_bytes(entropy.as_mut());
 
         let private_info = PrivateInfo {
             version: 1,
@@ -107,18 +107,15 @@ impl<'w> Account<'w> {
         };
 
         let data = serde_json::to_vec(&sub_accounts)?;
-        match network_type {
-            NetworkType::Eip155 => {
-                let private_key = k256::ecdsa::SigningKey::from_bytes(&private_key.0.into())?;
-                let address = Address::from_private_key(&private_key);
-                sub_accounts.eip155_account.push(Eip155Account {
-                    address,
-                    nonce: 0,
-                    balance: BTreeMap::new(),
-                    name: "".to_string(),
-                });
-            }
-            _ => {}
+        if let NetworkType::Eip155 = network_type {
+            let private_key = k256::ecdsa::SigningKey::from_bytes(&private_key.0.into())?;
+            let address = Address::from_private_key(&private_key);
+            sub_accounts.eip155_account.push(Eip155Account {
+                address,
+                nonce: 0,
+                balance: BTreeMap::new(),
+                name: "".to_string(),
+            });
         }
 
         let encrypted_data = wallet.encrypt_auth_data(&data)?;
@@ -145,7 +142,7 @@ impl<'w> Account<'w> {
         network_type: NetworkType,
         guard: &impl Guard,
     ) -> Result<()> {
-        let seed_path = self.account_path.join(format!("seed.ejson"));
+        let seed_path = self.account_path.join("seed.ejson");
 
         let encrypted_seed = EncryptedData::from_slice(&fs::read(seed_path).await?)?;
 

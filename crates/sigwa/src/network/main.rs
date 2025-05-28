@@ -55,7 +55,7 @@ impl Network {
     }
 
     pub async fn init_data(&mut self) -> Result<()> {
-        data::init_data(&mut self.pool).await?;
+        data::init_data(&self.pool).await?;
 
         Ok(())
     }

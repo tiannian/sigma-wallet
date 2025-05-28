@@ -37,7 +37,7 @@ pub async fn init_data(pool: &SqlitePool) -> Result<()> {
 
         let line = line.trim();
 
-        let info: NetworkInfo = serde_json::from_str(&line)?;
+        let info: NetworkInfo = serde_json::from_str(line)?;
 
         save_local(&mut txn, info).await?;
     }
