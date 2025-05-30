@@ -6,6 +6,7 @@ CREATE TABLE
         chain_id TEXT NOT NULL,
         symbol TEXT NOT NULL,
         decimals INTEGER NOT NULL,
+        native_asset TEXT,
         slip44 INTEGER NOT NULL,
         is_user_added BOOLEAN NOT NULL DEFAULT FALSE,
         icon TEXT,

@@ -23,7 +23,7 @@ pub async fn init_data(pool: &SqlitePool) -> Result<()> {
 
     let version: Version = serde_json::from_str(&version)?;
 
-    if version.name != "networks" {
+    if version.name != "network" {
         return Err(anyhow::anyhow!("invalid version name"));
     }
 
@@ -55,8 +55,9 @@ pub async fn save_local(txn: &mut SqliteTransaction<'static>, info: NetworkInfo)
             symbol,
             decimals,
             slip44,
-            icon
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            icon,
+            native_asset
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT DO NOTHING";
 
     let network_rpc_sql = "INSERT INTO network_rpc (
@@ -83,6 +84,7 @@ pub async fn save_local(txn: &mut SqliteTransaction<'static>, info: NetworkInfo)
         .bind(info.decimals as i64)
         .bind(info.slip44 as i64)
         .bind(info.icon)
+        .bind(info.native_asset)
         .execute(&mut **txn)
         .await?;
 

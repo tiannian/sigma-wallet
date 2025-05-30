@@ -111,6 +111,7 @@ pub async fn get_network(pool: &SqlitePool, id: u32) -> Result<NetworkInfo> {
         selected_explorer,
         slip44: slip44 as u64,
         icon: None,
+        native_asset: None,
     })
 }
 
